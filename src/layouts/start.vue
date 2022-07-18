@@ -1,6 +1,6 @@
 <template>
   <b-container class="np-layout np-layout--start">
-    <Logo class="pt-5 pb-1" />
+    <Logo class="pt-5 pb-5" />
     <Nuxt />
     <Copyright />
   </b-container>
