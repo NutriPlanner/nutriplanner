@@ -5,7 +5,7 @@
         <b-col>
           <b-card title="Inicio de Sesión" class="np-page--login__card">
             <b-card-text>
-              <b-form @submit="onSubmit">
+              <b-form @submit.prevent="onSubmit">
                 <b-form-group
                   id="input-group-username"
                   label="Correo electrónico"
@@ -63,7 +63,6 @@ export default {
 
   methods: {
     onSubmit (event) {
-      event.preventDefault()
       this.$router.push('/')
     }
   }
