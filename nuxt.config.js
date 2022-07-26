@@ -2,6 +2,11 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  server: {
+    port: 3000,
+    host: '0.0.0.0'
+  },
+
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
 
@@ -21,13 +26,16 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    '@/assets/styles/app.scss'
+    '@/assets/styles/app.scss',
+    'remixicon/fonts/remixicon.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/vee-validate/vee-validate.js',
-    '@/plugins/directives.js'
+    '@/plugins/directives.js',
+    '@/plugins/mixins.js',
+    '@/plugins/axios-setup.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -58,7 +66,7 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
+      lang: 'es'
     }
   },
 
@@ -79,5 +87,14 @@ export default {
         component: resolve(__dirname, 'src/pages/login.vue')
       })
     }
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      baseURL: process.env.NUXT_ENV_API_HOST
+    }
+  },
+
+  privateRuntimeConfig: {
   }
 }

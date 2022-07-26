@@ -1,19 +1,11 @@
-// NutriPlanner colors
-$rose: #FFC2DE;
-$ruby: #D81E5B;
-$aero-blue: #B8F2E6;
-$yellow: #F3D053;
-$blue: #3cb0f9;
-$white: #FFFFFF;
-
 // Theme color default definitions
-$primary: $blue !default;
-$secondary: $rose !default;
-$tertiary: $aero-blue !default;
-// $success: $green !default;
-// $info: $cyan !default;
+$primary: $purple !default;
+$secondary: $purple !default;
+$tertiary: $smooth-purple !default;
+$success: $green !default;
+$info: $aero-blue !default;
 // $warning: $yellow !default;
-// $danger: $red !default;
+$danger: $ruby !default;
 $light: $white !default;
 // $dark: $gray-800 !default;
 
@@ -24,10 +16,10 @@ $theme-colors: map-merge(
     'primary': $primary,
     'secondary': $secondary,
     'tertiary': $tertiary,
-    // 'success': $success,
-    // 'info': $info,
+    'success': $success,
+    'info': $info,
     // 'warning': $warning,
-    // 'danger': $danger,
+    'danger': $danger,
     'light': $light,
     // 'dark': $dark
   ),
@@ -35,5 +27,5 @@ $theme-colors: map-merge(
 );
 
 // This table defines the theme colors (variant names)
-$body-bg: rgb(250, 250, 250);
-$body-color: rgb(40, 40, 40);
+$body-bg: $background-color;
+$body-color: $text-color;

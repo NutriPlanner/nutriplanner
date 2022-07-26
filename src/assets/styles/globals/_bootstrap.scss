@@ -8,3 +8,17 @@ a {
     text-decoration: none !important;
   }
 }
+
+/* Busy table styling */
+table.b-table[aria-busy='true'] {
+  opacity: 1 !important;
+}
+
+/* Striped table styling */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba($primary, 0.03) !important;
+}
+
+.table td {
+  padding: 0.75rem !important;
+}
