@@ -21,9 +21,7 @@
               @input="$emit('update:sortBy', $event)"
             >
               <template #first>
-                <option :value="null">
-                  -- sin selección --
-                </option>
+                <option :value="null">-- sin selección --</option>
               </template>
             </b-form-select>
 
@@ -35,12 +33,8 @@
               class="w-25"
               @input="$emit('update:sortOrder', $event)"
             >
-              <option :value="false">
-                Asc
-              </option>
-              <option :value="true">
-                Desc
-              </option>
+              <option :value="false">Asc</option>
+              <option :value="true">Desc</option>
             </b-form-select>
           </b-input-group>
         </b-form-group>
@@ -91,7 +85,11 @@
             class="mt-1"
             @input="$emit('update:filterOn', $event)"
           >
-            <b-form-checkbox v-for="op in filterOptions" :key="op.value" :value="op.value">
+            <b-form-checkbox
+              v-for="op in filterOptions"
+              :key="op.value"
+              :value="op.value"
+            >
               {{ op.text }}
             </b-form-checkbox>
           </b-form-checkbox-group>
@@ -103,36 +101,34 @@
 
 <script>
 export default {
-  name: 'MaintainerFilterComponent',
+  name: "MaintainerFilterComponent",
   props: {
     sortBy: {
       type: String,
-      default: null
+      default: null,
     },
     sortOrder: {
       type: Boolean,
-      default: false
+      default: false,
     },
     filter: {
       type: String,
-      default: ''
+      default: "",
     },
     filterOn: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     sortOptions: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     filterOptions: {
       type: Array,
-      default: () => []
-    }
-  }
-}
+      default: () => [],
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

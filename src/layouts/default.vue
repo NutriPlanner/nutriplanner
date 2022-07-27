@@ -15,13 +15,11 @@
 </template>
 
 <script>
-import Breadcrumb from '../components/Breadcrumb.vue'
+import Breadcrumb from "../components/Breadcrumb.vue";
 export default {
-  name: 'DefaultLayout',
-  components: { Breadcrumb }
-}
+  name: "DefaultLayout",
+  components: { Breadcrumb },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

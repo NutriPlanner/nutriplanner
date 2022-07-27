@@ -22,27 +22,32 @@
 
 <script>
 export default {
-  name: 'MaintainerFieldActionRenderComponent',
+  name: "MaintainerFieldActionRenderComponent",
   props: {
     data: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
-    async onDelete () {
-      const confirmed = await this.$bvModal.msgBoxConfirm('¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.', {
-        title: 'Confirmar eliminación',
-        okVariant: 'danger',
-        okTitle: 'Eliminar',
-        cancelVariant: 'outline-primary',
-        cancelTitle: 'Cancelar'
-      })
+    async onDelete() {
+      const confirmed = await this.$bvModal.msgBoxConfirm(
+        "¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.",
+        {
+          title: "Confirmar eliminación",
+          okVariant: "danger",
+          okTitle: "Eliminar",
+          cancelVariant: "outline-primary",
+          cancelTitle: "Cancelar",
+        }
+      );
 
-      if (confirmed) { this.$emit('delete', this.data.item.id) }
-    }
-  }
-}
+      if (confirmed) {
+        this.$emit("delete", this.data.item.id);
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

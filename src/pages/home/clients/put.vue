@@ -9,31 +9,29 @@
 </template>
 
 <script>
-import _ from 'lodash'
+import _ from "lodash";
 
 export default {
-  name: 'ClientsPutPage',
-  data () {
+  name: "ClientsPutPage",
+  data() {
     return {
-      formInitialData: {}
-    }
+      formInitialData: {},
+    };
   },
-  beforeMount () {
-    this.__setupBreadcrumb()
-    this.formInitialData = this.$store.state.clients.update
+  beforeMount() {
+    this.__setupBreadcrumb();
+    this.formInitialData = this.$store.state.clients.update;
 
     if (_.isEmpty(this.formInitialData) || !this.formInitialData.id) {
-      this.$router.push({ name: 'home-clients' })
+      this.$router.push({ name: "home-clients" });
     }
   },
   methods: {
-    async onSubmit ({ data }) {
-      await this.$store.dispatch('clients/update', data)
-    }
-  }
-}
+    async onSubmit({ data }) {
+      await this.$store.dispatch("clients/update", data);
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

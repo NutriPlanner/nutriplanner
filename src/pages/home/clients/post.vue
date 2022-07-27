@@ -9,41 +9,39 @@
 </template>
 
 <script>
-import { FULLFILLED } from '@/utils/responseStatus'
+import { FULLFILLED } from "@/utils/responseStatus";
 
 const formInitialData = {
-  herba_id: '',
-  name: '',
-  last_name: '',
-  rut: '',
-  birthday: '',
-  address: '',
-  phone: '',
-  email: ''
-}
+  herba_id: "",
+  name: "",
+  last_name: "",
+  rut: "",
+  birthday: "",
+  address: "",
+  phone: "",
+  email: "",
+};
 
 export default {
-  name: 'ClientsPostPage',
-  data () {
+  name: "ClientsPostPage",
+  data() {
     return {
-      formInitialData
-    }
+      formInitialData,
+    };
   },
-  beforeMount () {
-    this.__setupBreadcrumb()
+  beforeMount() {
+    this.__setupBreadcrumb();
   },
   methods: {
-    async onSubmit ({ data, resetForm }) {
-      const { status } = await this.$store.dispatch('clients/create', data)
+    async onSubmit({ data, resetForm }) {
+      const { status } = await this.$store.dispatch("clients/create", data);
 
       if (status === FULLFILLED) {
-        resetForm(formInitialData)
+        resetForm(formInitialData);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

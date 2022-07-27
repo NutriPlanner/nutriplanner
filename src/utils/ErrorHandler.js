@@ -19,7 +19,7 @@ export const errorHandler = async (next, ctx) => {
 
     return {
       status: FULLFILLED,
-      data: response.data,
+      data: response?.data || {},
     };
   } catch (error) {
     // in case of cancel operation we don't want to show the error
@@ -30,7 +30,7 @@ export const errorHandler = async (next, ctx) => {
       };
     }
 
-    if (error.response) {
+    if (error.response && error.response.data) {
       const { internalCode, data } = error.response.data;
 
       if (errorsHandler[internalCode]) {

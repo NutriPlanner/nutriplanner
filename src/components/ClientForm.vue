@@ -2,7 +2,11 @@
   <div class="np-component np-component--client-form">
     <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
       <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
-        <validation-provider v-slot="validationContext" name="uuid" :rules="{ required: false }">
+        <validation-provider
+          v-slot="validationContext"
+          name="uuid"
+          :rules="{ required: false }"
+        >
           <b-form-group
             id="input-group-uuid"
             label="HerbaID"
@@ -15,14 +19,16 @@
             />
 
             <b-form-invalid-feedback id="input-uuid-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="nombre" :rules="{ required: true }">
+        <validation-provider
+          v-slot="validationContext"
+          name="nombre"
+          :rules="{ required: true }"
+        >
           <b-form-group
             id="input-group-name"
             label="Nombre"
@@ -37,14 +43,16 @@
             />
 
             <b-form-invalid-feedback id="input-name-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="apellido" :rules="{ required: true }">
+        <validation-provider
+          v-slot="validationContext"
+          name="apellido"
+          :rules="{ required: true }"
+        >
           <b-form-group
             id="input-group-last_name"
             label="Apellido(s)"
@@ -59,19 +67,17 @@
             />
 
             <b-form-invalid-feedback id="input-last_name-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="rut" :rules="{ required: true, rut: true }">
-          <b-form-group
-            id="input-group-rut"
-            label="RUT"
-            label-for="input-rut"
-          >
+        <validation-provider
+          v-slot="validationContext"
+          name="rut"
+          :rules="{ required: true, rut: true }"
+        >
+          <b-form-group id="input-group-rut" label="RUT" label-for="input-rut">
             <b-form-input
               id="input-rut"
               v-model="form.rut"
@@ -82,14 +88,16 @@
             />
 
             <b-form-invalid-feedback id="input-rut-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="fecha nacimiento" :rules="{ required: true }">
+        <validation-provider
+          v-slot="validationContext"
+          name="fecha nacimiento"
+          :rules="{ required: true }"
+        >
           <b-form-group
             id="input-group-birthday"
             label="Fecha Nacimiento"
@@ -103,19 +111,25 @@
               reset-button
               label-reset-button="Limpiar"
               label-no-date-selected="Fecha no seleccionada"
-              :date-format-options="{ year: 'numeric', month: '2-digit', day: '2-digit' }"
+              :date-format-options="{
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }"
               :state="__getValidationState(validationContext)"
             />
 
             <b-form-invalid-feedback id="input-birthday-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="dirección" :rules="{ required: true }">
+        <validation-provider
+          v-slot="validationContext"
+          name="dirección"
+          :rules="{ required: true }"
+        >
           <b-form-group
             id="input-group-address"
             label="Dirección física"
@@ -130,14 +144,16 @@
             />
 
             <b-form-invalid-feedback id="input-address-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="teléfono" :rules="{ required: true, min: 9, max: 9 }">
+        <validation-provider
+          v-slot="validationContext"
+          name="teléfono"
+          :rules="{ required: true, min: 9, max: 9 }"
+        >
           <b-form-group
             id="input-group-phone"
             label="Teléfono"
@@ -155,14 +171,16 @@
             />
 
             <b-form-invalid-feedback id="input-phone-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <validation-provider v-slot="validationContext" name="correo" rules="required|email">
+        <validation-provider
+          v-slot="validationContext"
+          name="correo"
+          rules="required|email"
+        >
           <b-form-group
             id="input-group-email"
             label="Correo electrónico"
@@ -178,18 +196,14 @@
             />
 
             <b-form-invalid-feedback id="input-email-feedback">
-              {{
-                validationContext.errors[0]
-              }}
+              {{ validationContext.errors[0] }}
             </b-form-invalid-feedback>
           </b-form-group>
         </validation-provider>
 
-        <b-overlay :show="loading" rounded opacity="0.6" spinner-small spinner-variant="primary">
-          <b-button block type="submit" variant="primary">
-            Enviar
-          </b-button>
-        </b-overlay>
+        <Overlay :loading="loading">
+          <b-button block type="submit" variant="primary"> Enviar </b-button>
+        </Overlay>
       </b-form>
     </validation-observer>
   </div>
@@ -197,53 +211,51 @@
 
 <script>
 export default {
-  name: 'ClientFormComponent',
+  name: "ClientFormComponent",
   props: {
     formInitialData: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-  data () {
+  data() {
     return {
       form: {
-        ...this.formInitialData
-      }
-    }
+        ...this.formInitialData,
+      },
+    };
   },
   computed: {
-    loading () {
-      return this.$store.state.clients.loading
-    }
+    loading() {
+      return this.$store.state.clients.loading;
+    },
   },
-  mounted () {
+  mounted() {
     this.form = {
-      ...this.formInitialData
-    }
+      ...this.formInitialData,
+    };
 
     setTimeout(() => {
-      this.$refs.formObserver.validate()
-    }, 100)
+      this.$refs.formObserver.validate();
+    }, 100);
   },
   methods: {
-    onSubmit () {
-      this.$emit('submit', {
+    onSubmit() {
+      this.$emit("submit", {
         data: { ...this.form },
-        resetForm: this.resetForm
-      })
+        resetForm: this.resetForm,
+      });
     },
-    resetForm (newData = {}) {
+    resetForm(newData = {}) {
       this.form = {
         ...this.formInitialData,
-        ...newData
-      }
+        ...newData,
+      };
 
-      this.$refs.formObserver.reset()
-    }
-  }
-}
+      this.$refs.formObserver.reset();
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

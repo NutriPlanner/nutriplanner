@@ -1,87 +1,90 @@
 export default {
   methods: {
-    __setupCrudStore (_id, data) {
-      this.$store.dispatch('crud/setup', {
+    __setupCrudStore(_id, data) {
+      this.$store.dispatch("crud/setup", {
         _id,
-        ...data
-      })
+        ...data,
+      });
     },
 
-    __crudGet (_id, path) {
-      return this.$store.getters['crud/get'](_id, path)
+    __crudGet(_id, path) {
+      return this.$store.getters["crud/get"](_id, path);
     },
 
-    async __callCrud (_id, method, data) {
+    async __callCrud(_id, method, data) {
       switch (method) {
-        case 'GET': {
-          this.$store.dispatch('crud/call', {
+        case "GET": {
+          this.$store.dispatch("crud/call", {
             _id,
             method,
-            data
-          })
-          break
+            data,
+          });
+          break;
         }
 
-        case 'POST_REDIRECT': {
-          this.$store.dispatch('crud/call', {
+        case "POST_REDIRECT": {
+          this.$store.dispatch("crud/call", {
             _id,
             method,
-            data
-          })
+            data,
+          });
 
-          break
+          break;
         }
 
-        case 'POST': {
-          this.$store.dispatch('crud/call', {
+        case "POST": {
+          this.$store.dispatch("crud/call", {
             _id,
             method,
-            data
-          })
-          break
+            data,
+          });
+          break;
         }
 
-        case 'PUT_REDIRECT': {
-          this.$store.dispatch('crud/call', {
+        case "PUT_REDIRECT": {
+          this.$store.dispatch("crud/call", {
             _id,
             method,
-            data
-          })
+            data,
+          });
 
-          break
+          break;
         }
 
-        case 'PUT': {
-          this.$store.dispatch('crud/call', {
+        case "PUT": {
+          this.$store.dispatch("crud/call", {
             _id,
             method,
-            data
-          })
-          break
+            data,
+          });
+          break;
         }
 
-        case 'DELETE': {
-          const confirmed = await this.$bvModal.msgBoxConfirm('¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.', {
-            title: 'Confirmar eliminación',
-            okVariant: 'danger',
-            okTitle: 'Eliminar',
-            cancelVariant: 'outline-primary',
-            cancelTitle: 'Cancelar'
-          })
+        case "DELETE": {
+          const confirmed = await this.$bvModal.msgBoxConfirm(
+            "¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.",
+            {
+              title: "Confirmar eliminación",
+              okVariant: "danger",
+              okTitle: "Eliminar",
+              cancelVariant: "outline-primary",
+              cancelTitle: "Cancelar",
+            }
+          );
 
           if (confirmed) {
-            await this.$store.dispatch('crud/call', {
+            await this.$store.dispatch("crud/call", {
               _id,
               method,
-              data
-            })
+              data,
+            });
           }
-          break
+          break;
         }
 
         default:
-          break
+          break;
       }
-    }
-  }
-}
+    },
+  },
+};
