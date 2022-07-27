@@ -5,43 +5,70 @@
         <b-col>
           <b-card title="Inicio de Sesión" class="np-page--login__card">
             <b-card-text>
-              <b-form @submit.prevent="onSubmit">
-                <b-form-group
-                  id="input-group-username"
-                  label="Correo electrónico"
-                  label-for="input-username"
-                >
-                  <b-form-input
-                    id="input-username"
-                    v-model="form.username"
-                    type="email"
-                    required
-                    trim
-                  />
-                </b-form-group>
+              <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
+                <b-form @submit.prevent="handleSubmit(onSubmit)">
+                  <validation-provider
+                    v-slot="validationContext"
+                    name="correo"
+                    rules="required"
+                  >
+                    <b-form-group
+                      id="input-group-email"
+                      label="Correo electrónico"
+                      label-for="input-email"
+                    >
+                      <b-form-input
+                        id="input-email"
+                        v-model="form.email"
+                        trim
+                        aria-describedby="input-email-feedback"
+                        :state="__getValidationState(validationContext)"
+                      />
 
-                <b-form-group
-                  id="input-group-password"
-                  label="Contraseña"
-                  label-for="input-password"
-                >
-                  <b-form-input
-                    id="input-password"
-                    v-model="form.password"
-                    type="password"
-                    required
-                  />
-                </b-form-group>
-              </b-form>
+                      <b-form-invalid-feedback id="input-email-feedback">
+                        {{ validationContext.errors[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+
+                  <validation-provider
+                    v-slot="validationContext"
+                    name="correo"
+                    rules="required"
+                  >
+                    <b-form-group
+                      id="input-group-password"
+                      label="Contraseña"
+                      label-for="input-password"
+                    >
+                      <b-form-input
+                        id="input-password"
+                        v-model="form.password"
+                        type="password"
+                        aria-describedby="input-password-feedback"
+                        :state="__getValidationState(validationContext)"
+                      />
+
+                      <b-form-invalid-feedback id="input-password-feedback">
+                        {{ validationContext.errors[0] }}
+                      </b-form-invalid-feedback>
+                    </b-form-group>
+                  </validation-provider>
+
+                  <Overlay :loading="loading">
+                    <b-button block type="submit" variant="primary">
+                      Ingresar
+                    </b-button>
+                  </Overlay>
+
+                  <Overlay :loading="loading">
+                    <b-button block variant="link" to="/recover-password">
+                      Recuperar contraseña
+                    </b-button>
+                  </Overlay>
+                </b-form>
+              </validation-observer>
             </b-card-text>
-
-            <b-button block type="submit" variant="primary">
-              Ingresar
-            </b-button>
-
-            <b-button block variant="link" to="/recover-password">
-              Recuperar contraseña
-            </b-button>
           </b-card>
         </b-col>
       </b-row>
@@ -50,23 +77,32 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
-  name: 'LoginPage',
-  layout: 'start',
-  data () {
+  name: "LoginPage",
+  layout: "start",
+  auth: "guest",
+  data() {
     return {
       form: {
-        username: ''
-      }
-    }
+        email: "",
+        password: "",
+      },
+    };
   },
-
+  computed: {
+    loading() {
+      return this.$store.state.authorization.loading;
+    },
+  },
   methods: {
-    onSubmit (event) {
-      this.$router.push('/')
-    }
-  }
-}
+    onSubmit() {
+      const params = _.cloneDeep(this.form);
+      this.$store.dispatch("authorization/login", { params });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,5 +110,4 @@ export default {
   margin: auto;
   max-width: 25rem;
 }
-
 </style>
