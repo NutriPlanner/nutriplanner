@@ -22,7 +22,7 @@
     <b-collapse id="nav-collapse" is-nav>
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <b-nav-item-dropdown text="User" right>
+        <b-nav-item-dropdown :text="userName" right>
           <b-dropdown-item to="/profile"> Preferencias </b-dropdown-item>
           <b-dropdown-item @click="logout"> Cerrar sesión </b-dropdown-item>
         </b-nav-item-dropdown>
@@ -34,6 +34,11 @@
 <script>
 export default {
   name: "NavigationBarComponent",
+  computed: {
+    userName() {
+      return this.$store.state.auth.user.name;
+    },
+  },
   methods: {
     async logout() {
       const confirmed = await this.$bvModal.msgBoxConfirm(

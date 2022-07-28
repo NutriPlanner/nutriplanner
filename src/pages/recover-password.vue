@@ -22,38 +22,48 @@
                     rules="required|email"
                   >
                     <b-form-group
-                      id="input-group-username"
+                      id="input-group-email"
                       label="Correo electrónico"
-                      label-for="input-username"
+                      label-for="input-email"
                     >
                       <b-form-input
-                        id="input-username"
-                        v-model="form.username"
+                        id="input-email"
+                        v-model="form.email"
                         type="email"
-                        aria-describedby="input-username-feedback"
+                        aria-describedby="input-email-feedback"
                         trim
                         :state="__getValidationState(validationContext)"
                       />
 
-                      <b-form-invalid-feedback id="input-username-feedback">
+                      <b-form-invalid-feedback id="input-email-feedback">
                         {{ validationContext.errors[0] }}
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
 
-                  <b-button block type="submit" variant="primary">
-                    Obtener código
-                  </b-button>
+                  <Overlay :loading="loading">
+                    <b-button block type="submit" variant="primary">
+                      Obtener código
+                    </b-button>
+                  </Overlay>
 
                   <b-button
                     block
                     variant="outline-primary"
+                    :disabled="loading"
                     @click="toChangePasswordView"
                   >
                     Ya poseo un código
                   </b-button>
 
-                  <b-button block variant="link" to="/login"> Volver </b-button>
+                  <b-button
+                    block
+                    variant="link"
+                    to="/login"
+                    :disabled="loading"
+                  >
+                    Volver
+                  </b-button>
                 </b-form>
               </validation-observer>
             </b-card-text>
@@ -65,6 +75,9 @@
 </template>
 
 <script>
+import _ from "lodash";
+import { FULLFILLED } from "@/utils/responseStatus";
+
 export default {
   name: "RecoverPasswordPage",
   layout: "start",
@@ -72,23 +85,39 @@ export default {
   data() {
     return {
       form: {
-        username: "",
+        email: "",
       },
     };
   },
-
-  methods: {
-    onSubmit() {
-      this.$router.push("/");
+  computed: {
+    loading() {
+      return this.$store.state.authorization.loading;
     },
-
+  },
+  methods: {
+    async onSubmit() {
+      const { status } = await this.$store.dispatch(
+        "authorization/requestChangePassword",
+        {
+          params: _.cloneDeep(this.form),
+        }
+      );
+      if (status === FULLFILLED) {
+        this.$router.push({
+          name: "change-password",
+          query: {
+            email: this.form.email,
+          },
+        });
+      }
+    },
     toChangePasswordView() {
       this.$refs.formObserver.validate().then((valid) => {
         if (valid) {
           this.$router.push({
-            path: "/change-password",
-            params: {
-              username: this.form.username,
+            name: "change-password",
+            query: {
+              email: this.form.email,
             },
           });
         }
