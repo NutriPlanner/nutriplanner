@@ -46,7 +46,7 @@ export const actions = {
     commit("set", data);
   },
 
-  abortPreviousRequests({ state }) {
+  abortPreviousRequests() {
     // abort previous operations
     const cancelMemory = { oldSource: source, newSource: CancelToken.source() };
     source = cancelMemory.newSource;
@@ -57,13 +57,12 @@ export const actions = {
     }, 100);
   },
 
-  async fetch({ state, commit, dispatch }, params) {
+  async fetch({ commit, dispatch }, params) {
     dispatch("abortPreviousRequests");
     commit("set", { loading: true });
 
     const { status, data, message, error } = await errorHandler(async () => {
-      return await clientsServices.fetchClients({
-        params,
+      return await clientsServices.fetchClients(params, {
         cancelToken: source.token,
       });
     }, this);
@@ -82,7 +81,7 @@ export const actions = {
     return { status, data, message, error };
   },
 
-  async create({ state, commit, dispatch }, params) {
+  async create({ commit, dispatch }, params) {
     dispatch("abortPreviousRequests");
     commit("set", { loading: true });
 
@@ -105,7 +104,7 @@ export const actions = {
     return { status, data, message, error };
   },
 
-  async update({ state, commit, dispatch }, params) {
+  async update({ commit, dispatch }, params) {
     dispatch("abortPreviousRequests");
     commit("set", { loading: true });
 
@@ -128,7 +127,7 @@ export const actions = {
     return { status, data, message, error };
   },
 
-  async delete({ state, commit, dispatch }, params) {
+  async delete({ commit, dispatch }, params) {
     dispatch("abortPreviousRequests");
     commit("set", { loading: true });
 

@@ -1,6 +1,6 @@
 import axios from "../utils/HttpClient";
 
-const fetchClients = async ({ params, cancelToken }) => {
+const fetchClients = async (params, { cancelToken }) => {
   return await axios.get("/clients", { params, cancelToken });
 };
 

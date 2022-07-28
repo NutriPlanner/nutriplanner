@@ -61,11 +61,14 @@
                     </b-button>
                   </Overlay>
 
-                  <Overlay :loading="loading">
-                    <b-button block variant="link" to="/recover-password">
-                      Recuperar contraseña
-                    </b-button>
-                  </Overlay>
+                  <b-button
+                    block
+                    variant="link"
+                    to="/recover-password"
+                    :disabled="loading"
+                  >
+                    Recuperar contraseña
+                  </b-button>
                 </b-form>
               </validation-observer>
             </b-card-text>

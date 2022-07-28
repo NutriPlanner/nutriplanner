@@ -5,7 +5,7 @@
     :opacity="$attrs.opacity || 0.6"
     spinner-small
     spinner-variant="primary"
-    class="np-component np-component--overlay"
+    class="np-component np-component--overlay mb-2"
   >
     <slot></slot>
   </b-overlay>

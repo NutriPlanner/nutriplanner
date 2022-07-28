@@ -39,6 +39,7 @@ export const errorHandler = async (next, ctx) => {
           title: "Error!",
           variant: "danger",
           solid: false,
+          autoHideDelay: 7000,
         });
 
         return {
