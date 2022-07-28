@@ -1,5 +1,5 @@
-import Vue from 'vue'
+import Vue from "vue";
 
-import BreadcrumbMixin from '@/mixins/breadcrumb'
+import BreadcrumbMixin from "@/mixins/breadcrumb";
 
-Vue.mixin(BreadcrumbMixin)
+Vue.mixin(BreadcrumbMixin);

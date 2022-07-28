@@ -2,9 +2,7 @@
   <div class="np-component np-component--maintainer">
     <b-row class="mb-4" align-h="end">
       <b-col cols="auto">
-        <b-button @click="$emit('new-registry')">
-          Crear nuevo
-        </b-button>
+        <b-button @click="$emit('new-registry')"> Crear nuevo </b-button>
       </b-col>
     </b-row>
 
@@ -111,130 +109,130 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import { setFilterParam, setSortParam, setPageParam } from '@/utils/fetch'
+import _ from "lodash";
+import { setFilterParam, setSortParam, setPageParam } from "@/utils/fetch";
 
 export default {
-  name: 'MaintainerComponent',
+  name: "MaintainerComponent",
   props: {
     fields: {
       type: Array,
-      required: true
+      required: true,
     },
     items: {
       type: Array,
-      required: true
+      required: true,
     },
     totalRows: {
       type: Number,
-      default: 0
+      default: 0,
     },
     loading: {
       type: Boolean,
-      default: false
+      default: false,
     },
     page: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
   },
-  data () {
+  data() {
     return {
       sortBy: null,
       sortOrder: false,
-      filter: '',
+      filter: "",
       filterOn: [],
-      noResultsText: 'No hay resultados',
+      noResultsText: "No hay resultados",
       limit: 10,
       limitOptions: [
-        { value: 5, text: '5' },
-        { value: 10, text: '10' },
-        { value: 25, text: '25' },
-        { value: 50, text: '50' }
+        { value: 5, text: "5" },
+        { value: 10, text: "10" },
+        { value: 25, text: "25" },
+        { value: 50, text: "50" },
       ],
       fetchParams: {
-        sortBy: '',
+        sortBy: "",
         filter: {},
         limit: 10,
-        page: 1
-      }
-    }
+        page: 1,
+      },
+    };
   },
   computed: {
-    sortOptions () {
+    sortOptions() {
       return this.fields
-        .filter(f => f.sortable)
+        .filter((f) => f.sortable)
         .map((f) => {
-          return { text: f.label, value: f.key }
-        })
+          return { text: f.label, value: f.key };
+        });
     },
 
-    filterOptions () {
+    filterOptions() {
       return this.fields
-        .filter(f => f.filterable)
+        .filter((f) => f.filterable)
         .map((f) => {
-          return { text: f.label, value: f.key }
-        })
-    }
+          return { text: f.label, value: f.key };
+        });
+    },
   },
   watch: {
-    filter () {
-      this.onFilter(this.filterOn, this.filter)
+    filter() {
+      this.onFilter(this.filterOn, this.filter);
     },
 
-    filterOn () {
+    filterOn() {
       if (!_.isEmpty(this.filter)) {
-        this.onFilter(this.filterOn, this.filter)
+        this.onFilter(this.filterOn, this.filter);
       }
     },
 
-    sortBy () {
-      this.onSort(this.sortBy, this.sortOrder)
+    sortBy() {
+      this.onSort(this.sortBy, this.sortOrder);
     },
 
-    sortOrder () {
-      this.onSort(this.sortBy, this.sortOrder)
+    sortOrder() {
+      this.onSort(this.sortBy, this.sortOrder);
     },
 
-    limit (newLimit, oldLimit) {
-      this.onLimit(oldLimit, newLimit, this.page)
-    }
+    limit(newLimit, oldLimit) {
+      this.onLimit(oldLimit, newLimit, this.page);
+    },
   },
-  mounted () {
-    this.$emit('filters-changed', _.cloneDeep(this.fetchParams))
+  mounted() {
+    this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
   },
   methods: {
-    onFilter (columns, searchValue) {
-      const filterColumns = !_.isEmpty(columns) ? columns : this.filterOptions.map(o => o.value)
+    onFilter(columns, searchValue) {
+      const filterColumns = !_.isEmpty(columns)
+        ? columns
+        : this.filterOptions.map((o) => o.value);
 
-      this.fetchParams.filter = setFilterParam(filterColumns, searchValue)
-      this.fetchParams.page = 1
-      this.$emit('filters-changed', _.cloneDeep(this.fetchParams))
+      this.fetchParams.filter = setFilterParam(filterColumns, searchValue);
+      this.fetchParams.page = 1;
+      this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
 
-    onSort (sortBy, sortOrder) {
-      this.fetchParams.sortBy = setSortParam(sortBy, sortOrder)
-      this.fetchParams.page = 1
-      this.$emit('filters-changed', _.cloneDeep(this.fetchParams))
+    onSort(sortBy, sortOrder) {
+      this.fetchParams.sortBy = setSortParam(sortBy, sortOrder);
+      this.fetchParams.page = 1;
+      this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
 
-    onLimit (oldLimit, newLimit, currentPage) {
-      this.fetchParams.limit = newLimit
-      this.fetchParams.page = setPageParam(oldLimit, newLimit, currentPage)
+    onLimit(oldLimit, newLimit, currentPage) {
+      this.fetchParams.limit = newLimit;
+      this.fetchParams.page = setPageParam(oldLimit, newLimit, currentPage);
 
-      this.$emit('filters-changed', _.cloneDeep(this.fetchParams))
+      this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
 
-    onPageClick (event, page) {
-      event.preventDefault()
+    onPageClick(event, page) {
+      event.preventDefault();
 
-      this.fetchParams.page = page
-      this.$emit('filters-changed', _.cloneDeep(this.fetchParams))
-    }
-  }
-}
+      this.fetchParams.page = page;
+      this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

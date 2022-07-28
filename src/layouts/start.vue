@@ -8,6 +8,6 @@
 
 <script>
 export default {
-  name: 'StartLayout'
-}
+  name: "StartLayout",
+};
 </script>

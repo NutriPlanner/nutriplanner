@@ -1,10 +1,12 @@
 <template>
-  <b-navbar class="np-component np-component--navigation-bar" toggleable="md" sticky>
+  <b-navbar
+    class="np-component np-component--navigation-bar"
+    toggleable="md"
+    sticky
+  >
     <SidebarToggle target="sidebar" />
 
-    <b-navbar-brand href="#">
-      NutriPlanner
-    </b-navbar-brand>
+    <b-navbar-brand href="#"> NutriPlanner </b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse">
       <template #default="{ expanded }">
@@ -21,12 +23,8 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown text="User" right>
-          <b-dropdown-item to="/profile">
-            Preferencias
-          </b-dropdown-item>
-          <b-dropdown-item>
-            Cerrar sesión
-          </b-dropdown-item>
+          <b-dropdown-item to="/profile"> Preferencias </b-dropdown-item>
+          <b-dropdown-item @click="logout"> Cerrar sesión </b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -35,12 +33,30 @@
 
 <script>
 export default {
-  name: 'NavigationBarComponent'
-}
+  name: "NavigationBarComponent",
+  methods: {
+    async logout() {
+      const confirmed = await this.$bvModal.msgBoxConfirm(
+        "¿Está seguro que deseas continuar?",
+        {
+          title: "Cerrar sesión",
+          okVariant: "primary",
+          okTitle: "Cerrar sesión",
+          cancelVariant: "outline-primary",
+          cancelTitle: "Cancelar",
+        }
+      );
+
+      if (confirmed) {
+        this.$store.dispatch("authorization/logout");
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/globals/mainColors';
+@import "@/assets/styles/globals/mainColors";
 
 .np-component--navigation-bar {
   background-color: $background-color;

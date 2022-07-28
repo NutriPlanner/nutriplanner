@@ -5,18 +5,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'BreadcrumbComponent',
+  name: "BreadcrumbComponent",
   computed: {
     ...mapGetters({
-      items: 'breadcrumb/items'
-    })
-  }
-}
+      items: "breadcrumb/items",
+    }),
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

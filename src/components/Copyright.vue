@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  name: 'CopyrightComponent'
-}
+  name: "CopyrightComponent",
+};
 </script>

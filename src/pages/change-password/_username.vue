@@ -3,15 +3,27 @@
     <div class="pb-3">
       <b-row align-h="center">
         <b-col>
-          <b-card title="Nueva Contraseña" class="np-page--change-password__card">
+          <b-card
+            title="Nueva Contraseña"
+            class="np-page--change-password__card"
+          >
             <b-card-text>
               <p class="text-justify">
-                Para cambiar contraseña, ingrese el código de autorización enviado a su correo electrónico.
+                Para cambiar contraseña, ingrese el código de autorización
+                enviado a su correo electrónico.
               </p>
 
               <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
                 <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
-                  <validation-provider v-slot="validationContext" name="código" :rules="{ required: true, min: CODE_LENGTH, max: CODE_LENGTH }">
+                  <validation-provider
+                    v-slot="validationContext"
+                    name="código"
+                    :rules="{
+                      required: true,
+                      min: CODE_LENGTH,
+                      max: CODE_LENGTH,
+                    }"
+                  >
                     <b-form-group
                       id="input-group-code"
                       label="Código de Autorización"
@@ -28,14 +40,16 @@
                       />
 
                       <b-form-invalid-feedback id="input-code-feedback">
-                        {{
-                          validationContext.errors[0]
-                        }}
+                        {{ validationContext.errors[0] }}
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
 
-                  <validation-provider v-slot="validationContext" name="contraseña" :rules="{ required: true, min: 8 }">
+                  <validation-provider
+                    v-slot="validationContext"
+                    name="contraseña"
+                    :rules="{ required: true, min: 8 }"
+                  >
                     <b-form-group
                       id="input-group-password"
                       label="Nueva Contraseña"
@@ -51,14 +65,22 @@
                       />
 
                       <b-form-invalid-feedback id="input-password-feedback">
-                        {{
-                          validationContext.errors[0]
-                        }}
+                        {{ validationContext.errors[0] }}
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
 
-                  <validation-provider v-slot="validationContext" name="confirmar contraseña" :rules="{ required: true, equalValues: { otherValue: form.password, otherName: 'contraseña' }}">
+                  <validation-provider
+                    v-slot="validationContext"
+                    name="confirmar contraseña"
+                    :rules="{
+                      required: true,
+                      equalValues: {
+                        otherValue: form.password,
+                        otherName: 'contraseña',
+                      },
+                    }"
+                  >
                     <b-form-group
                       id="input-group-confirm-password"
                       label="Confirmar Contraseña"
@@ -73,10 +95,10 @@
                         :state="__getValidationState(validationContext)"
                       />
 
-                      <b-form-invalid-feedback id="input-confirm-password-feedback">
-                        {{
-                          validationContext.errors[0]
-                        }}
+                      <b-form-invalid-feedback
+                        id="input-confirm-password-feedback"
+                      >
+                        {{ validationContext.errors[0] }}
                       </b-form-invalid-feedback>
                     </b-form-group>
                   </validation-provider>
@@ -85,9 +107,7 @@
                     Cambiar contraseña
                   </b-button>
 
-                  <b-button block variant="link" to="/login">
-                    Volver
-                  </b-button>
+                  <b-button block variant="link" to="/login"> Volver </b-button>
                 </b-form>
               </validation-observer>
             </b-card-text>
@@ -100,26 +120,27 @@
 
 <script>
 export default {
-  name: 'ChangePasswordPage',
-  layout: 'start',
-  data () {
+  name: "ChangePasswordPage",
+  layout: "start",
+  auth: "guest",
+  data() {
     return {
       CODE_LENGTH: 6,
 
       form: {
-        code: '',
-        password: '',
-        confirmPassword: ''
-      }
-    }
+        code: "",
+        password: "",
+        confirmPassword: "",
+      },
+    };
   },
 
   methods: {
-    onSubmit () {
-      this.$router.push('/')
-    }
-  }
-}
+    onSubmit() {
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -127,5 +148,4 @@ export default {
   margin: auto;
   max-width: 25rem;
 }
-
 </style>

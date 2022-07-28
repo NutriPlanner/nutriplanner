@@ -15,110 +15,108 @@
 </template>
 
 <script>
-import { OBJECT_ID } from '@/utils/fieldsTypes'
+import { OBJECT_ID } from "@/utils/fieldsTypes";
 
 export default {
-  name: 'ClientsPage',
-  data () {
+  name: "ClientsPage",
+  data() {
     return {
       fields: [
         {
-          key: 'herba_id',
-          label: 'HerbaID',
+          key: "herba_id",
+          label: "HerbaID",
           sortable: false,
           filterable: true,
           type: OBJECT_ID,
-          tdClass: 'align-middle'
+          tdClass: "align-middle",
         },
         {
-          key: 'name',
-          label: 'Nombre',
+          key: "name",
+          label: "Nombre",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'last_name',
-          label: 'Apellido',
+          key: "last_name",
+          label: "Apellido",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'rut',
-          label: 'Rut',
+          key: "rut",
+          label: "Rut",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'birthday',
-          label: 'Fecha Nacimiento',
+          key: "birthday",
+          label: "Fecha Nacimiento",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'address',
-          label: 'Dirección',
+          key: "address",
+          label: "Dirección",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'phone',
-          label: 'Teléfono',
+          key: "phone",
+          label: "Teléfono",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: 'email',
-          label: 'Email',
+          key: "email",
+          label: "Email",
           sortable: true,
-          filterable: true
+          filterable: true,
         },
         {
-          key: '__actions',
-          label: 'Acciones',
-          sortable: false
-        }
+          key: "__actions",
+          label: "Acciones",
+          sortable: false,
+        },
       ],
 
-      currentParamsStatus: {}
-    }
+      currentParamsStatus: {},
+    };
   },
   computed: {
-    items () {
-      return this.$store.state.clients.list
+    items() {
+      return this.$store.state.clients.list;
     },
-    totalRows () {
-      return this.$store.state.clients.totalResults
+    totalRows() {
+      return this.$store.state.clients.totalResults;
     },
-    page () {
-      return this.$store.state.clients.page
+    page() {
+      return this.$store.state.clients.page;
     },
-    loading () {
-      return this.$store.state.clients.loading
-    }
+    loading() {
+      return this.$store.state.clients.loading;
+    },
   },
-  beforeMount () {
-    this.__setupBreadcrumb()
+  beforeMount() {
+    this.__setupBreadcrumb();
   },
   methods: {
-    fetchData (params) {
-      this.currentParamsStatus = params
-      this.$store.dispatch('clients/fetch', params)
+    fetchData(params) {
+      this.currentParamsStatus = params;
+      this.$store.dispatch("clients/fetch", params);
     },
-    onNewRegistry () {
-      this.$router.push({ name: 'home-clients-post' })
+    onNewRegistry() {
+      this.$router.push({ name: "home-clients-post" });
     },
-    onEditRegistry (data) {
-      this.$store.dispatch('clients/set', { update: data })
-      this.$router.push({ name: 'home-clients-put' })
+    onEditRegistry(data) {
+      this.$store.dispatch("clients/set", { update: data });
+      this.$router.push({ name: "home-clients-put" });
     },
-    async onDeleteRegistry (id) {
-      await this.$store.dispatch('clients/delete', id)
-      this.$store.dispatch('clients/fetch', this.currentParamsStatus)
-    }
-  }
-}
+    async onDeleteRegistry(id) {
+      await this.$store.dispatch("clients/delete", id);
+      this.$store.dispatch("clients/fetch", this.currentParamsStatus);
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
