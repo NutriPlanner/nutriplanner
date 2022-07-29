@@ -19,7 +19,6 @@ export default {
     };
   },
   beforeMount() {
-    this.__setupBreadcrumb();
     this.formInitialData = this.$store.state.clients.update;
 
     if (_.isEmpty(this.formInitialData) || !this.formInitialData.id) {

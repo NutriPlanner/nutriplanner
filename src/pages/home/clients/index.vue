@@ -96,9 +96,6 @@ export default {
       return this.$store.state.clients.loading;
     },
   },
-  beforeMount() {
-    this.__setupBreadcrumb();
-  },
   methods: {
     fetchData(params) {
       this.currentParamsStatus = params;

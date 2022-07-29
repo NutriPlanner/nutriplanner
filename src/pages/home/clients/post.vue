@@ -29,9 +29,6 @@ export default {
       formInitialData,
     };
   },
-  beforeMount() {
-    this.__setupBreadcrumb();
-  },
   methods: {
     async onSubmit({ data, resetForm }) {
       const { status } = await this.$store.dispatch("clients/create", data);

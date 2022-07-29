@@ -9,14 +9,14 @@ export const getters = {
 };
 
 export const mutations = {
-  setup(state) {
-    const fullPath = this.$router.currentRoute.fullPath;
-    const params = fullPath.substring(1).split("/");
+  setup(state, fullPath) {
+    console.log("setup", fullPath);
+    const params = fullPath ? fullPath.substring(1).split("/") : [];
     const crumbs = [];
 
     let path = "";
 
-    params.forEach((param, index) => {
+    params.forEach((param) => {
       path = `${path}/${param}`;
       const match = this.$router.match(path);
 
@@ -35,7 +35,7 @@ export const mutations = {
 };
 
 export const actions = {
-  setup({ commit }) {
-    commit("setup");
+  setup({ commit }, fullPath) {
+    commit("setup", fullPath);
   },
 };

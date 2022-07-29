@@ -77,7 +77,7 @@ export default {
   srcDir: "src/",
 
   router: {
-    middleware: "auth",
+    middleware: ["auth", "breadcrumb"],
     extendRoutes(routes, resolve) {
       routes.push({
         name: "custom",
