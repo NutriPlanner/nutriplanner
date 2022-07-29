@@ -51,7 +51,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.np-component--maintainer-field-action-render__button {
-  padding: 0 5px;
+.np-component--maintainer-field-action-render {
+  white-space: nowrap;
+
+  &__button {
+    padding: 0 5px;
+  }
 }
 </style>
