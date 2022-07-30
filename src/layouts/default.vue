@@ -8,7 +8,7 @@
       <Breadcrumb />
     </b-container>
 
-    <b-container class="py-3">
+    <b-container fluid class="py-3">
       <Nuxt />
     </b-container>
   </div>
