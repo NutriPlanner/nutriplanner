@@ -1,22 +1,12 @@
 <template>
   <div class="np-component np-component--maintainer-field-action-render">
-    <b-button
-      size="sm"
-      variant="outline-primary"
-      class="np-component--maintainer-field-action-render__button"
-      @click="$emit('edit', data.item)"
-    >
+    <DataTableButton @click="$emit('edit', data.item)">
       Editar
-    </b-button>
+    </DataTableButton>
 
-    <b-button
-      size="sm"
-      variant="outline-danger"
-      class="np-component--maintainer-field-action-render__button"
-      @click="onDelete"
-    >
+    <DataTableButton variant="outline-danger" @click="onDelete">
       Eliminar
-    </b-button>
+    </DataTableButton>
   </div>
 </template>
 
@@ -53,9 +43,5 @@ export default {
 <style lang="scss" scoped>
 .np-component--maintainer-field-action-render {
   white-space: nowrap;
-
-  &__button {
-    padding: 0 5px;
-  }
 }
 </style>

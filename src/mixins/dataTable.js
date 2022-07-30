@@ -112,5 +112,9 @@ export default {
       this.fetchParams.page = page;
       this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
+
+    onReload() {
+      this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
+    },
   },
 };
