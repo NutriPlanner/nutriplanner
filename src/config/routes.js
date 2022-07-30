@@ -1,16 +1,20 @@
 export default {
   home: {
-    text: "Inicio",
+    text: "inicio",
+    show: false,
   },
   "home-clients": {
-    text: "Clientes",
+    text: "clientes",
   },
   "home-clients-post": {
-    text: "Crear cliente",
+    text: "crear cliente",
     show: false,
   },
   "home-clients-put": {
-    text: "Editar cliente",
+    text: "editar cliente",
     show: false,
+  },
+  "home-tracking": {
+    text: "seguimiento",
   },
 };

@@ -33,7 +33,7 @@ export default {
       limit: 10,
       fetchParams: {
         sortBy: "",
-        filter: {},
+        filter: "{}",
         limit: 10,
         page: 1,
       },
@@ -113,7 +113,7 @@ export default {
       this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
 
-    onReload() {
+    reFetch() {
       this.$emit("filters-changed", _.cloneDeep(this.fetchParams));
     },
   },

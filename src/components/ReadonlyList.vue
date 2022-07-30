@@ -1,5 +1,13 @@
 <template>
   <div class="np-component np-component--readonly-list">
+    <b-row class="mb-4" align-h="end" no-gutters>
+      <b-col cols="auto">
+        <b-button variant="outline-primary" @click="reFetch">
+          Recargar Lista
+        </b-button>
+      </b-col>
+    </b-row>
+
     <DataTableFilters
       :sort-by.sync="sortBy"
       :sort-order.sync="sortOrder"

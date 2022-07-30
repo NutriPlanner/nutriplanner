@@ -2,7 +2,7 @@
   <div class="np-component np-component--maintainer">
     <b-row class="mb-4" align-h="end" no-gutters>
       <b-col cols="auto">
-        <b-button variant="outline-primary" @click="onReload">
+        <b-button variant="outline-primary" @click="reFetch">
           Recargar Lista
         </b-button>
       </b-col>
@@ -30,12 +30,13 @@
       :loading="loading"
     >
       <template v-for="field in fields" #[`cell(${field.key})`]="data">
-        <DataTableFieldRender
+        <slot
           v-if="field.key !== '__actions'"
-          :key="field.key"
-          :data="data"
-          :field="field"
-        />
+          :name="`cell(${field.key})`"
+          v-bind="{ ...data }"
+        >
+          <DataTableFieldRender :key="field.key" :data="data" :field="field" />
+        </slot>
 
         <!-- eslint-disable-next-line vue/valid-v-for -->
         <MaintainerFieldActionRender

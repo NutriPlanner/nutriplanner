@@ -23,12 +23,26 @@ table.b-table[aria-busy='true'] {
   padding: 0.75rem !important;
 }
 
-.btn {
-  text-transform: uppercase;
-  font-size: 0.85rem !important;
-}
-
+.btn,
 .nav-link {
   text-transform: uppercase;
   font-size: 0.85rem !important;
+
+  i {
+    font-size: 1rem;
+    vertical-align: sub;
+  }
+
+  .no-transform {
+    text-transform: none;
+  }
+}
+
+table {
+  border-radius: 0.25rem;
+
+  th {
+    font-weight: 500;
+    border-bottom: 1px solid $primary !important;
+  }
 }
