@@ -1,16 +1,18 @@
 <template>
   <div class="np-page np-page--clients">
-    <Maintainer
-      :fields="fields"
-      :items="items"
-      :total-rows="totalRows"
-      :page="page"
-      :loading="loading"
-      @new-registry="onNewRegistry"
-      @edit-registry="onEditRegistry"
-      @delete-registry="onDeleteRegistry"
-      @filters-changed="fetchData"
-    />
+    <b-card>
+      <Maintainer
+        :fields="fields"
+        :items="items"
+        :total-rows="totalRows"
+        :page="page"
+        :loading="loading"
+        @new-registry="onNewRegistry"
+        @edit-registry="onEditRegistry"
+        @delete-registry="onDeleteRegistry"
+        @filters-changed="fetchData"
+      />
+    </b-card>
   </div>
 </template>
 
