@@ -15,10 +15,8 @@
 </template>
 
 <script>
-import Breadcrumb from "../components/Breadcrumb.vue";
 export default {
   name: "DefaultLayout",
-  components: { Breadcrumb },
 };
 </script>
 

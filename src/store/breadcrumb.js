@@ -10,7 +10,6 @@ export const getters = {
 
 export const mutations = {
   setup(state, fullPath) {
-    console.log("setup", fullPath);
     const params = fullPath ? fullPath.substring(1).split("/") : [];
     const crumbs = [];
 
