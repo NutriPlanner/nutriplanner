@@ -1,5 +1,5 @@
 <template>
-  <b-card>
+  <b-card class="np-component np-component--data-table-filters">
     <b-row>
       <b-col v-if="sortOptions.length > 0" sm="12" lg="6" class="my-1">
         <b-form-group
@@ -101,7 +101,7 @@
 
 <script>
 export default {
-  name: "MaintainerFilterComponent",
+  name: "DataTableFiltersComponent",
   props: {
     sortBy: {
       type: String,

@@ -1,10 +1,10 @@
 <template>
-  <div class="np-component np-component--maintainer-field-render">
+  <div class="np-component np-component--data-table-field-render">
     <template v-if="$attrs.data.field.type === OBJECT_ID">
       <b-badge
         v-if="$attrs.data.value"
         variant="tertiary"
-        class="np-component--maintainer-field-render__object-id"
+        class="np-component--data-table-field-render__object-id"
       >
         {{ $attrs.data.value }}
       </b-badge>
@@ -20,7 +20,7 @@
 import { OBJECT_ID } from "@/utils/fieldsTypes";
 
 export default {
-  name: "MaintainerFieldRenderComponent",
+  name: "DataTableFieldRenderComponent",
   data() {
     return {
       OBJECT_ID,
@@ -30,10 +30,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.np-component--maintainer-field-render {
+.np-component--data-table-field-render {
   &__object-id {
     word-break: break-all;
     white-space: normal;
+    padding: 0.5em 0.7em;
   }
 }
 </style>
