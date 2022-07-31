@@ -1,9 +1,9 @@
 export const getBindedServices = (services, ctx) => {
-  const bindedServices = {};
+    const bindedServices = {}
 
-  Object.entries(services).forEach(([key, service]) => {
-    bindedServices[key] = service.bind(ctx);
-  });
+    Object.entries(services).forEach( ( [ key, service ] ) => {
+        bindedServices[key] = service.bind(ctx)
+    } )
 
-  return bindedServices;
-};
+    return bindedServices
+}
