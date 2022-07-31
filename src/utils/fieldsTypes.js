@@ -1,1 +1,1 @@
-export const OBJECT_ID = "objectId";
+export const OBJECT_ID = 'objectId'

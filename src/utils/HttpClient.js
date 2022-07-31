@@ -1,30 +1,30 @@
-let client;
+let client
 
 export const setupClient = (httpClient) => {
-  client = httpClient;
-};
+    client = httpClient
+}
 
 // Request helpers
 const reqMethods = [
-  "request",
-  "delete",
-  "get",
-  "head",
-  "options", // url, config
-  "post",
-  "put",
-  "patch", // url, data, config
-];
+    'request',
+    'delete',
+    'get',
+    'head',
+    'options', // url, config
+    'post',
+    'put',
+    'patch', // url, data, config
+]
 
-const service = {};
+const service = {}
 
-reqMethods.forEach((method) => {
-  service[method] = function () {
-    if (!client) {
-      throw new Error("apiClient not installed");
+reqMethods.forEach( (method) => {
+    service[method] = function () {
+        if (!client)
+            throw new Error('apiClient not installed')
+    
+        return client[method].apply(null, arguments)
     }
-    return client[method].apply(null, arguments);
-  };
-});
+} )
 
-export default service;
+export default service

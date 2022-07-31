@@ -1,43 +1,42 @@
 <template>
-  <div class="np-component np-component--maintainer-field-action-render">
-    <DataTableButton @click="$emit('edit', data.item)">
-      Editar
-    </DataTableButton>
+    <div class="np-component np-component--maintainer-field-action-render">
+        <DataTableButton @click="$emit('edit', data.item)">
+            Editar
+        </DataTableButton>
 
-    <DataTableButton variant="outline-danger" @click="onDelete">
-      Eliminar
-    </DataTableButton>
-  </div>
+        <DataTableButton variant="outline-danger" @click="onDelete">
+            Eliminar
+        </DataTableButton>
+    </div>
 </template>
 
 <script>
 export default {
-  name: "MaintainerFieldActionRenderComponent",
-  props: {
-    data: {
-      type: Object,
-      required: true,
+    name  : 'MaintainerFieldActionRenderComponent',
+    props : {
+        data: {
+            type     : Object,
+            required : true,
+        },
     },
-  },
-  methods: {
-    async onDelete() {
-      const confirmed = await this.$bvModal.msgBoxConfirm(
-        "¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.",
-        {
-          title: "Confirmar eliminación",
-          okVariant: "danger",
-          okTitle: "Eliminar",
-          cancelVariant: "outline-primary",
-          cancelTitle: "Cancelar",
-        }
-      );
+    methods: {
+        async onDelete () {
+            const confirmed = await this.$bvModal.msgBoxConfirm(
+                '¿Está seguro de deseas eliminar este registro? Esta operación no es reversible.',
+                {
+                    title         : 'Confirmar eliminación',
+                    okVariant     : 'danger',
+                    okTitle       : 'Eliminar',
+                    cancelVariant : 'outline-primary',
+                    cancelTitle   : 'Cancelar',
+                },
+            )
 
-      if (confirmed) {
-        this.$emit("delete", this.data.item.id);
-      }
+            if (confirmed)
+                this.$emit('delete', this.data.item.id)
+        },
     },
-  },
-};
+}
 </script>
 
 <style lang="scss" scoped>
