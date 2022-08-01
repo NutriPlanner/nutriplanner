@@ -141,6 +141,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 import { FULLFILLED } from '@/utils/responseStatus'
 
 export default {
@@ -172,16 +173,7 @@ export default {
     },
     methods: {
         async onSubmit () {
-            const params = {
-                email    : this.form.email,
-                code     : this.form.code,
-                password : this.form.password,
-            }
-
-            const { status } = await this.$store.dispatch(
-                'authorization/changePassword',
-                { params },
-            )
+            const { status } = await this.$store.dispatch('authorization/changePassword', { params: _.cloneDeep(this.form) } )
 
             if (status === FULLFILLED) {
                 this.returnTimeout = setTimeout( () => {

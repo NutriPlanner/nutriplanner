@@ -19,7 +19,7 @@ export const mutations = {
             path = `${path}/${param}`
             const match = this.$router.match(path)
 
-            if (match.name !== null) {
+            if (match.name != null && match.name !== 'custom') {
                 crumbs.push( {
                     id     : match.name,
                     text   : Routes[match.name]?.text || param.replace(/-/g, ' '),

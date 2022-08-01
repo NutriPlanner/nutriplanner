@@ -1,13 +1,7 @@
 <template>
     <div class="np-component np-component--data-table-field-render tabular-nums">
         <template v-if="$attrs.data.field.type === OBJECT_ID">
-            <b-badge
-                v-if="$attrs.data.value"
-                variant="tertiary"
-                class="np-component--data-table-field-render__object-id"
-            >
-                {{ $attrs.data.value }}
-            </b-badge>
+            <ObjectIdBadge v-if="$attrs.data.value" :value="$attrs.data.value" />
         </template>
 
         <template v-else>
@@ -30,12 +24,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.np-component--data-table-field-render {
-  &__object-id {
-    word-break: break-all;
-    white-space: normal;
-    padding: 0.5em 0.7em;
-    font-family: monospace;
-  }
-}
+
 </style>

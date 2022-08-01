@@ -25,4 +25,12 @@ export default {
         text : 'editar seguimiento',
         show : false,
     },
+    'home-user': {
+        text : 'usuario',
+        show : false,
+    },
+    'home-user-preferences': {
+        text : 'preferencias',
+        show : false,
+    },
 }

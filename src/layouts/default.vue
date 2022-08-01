@@ -11,6 +11,8 @@
         <b-container fluid class="py-3">
             <Nuxt />
         </b-container>
+
+        <NutriPlannerFooter />
     </div>
 </template>
 
