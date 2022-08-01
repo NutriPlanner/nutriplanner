@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      ENVIRONMENT:
+        required: true
+        type: string
+
+jobs:
+  build:
+    name: Build Application
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ENVIRONMENT }}
+    env:
+      IMAGE_NAME: us.gcr.io/${{ secrets.GCP_PROJECT_ID }}/nutriplanner:${{ github.sha }}
+
+    steps:
+      - name: Login
+        uses: google-github-actions/setup-gcloud@v0
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_CREDENTIALS }}
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker --quiet
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build . -t $IMAGE_NAME --build-arg NUXT_ENV_API_HOST="${{ secrets.NUXT_ENV_API_HOST }}"
+
+      - name: Push Docker image
+        run: docker push $IMAGE_NAME
