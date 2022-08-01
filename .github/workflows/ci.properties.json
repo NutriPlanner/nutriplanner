@@ -1,0 +1,9 @@
+{
+    "name": "CI Workflow",
+    "description": "NutriPlanner CI workflow.",
+    "iconName": "flask-line",
+    "categories": [
+        "Javascript",
+        "Vue"
+    ]
+}

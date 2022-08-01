@@ -1,0 +1,9 @@
+{
+    "name": "Deploy Workflow",
+    "description": "NutriPlanner Deploy workflow.",
+    "iconName": "rocket-line",
+    "categories": [
+        "Javascript",
+        "Vue"
+    ]
+}
