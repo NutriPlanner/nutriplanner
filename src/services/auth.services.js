@@ -16,8 +16,8 @@ const requestChangePassword = async function ( { params } ) {
     return await axios.post('/auth/forgot-password', params)
 }
 
-const changePassword = async function ( { params } ) {
-    return await axios.post('/auth/reset-password', params)
+const changePassword = async function ( { params: { email, code, password } } ) {
+    return await axios.post('/auth/reset-password', { email, code, password } )
 }
 
 export default {

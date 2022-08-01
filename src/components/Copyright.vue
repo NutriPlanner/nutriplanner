@@ -2,7 +2,7 @@
     <div class="np-component np-component--copyright">
         <div class="py-3">
             <span class="np-component--copyright__text">
-                <small>Hecho por Jesús Barrientos con ❤️</small>
+                <small>NutriPlanner © Todos los derechos reservados - {{ currentYear }}</small>
             </span>
         </div>
     </div>
@@ -10,6 +10,11 @@
 
 <script>
 export default {
-    name: 'CopyrightComponent',
+    name     : 'CopyrightComponent',
+    computed : {
+        currentYear() {
+            return new Date().getFullYear()
+        },
+    },
 }
 </script>

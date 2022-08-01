@@ -31,7 +31,7 @@
             <!-- Right aligned nav items -->
             <b-navbar-nav class="ml-auto">
                 <b-nav-item-dropdown :text="userName" right>
-                    <b-dropdown-item to="/profile">
+                    <b-dropdown-item to="/home/user/preferences">
                         Preferencias
                     </b-dropdown-item>
                     <b-dropdown-item @click="logout">
