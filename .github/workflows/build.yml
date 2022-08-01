@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    name: Build Application
+    name: Docker Image
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENVIRONMENT }}
     env:
