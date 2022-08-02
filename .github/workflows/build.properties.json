@@ -1,9 +1,0 @@
-{
-    "name": "Build Workflow",
-    "description": "NutriPlanner Build workflow.",
-    "iconName": "building-line",
-    "categories": [
-        "Javascript",
-        "Vue"
-    ]
-}
