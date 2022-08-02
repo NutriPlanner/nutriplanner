@@ -1,14 +1,14 @@
 export default {
     // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-    ssr: false,
+    ssr: true,
 
     server: {
-        port : 3000,
+        port : process.env.PORT || 3000,
         host : '0.0.0.0',
     },
 
     // Target: https://go.nuxtjs.dev/config-target
-    target: 'static',
+    target: 'server',
 
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
@@ -17,8 +17,7 @@ export default {
             { charset: 'utf-8' },
             {
                 name    : 'viewport',
-                content :
-          'width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no',
+                content : 'width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no',
             },
             { hid: 'description', name: 'description', content: '' },
             { name: 'format-detection', content: 'telephone=no' },
