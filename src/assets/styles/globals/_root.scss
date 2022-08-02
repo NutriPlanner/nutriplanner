@@ -1,0 +1,25 @@
+html {
+  font-size: 14px;
+}
+
+html,
+body {
+  overscroll-behavior: contain;
+}
+
+html,
+body,
+#__nuxt,
+#__layout {
+  height: 100% !important;
+}
+
+#__layout {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  .np-layout {
+    flex: auto;
+  }
+}
