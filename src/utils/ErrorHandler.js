@@ -23,7 +23,7 @@ export const errorHandler = async (next, ctx) => {
         }
     }
     catch (error) {
-    // in case of cancel operation we don't want to show the error
+        // in case of cancel operation we don't want to show the error
         if (error.__CANCEL__) {
             return {
                 status  : CANCELLED,
@@ -35,10 +35,10 @@ export const errorHandler = async (next, ctx) => {
             const { internalCode, data } = error.response.data
 
             if (errorsHandler[internalCode] ) {
-                const { message } = errorsHandler[internalCode](data)
+                const { message, type } = errorsHandler[internalCode](data)
                 ctx._vm.$bvToast.toast(message, {
                     title         : 'Error!',
-                    variant       : 'danger',
+                    variant       : type || 'danger',
                     solid         : false,
                     autoHideDelay : 7000,
                 } )
@@ -50,8 +50,7 @@ export const errorHandler = async (next, ctx) => {
                 }
             }
             else {
-                const message =
-          'Ha ocurrido un error no controlado, contacte a soporte para más información.'
+                const message = 'Ha ocurrido un error no controlado, contacte a soporte para más información.'
                 ctx._vm.$bvToast.toast(message, {
                     title   : 'Error!',
                     variant : 'danger',
@@ -66,15 +65,12 @@ export const errorHandler = async (next, ctx) => {
             }
         }
         else {
-            const message =
-        'Ha ocurrido un error no controlado, contacte a soporte para más información.'
+            const message = 'Ha ocurrido un error no controlado, contacte a soporte para más información.'
             ctx._vm.$bvToast.toast(message, {
                 title   : 'Error!',
                 variant : 'danger',
                 solid   : false,
             } )
-
-            console.error(error)
 
             return {
                 status: REJECTED,
