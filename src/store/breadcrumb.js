@@ -1,4 +1,4 @@
-import Routes from '../config/routes'
+import { breadcrumbs } from '@/config/routes'
 
 export const state = () => ( {
     items: [],
@@ -22,7 +22,7 @@ export const mutations = {
             if (match.name != null && match.name !== 'custom') {
                 crumbs.push( {
                     id     : match.name,
-                    text   : Routes[match.name]?.text || param.replace(/-/g, ' '),
+                    text   : breadcrumbs[match.name]?.text || param.replace(/-/g, ' '),
                     to     : { path },
                     active : path === fullPath,
                 } )

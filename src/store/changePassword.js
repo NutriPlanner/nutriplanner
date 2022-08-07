@@ -4,15 +4,21 @@ import { routesNames } from '@/config/routes'
 import { ResponseStatus } from '@/utils'
 
 const defaultData = {
-    email    : '',
-    password : '',
+    email           : '',
+    code            : '',
+    password        : '',
+    confirmPassword : '',
 }
 
 export const state = () => ( {
     data: {
         ...defaultData,
     },
-    loading: false,
+    loading : false,
+    rules   : {
+        codeLength        : 6,
+        passwordMinLength : 8,
+    },
 } )
 
 export const getters = {
@@ -37,16 +43,18 @@ export const actions = {
 
     // API CALLS
 
-    async login ( { state, commit, dispatch } ) {
+    async changePassword ( { state, commit, dispatch } ) {
         commit('set', { loading: true } )
 
         const params = { ...state.data }
 
-        const { status, data, message, error } = await dispatch('authorization/login', params, { root: true } )
+        const { status, data, message, error } = await dispatch('authorization/changePassword', params, { root: true } )
 
-        if (status === ResponseStatus.FULLFILLED)
+        if (status === ResponseStatus.FULLFILLED) {
+            await dispatch('authorization/login', params, { root: true } )
             commit('resetData')
-        
+        }
+
         commit('set', { loading: false } )
 
         return { status, data, message, error }
@@ -54,8 +62,8 @@ export const actions = {
 
     // VIEW ACTIONS
 
-    redirectToForgonPassword (_ctx) {
-        this.$router.push( { name: routesNames.RECOVER_PASSWORD } )
+    redirectToLogin ( { commit } ) {
+        this.$router.push( { name: routesNames.LOGIN } )
         commit('resetData')
     },
 }

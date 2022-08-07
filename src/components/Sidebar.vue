@@ -22,24 +22,21 @@
 </template>
 
 <script>
-import Routes from '@/config/routes'
+import { breadcrumbs } from '@/config/routes'
 
 export default {
-    name  : 'SidebarComponent',
-    props : {
+    name: 'SidebarComponent',
+    
+    props: {
         target: {
             type    : String,
             default : 'sidebar',
         },
     },
-    data () {
-        return {
-            Routes,
-        }
-    },
+
     computed: {
         routes () {
-            return Object.entries(this.Routes)
+            return Object.entries(breadcrumbs)
                 .filter( ( [ , { show }] ) => show !== false)
                 .reduce( (acc, route) => {
                     acc[route[0]] = route[1]

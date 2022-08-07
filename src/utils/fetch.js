@@ -30,3 +30,9 @@ export const setPageParam = (oldLimit, newLimit, currentPage) => {
 
     return newPage > 0 ? newPage : 1
 }
+
+export default {
+    setFilterParam,
+    setSortParam,
+    setPageParam,
+}

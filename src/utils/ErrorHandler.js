@@ -1,4 +1,4 @@
-import { FULLFILLED, REJECTED, CANCELLED } from './responseStatus'
+import { ResponseStatus } from '@/utils'
 
 let errorsHandler = {}
 
@@ -18,7 +18,7 @@ export const errorHandler = async (next, ctx) => {
         const response = await next()
 
         return {
-            status : FULLFILLED,
+            status : ResponseStatus.FULLFILLED,
             data   : response?.data || {},
         }
     }
@@ -26,7 +26,7 @@ export const errorHandler = async (next, ctx) => {
         // in case of cancel operation we don't want to show the error
         if (error.__CANCEL__) {
             return {
-                status  : CANCELLED,
+                status  : ResponseStatus.CANCELLED,
                 message : error.message,
             }
         }
@@ -44,7 +44,7 @@ export const errorHandler = async (next, ctx) => {
                 } )
 
                 return {
-                    status : REJECTED,
+                    status : ResponseStatus.REJECTED,
                     message,
                     error  : error.response.data,
                 }
@@ -58,7 +58,7 @@ export const errorHandler = async (next, ctx) => {
                 } )
 
                 return {
-                    status : REJECTED,
+                    status : ResponseStatus.REJECTED,
                     message,
                     error  : error.response.data,
                 }
@@ -73,10 +73,15 @@ export const errorHandler = async (next, ctx) => {
             } )
 
             return {
-                status: REJECTED,
+                status: ResponseStatus.REJECTED,
                 message,
                 error,
             }
         }
     }
+}
+
+export default {
+    setupErrorHandler,
+    errorHandler,
 }

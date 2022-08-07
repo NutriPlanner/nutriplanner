@@ -33,7 +33,6 @@ export default {
         '@/plugins/vee-validate/vee-validate.js',
         '@/plugins/directives.js',
         '@/plugins/mixins.js',
-        '@/plugins/axios-setup.js',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

@@ -1,7 +1,8 @@
-import { setupErrorHandler, errorHandler } from '@/utils/ErrorHandler'
-import { FULLFILLED } from '@/utils/responseStatus'
+import _ from 'lodash'
+import { ResponseStatus, ErrorHandler } from '@/utils'
 import authErrors from '@/store/errors/auth.errors'
 
+const { setupErrorHandler, errorHandler } = ErrorHandler
 setupErrorHandler(authErrors)
 
 export const state = () => ( {
@@ -9,14 +10,13 @@ export const state = () => ( {
 } )
 
 export const mutations = {
-    set (state, data) {
-        for (const key in data)
-            state[key] = data[key]
+    set (state, newState) {
+        state = _.merge(state, newState)
     },
 }
 
 export const actions = {
-    async login ( { commit }, { email, password } ) {
+    async login (_ctx, { email, password } ) {
         const { status, data, message, error } = await errorHandler(async () => {
             return await this.$auth.login( { data: { email, password } } )
         }, this)
@@ -40,14 +40,14 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async requestChangePassword ( { commit }, { params } ) {
+    async requestChangePassword ( { commit }, { email } ) {
         commit('set', { loading: true } )
 
         const { status, data, message, error } = await errorHandler(async () => {
-            return await this.$axios.post('/auth/forgot-password', params)
+            return await this.$axios.post('/auth/forgot-password', { email } )
         }, this)
 
-        if (status === FULLFILLED) {
+        if (status === ResponseStatus.FULLFILLED) {
             this._vm.$bvToast.toast(
                 'Se ha generado un código de autorización. Revise la bandeja de entrada de su correo electrónico.',
                 {
@@ -71,7 +71,7 @@ export const actions = {
             return await this.$axios.post('/auth/reset-password', { email, code, password } )
         }, this)
 
-        if (status === FULLFILLED) {
+        if (status === ResponseStatus.FULLFILLED) {
             this._vm.$bvToast.toast('La contraseña se ha modificado correctamente.', {
                 title   : 'Cambio aplicado',
                 variant : 'success',

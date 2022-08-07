@@ -78,7 +78,6 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
 
@@ -93,6 +92,12 @@ export default {
             password : 'data.password',
             loading  : 'loading',
         } ),
+    },
+
+    mounted() {
+        setTimeout( () => {
+            this.$refs.formObserver.validate()
+        }, 100)
     },
 
     methods: {
