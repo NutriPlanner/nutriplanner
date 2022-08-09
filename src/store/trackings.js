@@ -1,8 +1,8 @@
 import axios from 'axios'
-import trackingErrors from '../services/tracking.errors'
-import trackingServices from '../services/tracking.services'
-import { errorHandler, setupErrorHandler } from '../utils/ErrorHandler'
-import { FULLFILLED } from '../utils/responseStatus'
+import trackingErrors from '@/services/tracking.errors'
+import trackingServices from '@/services/tracking.services'
+import { errorHandler, setupErrorHandler } from '~/utils/errorHandler'
+import { FULLFILLED } from '@/utils/responseStatus'
 
 const CancelToken = axios.CancelToken
 let source = CancelToken.source()
@@ -92,8 +92,7 @@ export const actions = {
         return {}
     },
 
-    async create ( { state, commit, dispatch }, params) {
-        dispatch('abortPreviousRequests')
+    async create ( { state, commit }, params) {
         commit('set', { loading: true } )
 
         const paramsWithClientId = {
@@ -123,8 +122,7 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async update ( { state, commit, dispatch }, params) {
-        dispatch('abortPreviousRequests')
+    async update ( { state, commit }, params) {
         commit('set', { loading: true } )
 
         const paramsWithClientId = {
@@ -154,8 +152,7 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async delete ( { commit, dispatch }, params) {
-        dispatch('abortPreviousRequests')
+    async delete ( { commit }, params) {
         commit('set', { loading: true } )
 
         const { status, data, message, error } = await errorHandler(async () => {

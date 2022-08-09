@@ -31,6 +31,8 @@ export const errorHandler = async (next, ctx) => {
             }
         }
 
+        console.error(error)
+
         if (error.response && error.response.data) {
             const { internalCode, data } = error.response.data
 

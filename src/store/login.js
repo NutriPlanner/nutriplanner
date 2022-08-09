@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { getField, updateField } from 'vuex-map-fields'
 import { routesNames } from '@/config/routes'
-import { ResponseStatus } from '@/utils'
+import { ResponseStatus, Store } from '@/utils'
 
 const defaultData = {
     email    : '',
@@ -23,7 +23,7 @@ export const mutations = {
     updateField,
     
     set (state, newState) {
-        state = _.merge(state, newState)
+        Store.set(state, newState)
     },
 
     resetData(state) {

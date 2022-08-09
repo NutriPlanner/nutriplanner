@@ -1,3 +1,7 @@
+import axios from 'axios'
+
+const CancelToken = axios.CancelToken
+
 export const setFilterParam = (filterColumns, searchValue) => {
     const filterParam = {}
 
@@ -31,8 +35,20 @@ export const setPageParam = (oldLimit, newLimit, currentPage) => {
     return newPage > 0 ? newPage : 1
 }
 
+export const abortPreviousRequest = (source) => {
+    const cancelMemory = { oldSource: source, newSource: CancelToken.source() }
+
+    // this timeout is important to await the source is injected in the axios instance
+    setTimeout( () => {
+        cancelMemory.oldSource.cancel('Operation cancelled.')
+    }, 100)
+
+    return cancelMemory.newSource
+}
+
 export default {
     setFilterParam,
     setSortParam,
     setPageParam,
+    abortPreviousRequest,
 }

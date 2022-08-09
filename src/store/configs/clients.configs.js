@@ -1,13 +1,21 @@
-import { OBJECT_ID } from '../../utils/fieldsTypes'
-import { getNeededFields } from '../../utils/fields'
+import { FieldsTypes } from '@/utils'
 
-const fields = [
+export const tableFields = [
+    {
+        key        : 'id',
+        label      : 'ID',
+        sortable   : false,
+        filterable : true,
+        type       : FieldsTypes.OBJECT_ID,
+        tdClass    : 'align-middle',
+        thStyle    : 'width: 210px; min-width: 100px;',
+    },
     {
         key        : 'herba_id',
         label      : 'HerbaID',
         sortable   : false,
         filterable : true,
-        type       : OBJECT_ID,
+        type       : FieldsTypes.OBJECT_ID,
         tdClass    : 'align-middle',
     },
     {
@@ -54,11 +62,14 @@ const fields = [
         sortable   : true,
         filterable : true,
     },
+    {
+        key        : '__actions',
+        label      : 'Acciones',
+        sortable   : false,
+        filterable : false,
+    },
 ]
 
-const getFields = neededFields => getNeededFields(fields, neededFields)
-
 export default {
-    fields,
-    getFields,
+    tableFields,
 }

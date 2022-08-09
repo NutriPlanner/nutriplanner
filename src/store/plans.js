@@ -2,19 +2,19 @@ import axios from 'axios'
 import { getField, updateField } from 'vuex-map-fields'
 import { ResponseStatus, ErrorHandler, Fetch, Store } from '@/utils'
 import { routesNames } from '@/config/routes'
-import clientsErrors from '@/store/errors/clients.errors'
-import clientsConfigs from '@/store/configs/clients.configs'
+import plansErrors from '@/store/errors/plans.errors'
+import plansConfigs from '@/store/configs/plans.configs'
 
 const CancelToken = axios.CancelToken
 let source = CancelToken.source()
 
 const { setupErrorHandler, errorHandler } = ErrorHandler
-setupErrorHandler(clientsErrors)
+setupErrorHandler(plansErrors)
 
-const apiNamespace = 'clients'
+const apiNamespace = 'plans'
 
 const defaultData = {
-    clients      : [],
+    plans        : [],
     totalPages   : 0,
     totalResults : 0,
     page         : 1,
@@ -31,7 +31,7 @@ export const getters = {
     getField,
 
     tableFields () {
-        return clientsConfigs.tableFields
+        return plansConfigs.tableFields
     },
 }
 
@@ -70,7 +70,7 @@ export const actions = {
 
         if (status === ResponseStatus.FULLFILLED) {
             commit('set', {
-                'data.clients'      : data.results,
+                'data.plans'        : data.results,
                 'data.totalPages'   : data.totalPages,
                 'data.totalResults' : data.totalResults,
             } )
@@ -89,7 +89,7 @@ export const actions = {
         }, this)
 
         if (status === ResponseStatus.FULLFILLED) {
-            this._vm.$bvToast.toast('El cliente se ha eliminado correctamente.', {
+            this._vm.$bvToast.toast('El plan se ha eliminado correctamente.', {
                 title   : 'Eliminación completada',
                 variant : 'success',
                 solid   : false,
@@ -101,16 +101,16 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    
+
     // VIEW ACTIONS
 
     redirectToPost ( { commit } ) {
         commit('resetData')
-        this.$router.push( { name: routesNames.HOME_CLIENTS_POST } )
+        this.$router.push( { name: routesNames.HOME_PLANS_POST } )
     },
 
     redirectToPut ( { commit }, { id } ) {
         commit('resetData')
-        this.$router.push( { name: routesNames.HOME_CLIENTS_PUT, query: { id } } )
+        this.$router.push( { name: routesNames.HOME_PLANS_PUT, query: { id } } )
     },
 }

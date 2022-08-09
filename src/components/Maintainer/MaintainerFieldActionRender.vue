@@ -4,7 +4,7 @@
             Editar
         </DataTableButton>
 
-        <DataTableButton variant="outline-danger" @click="onDelete">
+        <DataTableButton v-if="showDeleteButton" variant="outline-danger" @click="onDelete">
             Eliminar
         </DataTableButton>
     </div>
@@ -17,6 +17,11 @@ export default {
         data: {
             type     : Object,
             required : true,
+        },
+        showDeleteButton: {
+            type     : Boolean,
+            required : false,
+            default  : true,
         },
     },
     methods: {

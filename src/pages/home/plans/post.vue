@@ -1,11 +1,11 @@
 <template>
-    <div class="np-page np-page--clients-post">
+    <div class="np-page np-page--plan-post">
         <b-card>
             <template #header>
-                <CardHeader>Agregar cliente</CardHeader>
+                <CardHeader>Crear plan</CardHeader>
             </template>
 
-            <ClientForm @submit="create" />
+            <PlanForm @submit="create" />
         </b-card>
     </div>
 </template>
@@ -14,14 +14,14 @@
 import { mapActions } from 'vuex'
 
 export default {
-    name: 'ClientsPostPage',
+    name: 'PlansPostPage',
 
     beforeMount() {
         this.resetData()
     },
 
     methods: {
-        ...mapActions('clientForm', {
+        ...mapActions('planForm', {
             resetData : 'resetData',
             create    : 'create',
         } ),

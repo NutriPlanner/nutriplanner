@@ -5,15 +5,15 @@ export const routesNames = {
     HOME                  : 'home',
     HOME_CLIENTS          : 'home-clients',
     HOME_CLIENTS_POST     : 'home-clients-post',
-    HOME_CLIENTS_PUT      : 'home-clients-put-id',
+    HOME_CLIENTS_PUT      : 'home-clients-put',
     HOME_TRACKING         : 'home-tracking',
     HOME_TRACKING_POST    : 'home-tracking-post',
-    HOME_TRACKING_PUT     : 'home-tracking-put-id',
+    HOME_TRACKING_PUT     : 'home-tracking-put',
     HOME_USER             : 'home-user',
     HOME_USER_PREFERENCES : 'home-user-preferences',
-    HOME_PLAN             : 'home-plan',
-    HOME_PLAN_POST        : 'home-plan-post',
-    HOME_PLAN_PUT         : 'home-plan-put-id',
+    HOME_PLANS            : 'home-plans',
+    HOME_PLANS_POST       : 'home-plans-post',
+    HOME_PLANS_PUT        : 'home-plans-put',
 }
 
 export const breadcrumbs = {
@@ -51,14 +51,14 @@ export const breadcrumbs = {
         text : 'preferencias',
         show : false,
     },
-    [routesNames.HOME_PLAN]: {
-        text: 'plan4u',
+    [routesNames.HOME_PLANS]: {
+        text: 'planes',
     },
-    [routesNames.HOME_PLAN_POST]: {
+    [routesNames.HOME_PLANS_POST]: {
         text : 'crear plan',
         show : false,
     },
-    [routesNames.HOME_PLAN_PUT]: {
+    [routesNames.HOME_PLANS_PUT]: {
         text : 'editar plan',
         show : false,
     },

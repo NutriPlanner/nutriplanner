@@ -1,8 +1,8 @@
 <template>
-    <div class="np-page np-page--clients">
+    <div class="np-page np-page--plan">
         <b-card>
             <template #header>
-                <CardHeader>Clientes</CardHeader>
+                <CardHeader>Planes</CardHeader>
             </template>
 
             <Maintainer
@@ -27,30 +27,30 @@ import { mapGetters, mapActions } from 'vuex'
 import { ResponseStatus } from '@/utils'
 
 export default {
-    name: 'ClientsPage',
+    name: 'PlansPage',
 
     async fetch() {
         await this.fetchAction()
     },
 
     computed: {
-        ...mapMultiRowFields('clients', {
-            items: 'data.clients',
+        ...mapMultiRowFields('plans', {
+            items: 'data.plans',
         } ),
 
-        ...mapFields('clients', {
+        ...mapFields('plans', {
             totalRows : 'data.totalRows',
             page      : 'data.page',
             loading   : 'loading',
         } ),
 
-        ...mapGetters('clients', {
+        ...mapGetters('plans', {
             fields: 'tableFields',
         } ),
     },
 
     methods: {
-        ...mapActions('clients', {
+        ...mapActions('plans', {
             fetchAction          : 'fetch',
             deleteRegistryAction : 'deleteRegistry',
             redirectToPost       : 'redirectToPost',
@@ -58,13 +58,29 @@ export default {
         } ),
 
         async deleteRegistry (id) {
-            const response = await this.deleteRegistryAction(id)
+            const confirm = await this.$bvModal.msgBoxConfirm(
+                'Si elimina este plan, los seguimientos asociados seguirán existiendo. ¿Desea continuar?',
+                {
+                    title         : 'Eliminar plan',
+                    size          : 'md',
+                    okVariant     : 'danger',
+                    okTitle       : 'Eliminar',
+                    cancelTitle   : 'Cancelar',
+                    cancelVariant : 'outline-primary',
+                },
+            )
 
-            if (response.status = ResponseStatus.FULLFILLED)
-                this.$refs.maintainer.reFetch()
+            if (confirm) {
+                const response = await this.deleteRegistryAction(id)
+
+                if (response.status = ResponseStatus.FULLFILLED)
+                    this.$refs.maintainer.reFetch()
+            }
         },
     },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+</style>
