@@ -22,9 +22,16 @@ const clientGoalExistsOneActive = () => {
     }
 }
 
+const clientGoalToCloseNotFound = () => {
+    return {
+        message: 'El objetivo que desea cerrar no se encuentra en nuestros registros. Refresque el sitio y vuelva a intentar.',
+    }
+}
+
 export default {
     CLIENT__NOT_FOUND              : clientNotFound,
     PLAN__NOT_FOUND                : planNotFound,
+    CLIENT_GOAL__CLOSE__NOT_FOUND  : clientGoalToCloseNotFound,
     CLIENT_GOAL__UPDATE__NOT_FOUND : clientGoalToUpdateNotFound,
     CLIENT_GOAL__EXISTS_ONE_ACTIVE : clientGoalExistsOneActive,
 }

@@ -1,7 +1,9 @@
 <template>
     <div class="np-component np-component--sidebar">
         <b-sidebar
-            :id="target" backdrop shadow
+            :id="target"
+            backdrop
+            shadow
             no-header
         >
             <div class="px-3 py-4">

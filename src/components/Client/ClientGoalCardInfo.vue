@@ -1,11 +1,11 @@
 <template>
-    <div class="np-component np-component--client-card-info">
+    <div class="np-component np-component--client-goal-card-info">
         <b-card>
             <template #header>
                 <h4 class="m-0">
-                    CLI.:
-                    <b-badge variant="tertiary" class="object-id np-component--client-card-info__badge">
-                        {{ client.id }}
+                    CLO.:
+                    <b-badge variant="tertiary" class="object-id np-component--client-goal-card-info__badge">
+                        {{ goal.id }}
                     </b-badge>
                 </h4>
             </template>
@@ -19,21 +19,9 @@
                             md="2"
                             :class="colClass"
                         >
-                            RUT
-                        </b-col>
-                        <b-col>: <span class="text-muted">{{ client.rut }}</span></b-col>
-                    </b-row>
-
-                    <b-row>
-                        <b-col
-                            cols="12"
-                            sm="3"
-                            md="2"
-                            :class="colClass"
-                        >
                             Nombre
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ fullName }}</span></b-col>
+                        <b-col>: <span class="text-muted">{{ goal.name }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -43,9 +31,9 @@
                             md="2"
                             :class="colClass"
                         >
-                            Correo
+                            Estado
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.email }}</span></b-col>
+                        <b-col>: <span class="text-muted">{{ goal.status }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -55,9 +43,9 @@
                             md="2"
                             :class="colClass"
                         >
-                            Teléfono
+                            F. Inicio
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.phone }}</span></b-col>
+                        <b-col>: <span class="text-muted">{{ startDate }}</span></b-col>
                     </b-row>
                 </b-card-text>
             </Overlay>
@@ -66,10 +54,12 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
-    name  : 'ClientCardInfoComponent',
+    name  : 'ClientGoalCardInfoComponent',
     props : {
-        client: {
+        goal: {
             type     : Object,
             required : false,
             default  : () => ( {} ),
@@ -85,22 +75,21 @@ export default {
     computed: {
         colClass() {
             return {
-                'np-component--client-card-info__field': this.$mq !== 'xs',
+                'np-component--client-goal-card-info__field': this.$mq !== 'xs',
             }
         },
 
-        fullName() {
-            const name = this.client.name || ''
-            const lastName = this.client.last_name || ''
+        startDate() {
+            console.log(this.goal.start_date)
 
-            return `${name} ${lastName}`.trim()
+            return this.goal.start_date ? moment.utc(this.goal.start_date).local().format('DD-MM-YYYY') : ''
         },
     },
 }
 </script>
 
 <style lang="scss" scoped>
-.np-component--client-card-info {
+.np-component--client-goal-card-info {
     &__badge {
         vertical-align: bottom;
     }

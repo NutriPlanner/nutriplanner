@@ -7,7 +7,7 @@
             :total-rows="totalRows"
             :page="page"
             :loading="loading"
-            @filters-changed="fetchAction"
+            @filters-changed="fetchData"
         >
             <template v-for="field in fields" #[`cell(${field.key})`]="data">
                 <DateRender

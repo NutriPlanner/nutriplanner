@@ -40,7 +40,9 @@
                         </validation-provider>
 
                         <b-button
-                            block variant="outline-primary" :disabled="loading"
+                            block
+                            variant="outline-primary"
+                            :disabled="loading"
                             class="mb-4"
                             @click="requestCode"
                         >

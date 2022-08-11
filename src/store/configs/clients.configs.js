@@ -70,6 +70,18 @@ export const tableFields = [
     },
 ]
 
+const GOAL_STATUS = {
+    INCOMPLETE : 'INCOMPLETE',
+    COMPLETED  : 'COMPLETED',
+}
+
+export const goalStatusOptions = [
+    { text: 'INCOMPLETO', value: 'INCOMPLETE' },
+    { text: 'COMPLETADO', value: 'COMPLETED' },
+]
+
 export default {
     tableFields,
+    goalStatusOptions,
+    GOAL_STATUS,
 }

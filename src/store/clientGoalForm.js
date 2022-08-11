@@ -2,20 +2,16 @@ import moment from 'moment'
 import { getField, updateField } from 'vuex-map-fields'
 import { Store, Fetch, ErrorHandler, ResponseStatus } from '@/utils'
 import clientsGoalsErrors from '@/store/errors/clientsGoals.errors'
+import clientsConfigs from '@/store/configs/clients.configs'
 
 const namespace = 'clientGoals'
 
 const { setupErrorHandler, errorHandler } = ErrorHandler
 setupErrorHandler(clientsGoalsErrors)
 
-const STATUS = {
-    INCOMPLETE : 'INCOMPLETE',
-    COMPLETED  : 'COMPLETED',
-}
-
 const defaultData = {
     name           : '',
-    status         : STATUS.INCOMPLETE,
+    status         : clientsConfigs.GOAL_STATUS.INCOMPLETE,
     start_date     : moment().format('YYYY-MM-DD'),
     plan           : null,
     tasks          : [],
@@ -37,20 +33,11 @@ export const getters = {
     getField,
 
     status() {
-        return STATUS
+        return clientsConfigs.GOAL_STATUS
     },
 
     statusOptions() {
-        return [
-            {
-                text  : 'INCOMPLETO',
-                value : STATUS.INCOMPLETE,
-            },
-            {
-                text  : 'COMPLETADO',
-                value : STATUS.COMPLETED,
-            },
-        ]
+        return clientsConfigs.goalStatusOptions
     },
 
     selectedPlanData(state) {
@@ -94,7 +81,19 @@ export const actions = {
     
     // API CALLS
 
-    async fetch ( { state, commit }, { clientId } ) {
+    async get ( { commit }, id) {
+        commit('set', { loading: true } )
+       
+        const { status, data, message, error } = await errorHandler(async () => {
+            return await this.$axios.get(`/${namespace}/${id}`)
+        }, this)
+
+        commit('set', { loading: false } )
+
+        return { status, data, message, error }
+    },
+
+    async fetch ( { state, commit }, { active } ) {
         commit('set', { loading: true } )
         commit('set', { client: clientId } )
 
@@ -203,29 +202,31 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    // async close ( { commit, dispatch }, params) {
-    //     commit('set', { loading: true } )
+    async close ( { commit, state } ) {
+        commit('set', { loading: true } )
 
-    //     const { status, data, message, error } = await errorHandler(async () => {
-    //         return await clientsServices.closeGoal(params, {
-    //             cancelToken: source.token,
-    //         } )
-    //     }, this)
+        const { status, data, message, error } = await errorHandler(async () => {
+            return await this.$axios.put(`/${namespace}/close/${state.data.id}`)
+        }, this)
 
-    //     if (status === FULLFILLED) {
-    //         this._vm.$bvToast.toast('El objetivo se ha cerrado correctamente.', {
-    //             title   : 'Objetivo completado',
-    //             variant : 'success',
-    //             solid   : false,
-    //         } )
+        if (status === ResponseStatus.FULLFILLED) {
+            this._vm.$bvToast.toast('El objetivo se ha cerrado correctamente.', {
+                title   : 'Objetivo completado',
+                variant : 'success',
+                solid   : false,
+            } )
 
-    //         await dispatch('fetch', { page: 1, limit: 10 } )
-    //     }
+            commit('resetData')
+            commit('set', {
+                'data.id' : undefined,
+                "isNew"   : true,
+            } )
+        }
 
-    //     commit('set', { loading: false } )
+        commit('set', { loading: false } )
 
-    //     return { status, data, message, error }
-    // },
+        return { status, data, message, error }
+    },
 
     async fetchPlanOptions ( { dispatch, commit }, name) {
         commit('set', { loadingPlans: true } )

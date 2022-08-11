@@ -2,6 +2,10 @@ import axios from 'axios'
 
 const CancelToken = axios.CancelToken
 
+const regExpEscape = function(string) {
+    return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
+}
+
 export const setFilterParam = (filterColumns, searchValue) => {
     const filterParam = {}
 
@@ -10,7 +14,7 @@ export const setFilterParam = (filterColumns, searchValue) => {
 
         filterColumns.forEach( (column) => {
             filterParam.$or.push( {
-                [column]: { $regex: searchValue, $options: 'i' },
+                [column]: { $regex: regExpEscape(searchValue), $options: 'i' },
             } )
         } )
     }

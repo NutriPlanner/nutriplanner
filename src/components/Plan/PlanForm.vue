@@ -168,6 +168,13 @@ export default {
         },
     },
 
+    // post case
+    mounted() {
+        setTimeout( () => {
+            this.$refs.formObserver.validate()
+        }, 100)
+    },
+
     methods: {
         ...mapActions('planForm', {
             setSessionsAction: 'setSessions',

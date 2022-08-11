@@ -242,9 +242,9 @@
 </template>
 
 <script>
-import _ from 'lodash'
 import { mapFields, mapMultiRowFields } from 'vuex-map-fields'
 import { mapActions, mapGetters } from 'vuex'
+import { ResponseStatus } from '@/utils'
 
 export default {
     name: 'ClientActiveGoalFormComponent',
@@ -312,11 +312,12 @@ export default {
             addNewExtraSession : 'addNewExtraSession',
             deleteExtraSession : 'deleteExtraSession',
             resetData          : 'resetData',
+            close              : 'close',
         } ),
 
         async closeGoal() {
             const confirm = await this.$bvModal.msgBoxConfirm(
-                '¿Está seguro de cerrar el objetivo? Esta acción no se puede revertir.',
+                '¿Está seguro de cerrar el objetivo? Esta acción no se puede revertir. Una vez cerrado el objetivo, los seguimientos pendientes desde ahora pasarán a estado CERRADO, esto no impide su posterior modificación.',
                 {
                     title         : 'Cerrar objetivo',
                     size          : 'md',
@@ -328,7 +329,13 @@ export default {
             )
 
             if (confirm) {
+                const result = await this.close()
 
+                if (result.status === ResponseStatus.FULLFILLED) {
+                    setTimeout( () => {
+                        this.$refs.formObserver.validate()
+                    }, 100)
+                }
             }
         },
     },

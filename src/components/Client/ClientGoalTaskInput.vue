@@ -1,6 +1,8 @@
 <template>
     <b-row
-        class="np-component np-component--client-goal-task-input mt-3" no-gutters align-v="start"
+        class="np-component np-component--client-goal-task-input mt-3"
+        no-gutters
+        align-v="start"
         align-h="end"
     >
         <b-col cols="auto">
@@ -46,23 +48,30 @@
 
         <b-col cols="auto">
             <b-button
-                v-if="!confirm" variant="outline-danger" size="sm"
-                :disabled="disabled" @click="confirm = true"
+                v-if="!confirm"
+                variant="outline-danger"
+                size="sm"
+                :disabled="disabled"
+                @click="confirm = true"
             >
                 Eliminar
             </b-button>
 
             <div v-else>
                 <b-button
-                    variant="outline-danger" size="sm"
-                    :disabled="disabled" @click="onConfirmDelete"
+                    variant="outline-danger"
+                    size="sm"
+                    :disabled="disabled"
+                    @click="onConfirmDelete"
                 >
                     Confirmar
                 </b-button>
 
                 <b-button
-                    variant="outline-primary" size="sm"
-                    :disabled="disabled" @click="confirm = false"
+                    variant="outline-primary"
+                    size="sm"
+                    :disabled="disabled"
+                    @click="confirm = false"
                 >
                     Cancelar
                 </b-button>
