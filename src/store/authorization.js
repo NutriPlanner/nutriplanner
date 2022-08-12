@@ -1,50 +1,38 @@
-import { getBindedServices } from '../utils/AutoBindServices'
-import { setupErrorHandler, errorHandler } from '../utils/ErrorHandler'
-import { FULLFILLED } from '../utils/responseStatus'
-import authErrors from '../services/auth.errors'
-import authServices from '../services/auth.services'
+import _ from 'lodash'
+import { ResponseStatus, ErrorHandler } from '@/utils'
+import authErrors from '@/store/errors/auth.errors'
 
+const { setupErrorHandler, errorHandler } = ErrorHandler
 setupErrorHandler(authErrors)
-
-const allowedProperties = [ 'loading' ]
 
 export const state = () => ( {
     loading: false,
 } )
 
 export const mutations = {
-    set (state, data) {
-        for (const key in data) {
-            if (allowedProperties.includes(key) )
-                state[key] = data[key]
-            else
-                console.warn(`${key} is not allowed in clients.set`)
-        }
+    set (state, newState) {
+        state = _.merge(state, newState)
     },
 }
 
 export const actions = {
-    async login ( { commit }, { params } ) {
-        const authBindedServices = getBindedServices(authServices, this)
-
-        commit('set', { loading: true } )
-
+    async login (_ctx, { email, password } ) {
         const { status, data, message, error } = await errorHandler(async () => {
-            return await authBindedServices.login( { params } )
+            return await this.$auth.login( { data: { email, password } } )
         }, this)
-
-        commit('set', { loading: false } )
 
         return { status, data, message, error }
     },
 
     async logout ( { commit } ) {
-        const authBindedServices = getBindedServices(authServices, this)
-
         commit('set', { loading: true } )
 
         const { status, data, message, error } = await errorHandler(async () => {
-            return await authBindedServices.logout()
+            return await this.$auth.logout( {
+                data: {
+                    refreshToken: this.$auth.strategies.local.refreshToken.get(),
+                },
+            } )
         }, this)
 
         commit('set', { loading: false } )
@@ -52,14 +40,14 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async requestChangePassword ( { commit }, { params } ) {
+    async requestChangePassword ( { commit }, { email } ) {
         commit('set', { loading: true } )
 
         const { status, data, message, error } = await errorHandler(async () => {
-            return await authServices.requestChangePassword( { params } )
+            return await this.$axios.post('/auth/forgot-password', { email } )
         }, this)
 
-        if (status === FULLFILLED) {
+        if (status === ResponseStatus.FULLFILLED) {
             this._vm.$bvToast.toast(
                 'Se ha generado un código de autorización. Revise la bandeja de entrada de su correo electrónico.',
                 {
@@ -76,14 +64,14 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async changePassword ( { commit }, { params } ) {
+    async changePassword ( { commit }, { email, code, password } ) {
         commit('set', { loading: true } )
 
         const { status, data, message, error } = await errorHandler(async () => {
-            return await authServices.changePassword( { params } )
+            return await this.$axios.post('/auth/reset-password', { email, code, password } )
         }, this)
 
-        if (status === FULLFILLED) {
+        if (status === ResponseStatus.FULLFILLED) {
             this._vm.$bvToast.toast('La contraseña se ha modificado correctamente.', {
                 title   : 'Cambio aplicado',
                 variant : 'success',

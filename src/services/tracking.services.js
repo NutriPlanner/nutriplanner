@@ -1,22 +1,19 @@
-import axios from '../utils/HttpClient'
+let axios
 
 const fetchTrackings = async (params, { cancelToken } ) => {
-    return await axios.get('/tracking', { params, cancelToken } )
+    return await axios.get('/trackings', { params, cancelToken } )
 }
 
 const addTracking = async (data, { cancelToken } ) => {
-    return await axios.post('/tracking', data, { cancelToken } )
+    return await axios.post('/trackings', data, { cancelToken } )
 }
 
 const updateTracking = async ( { id, ...data }, { cancelToken } ) => {
-    const params = data
-    delete params.tenant
-
-    return await axios.put('/tracking/' + id, params, { cancelToken } )
+    return await axios.put('/trackings/' + id, data, { cancelToken } )
 }
 
 const deleteTracking = async (id, { cancelToken } ) => {
-    return await axios.delete('/tracking/' + id, { cancelToken } )
+    return await axios.delete('/trackings/' + id, { cancelToken } )
 }
 
 export default {

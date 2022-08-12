@@ -13,13 +13,17 @@
         <b-navbar-toggle target="nav-collapse">
             <template #default="{ expanded }">
                 <b-button
-                    v-if="expanded" size="sm" class="ml-auto"
+                    v-if="expanded"
+                    size="sm"
+                    class="ml-auto"
                     variant="primary"
                 >
                     <i class="ri-menu-3-fill" />
                 </b-button>
                 <b-button
-                    v-else size="sm" class="ml-auto"
+                    v-else
+                    size="sm"
+                    class="ml-auto"
                     variant="outline-primary"
                 >
                     <i class="ri-menu-3-fill" />

@@ -1,49 +1,43 @@
 <template>
     <div class="np-page np-page--tracking-post">
-        <b-card title="Registrar seguimiento">
-            <b-card-text>
-                <TrackingForm ref="form" :form-initial-data="formInitialData" @submit="onSubmit" />
-            </b-card-text>
+        <b-card>
+            <template #header>
+                <CardHeader>Registrar seguimiento</CardHeader>
+            </template>
+
+            <TrackingForm :client="client" @submit="create" />
         </b-card>
     </div>
 </template>
 
 <script>
-import { FULLFILLED } from '@/utils/responseStatus'
-
-const formInitialData = {
-    status      : 'PENDING',
-    subject     : '',
-    measurement : {
-        chest     : '',
-        waist     : '',
-        arm       : '',
-        stomach   : '',
-        thigh     : '',
-        bottom    : '',
-        body_mass : '',
-    },
-    note: '',
-}
+import { mapActions } from 'vuex'
 
 export default {
     name: 'TrackingPostPage',
-    data () {
+
+    data() {
         return {
-            formInitialData,
+            client: {},
         }
     },
-    beforeCreate () {
-        if (!this.$store.state.trackings.selectedClientId)
-            this.$router.push( { name: 'home-tracking' } )
-    },
-    methods: {
-        async onSubmit (data) {
-            const { status } = await this.$store.dispatch('trackings/create', data)
 
-            if (status === FULLFILLED)
-                this.$refs.form.reset()
-        },
+    async fetch() {
+        await this.resetData()
+
+        const response  = await this.fetchClient(this.$route.query.clientId)
+        this.client = response.data
+    },
+
+    methods: {
+        ...mapActions('trackings/form', {
+            resetData : 'resetData',
+            create    : 'create',
+        } ),
+
+        ...mapActions('clientForm', {
+            fetchClient: 'fetch',
+        } ),
     },
 }
 </script>

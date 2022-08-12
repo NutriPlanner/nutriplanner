@@ -1,4 +1,4 @@
-import { FULLFILLED, REJECTED, CANCELLED } from './responseStatus'
+import { ResponseStatus } from '@/utils'
 
 let errorsHandler = {}
 
@@ -18,40 +18,41 @@ export const errorHandler = async (next, ctx) => {
         const response = await next()
 
         return {
-            status : FULLFILLED,
+            status : ResponseStatus.FULLFILLED,
             data   : response?.data || {},
         }
     }
     catch (error) {
-    // in case of cancel operation we don't want to show the error
+        // in case of cancel operation we don't want to show the error
         if (error.__CANCEL__) {
             return {
-                status  : CANCELLED,
+                status  : ResponseStatus.CANCELLED,
                 message : error.message,
             }
         }
+
+        console.error(error)
 
         if (error.response && error.response.data) {
             const { internalCode, data } = error.response.data
 
             if (errorsHandler[internalCode] ) {
-                const { message } = errorsHandler[internalCode](data)
+                const { message, type } = errorsHandler[internalCode](data)
                 ctx._vm.$bvToast.toast(message, {
                     title         : 'Error!',
-                    variant       : 'danger',
+                    variant       : type || 'danger',
                     solid         : false,
                     autoHideDelay : 7000,
                 } )
 
                 return {
-                    status : REJECTED,
+                    status : ResponseStatus.REJECTED,
                     message,
                     error  : error.response.data,
                 }
             }
             else {
-                const message =
-          'Ha ocurrido un error no controlado, contacte a soporte para más información.'
+                const message = 'Ha ocurrido un error no controlado, contacte a soporte para más información.'
                 ctx._vm.$bvToast.toast(message, {
                     title   : 'Error!',
                     variant : 'danger',
@@ -59,28 +60,30 @@ export const errorHandler = async (next, ctx) => {
                 } )
 
                 return {
-                    status : REJECTED,
+                    status : ResponseStatus.REJECTED,
                     message,
                     error  : error.response.data,
                 }
             }
         }
         else {
-            const message =
-        'Ha ocurrido un error no controlado, contacte a soporte para más información.'
+            const message = 'Ha ocurrido un error no controlado, contacte a soporte para más información.'
             ctx._vm.$bvToast.toast(message, {
                 title   : 'Error!',
                 variant : 'danger',
                 solid   : false,
             } )
 
-            console.error(error)
-
             return {
-                status: REJECTED,
+                status: ResponseStatus.REJECTED,
                 message,
                 error,
             }
         }
     }
+}
+
+export default {
+    setupErrorHandler,
+    errorHandler,
 }

@@ -157,7 +157,7 @@ module.exports = {
                 max: 3,
             },
             multiline: {
-                max: 3,
+                max: 1,
             },
         }],
 

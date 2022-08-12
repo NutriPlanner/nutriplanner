@@ -86,9 +86,6 @@ export default {
             this.onLimit(oldLimit, newLimit, this.page)
         },
     },
-    mounted () {
-        this.$emit('filters-changed', _.cloneDeep(this.fetchParams) )
-    },
     methods: {
         onFilter (columns, searchValue) {
             const filterColumns = !_.isEmpty(columns)
