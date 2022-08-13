@@ -1,5 +1,5 @@
 import ResponseStatusUtil from './responseStatus'
-import ErrorHandlerUtil from './errorHandler'
+import ErrorHandlerUtil from './errorsHandler'
 import FetchUtil from './fetch'
 import FieldsUtil from './fields'
 import FieldsTypesUtil from './fieldsTypes'
