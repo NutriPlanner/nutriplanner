@@ -27,7 +27,6 @@ export const setSortParam = (sortBy, sortOrder) => {
 
     if (sortBy)
         sortParam = sortBy + ':' + (sortOrder ? 'desc' : 'asc')
-  
 
     return sortParam
 }

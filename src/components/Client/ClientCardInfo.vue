@@ -59,6 +59,18 @@
                         </b-col>
                         <b-col>: <span class="text-muted">{{ client.phone }}</span></b-col>
                     </b-row>
+
+                    <b-row>
+                        <b-col
+                            cols="12"
+                            sm="3"
+                            md="2"
+                            :class="colClass"
+                        >
+                            Dirección
+                        </b-col>
+                        <b-col>: <span class="text-muted">{{ client.address }}</span></b-col>
+                    </b-row>
                 </b-card-text>
             </Overlay>
         </b-card>

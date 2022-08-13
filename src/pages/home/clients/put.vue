@@ -12,8 +12,12 @@
                     <ClientForm @submit="update" />
                 </b-tab>
 
-                <b-tab title="Objetivos">
-                    <ClientGoals :client="client" />
+                <b-tab :disabled="!userHasRequiredLicensee">
+                    <template #title>
+                        <span>Objetivos <Licensee v-if="!userHasRequiredLicensee" :type="goalRequiredLicensee" /></span>
+                    </template>
+
+                    <ClientGoals v-if="userHasRequiredLicensee" :client="client" />
                 </b-tab>
             </Tabs>
         </b-card>
@@ -23,6 +27,7 @@
 <script>
 import { mapFields } from 'vuex-map-fields'
 import { mapActions } from 'vuex'
+import { feature, requiredLicensee } from '@/config/features'
 
 export default {
     name: 'ClientsPutPage',
@@ -42,6 +47,14 @@ export default {
         ...mapFields('clientForm', {
             client: 'data',
         } ),
+
+        goalRequiredLicensee() {
+            return requiredLicensee(feature.CLIENT_GOALS)
+        },
+
+        userHasRequiredLicensee() {
+            return this.$loyalty.validate(this.goalRequiredLicensee)
+        },
     },
 
     methods: {

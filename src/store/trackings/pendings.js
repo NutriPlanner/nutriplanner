@@ -16,6 +16,6 @@ export const actions = {
             date: { $lte: moment.utc().toISOString() },
         } )
 
-        return await dispatch('fetch', { filter: filters, sortBy, limit, page } )
+        return await dispatch('fetch', { filter: filters, sortBy, limit, page, options: { url: '/pendings' } } )
     },
 }

@@ -9,13 +9,15 @@
             <div class="px-3 py-4">
                 <b-nav vertical pills>
                     <b-nav-item
-                        v-for="({ text }, name) in routes"
+                        v-for="({ text, licensee }, name) in routes"
                         :key="name"
                         :to="{ name }"
                         exact
                         exact-active-class="active"
+                        :active="activeRoute === name"
+                        :disabled="!$loyalty.validate(licensee)"
                     >
-                        {{ text }}
+                        {{ text }} <Licensee v-if="licensee" :type="licensee" />
                     </b-nav-item>
                 </b-nav>
             </div>
@@ -24,6 +26,7 @@
 </template>
 
 <script>
+import { mapFields } from 'vuex-map-fields'
 import { breadcrumbs } from '@/config/routes'
 
 export default {
@@ -37,6 +40,10 @@ export default {
     },
 
     computed: {
+        ...mapFields('breadcrumb', {
+            activeRoute: 'active',
+        } ),
+
         routes () {
             return Object.entries(breadcrumbs)
                 .filter( ( [ , { show }] ) => show !== false)
@@ -50,4 +57,24 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '@/assets/styles/globals/mainColors';
+@import '@/assets/styles/globals/colors';
+
+.nav-link {
+    margin-bottom: 5px;
+
+    &.disabled {
+        background-color: $disabled-bkg;
+    }
+
+    &:not(.active):not(.disabled) {
+        border: solid 1px $primary;
+
+        &:hover {
+            background-color: rgba($primary, 0.1);
+        }
+    }
+}
+
+</style>

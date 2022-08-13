@@ -53,7 +53,7 @@ export const actions = {
 
     // API CALLS
 
-    async fetch ( { state, commit }, { filter, sortBy, limit, page } = {} ) {
+    async fetch ( { state, commit }, { filter, sortBy, limit, page, options } = {} ) {
         source = Fetch.abortPreviousRequest(source)
         commit('set', { loading: true } )
 
@@ -65,7 +65,7 @@ export const actions = {
         }
 
         const { status, data, message, error } = await errorHandler(async () => {
-            return await this.$axios.get(`/${apiNamespace}`, { params, cancelToken: source.token } )
+            return await this.$axios.get(`/${apiNamespace}${options?.url || ''}`, { params, cancelToken: source.token } )
         }, this)
 
         if (status === ResponseStatus.FULLFILLED) {

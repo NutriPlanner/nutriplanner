@@ -23,7 +23,7 @@
         @sort-changed="onSortChanged"
     >
         <template v-for="field in fields" #[`cell(${field.key})`]="data">
-            <slot :name="`cell(${field.key})`" v-bind="{ ...data }">
+            <slot :name="`cell(${field.key})`" v-bind="{...data}">
                 {{ data.value }}
             </slot>
         </template>

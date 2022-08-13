@@ -20,10 +20,14 @@
             <b-card-body>
                 <b-card-text>
                     <p>
+                        Licencia requerida: <Licensee :type="goalRequiredLicensee" />
+                    </p>
+
+                    <p>
                         Los objetivos son las metas que el cliente desea alcanzar. Cuando se registra un objetivo,
                         el sistema le pedirá que ingrese un plan de acción para lograrlo. El plan es una plantilla
                         que le permitirá generar rápidamente los seguimientos de su cliente (para crear un plan, diríjase a <b-link href="/home/plan" target="_blank">
-                            Plan4U
+                            Planes
                         </b-link>).
                     </p>
 
@@ -45,12 +49,21 @@
 </template>
 
 <script>
+import { feature, requiredLicensee } from '@/config/features'
+
 export default {
     name: 'ClientHelpSectionComponent',
+
     data () {
         return {
             collapsed: true,
         }
+    },
+
+    computed: {
+        goalRequiredLicensee() {
+            return requiredLicensee(feature.CLIENT_GOALS)
+        },
     },
 }
 </script>

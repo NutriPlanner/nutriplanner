@@ -10,26 +10,15 @@
             @filters-changed="fetchData"
         >
             <template v-for="field in fields" #[`cell(${field.key})`]="data">
-                <DateRender
-                    v-if="field.key === 'birthday'"
-                    :key="`date-${field.key}`"
-                    :value="data.value"
-                />
-
                 <DataTableButton
-                    v-else-if="field.key === '__actions'"
+                    v-if="field.key === '__actions'"
                     :key="`action-${field.key}`"
                     @click="$emit('show-tracking-list', data)"
                 >
                     Mostrar
                 </DataTableButton>
 
-                <DataTableFieldRender
-                    v-else
-                    :key="`field-${field.key}`"
-                    :data="data"
-                    :field="field"
-                />
+                <DataTableFieldRender v-else :key="`field-${field.key}`" v-bind="{ ...data }" />
             </template>
         </ReadonlyList>
     </div>

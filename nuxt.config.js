@@ -34,6 +34,8 @@ export default {
         '@/plugins/directives.js',
         '@/plugins/mixins.js',
         '@/plugins/vue-mq.js',
+        '@/plugins/loyalty.js',
+        '@/plugins/feature.js',
     ],
 
     // Auto import components: https://go.nuxtjs.dev/config-components

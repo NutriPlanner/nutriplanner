@@ -93,9 +93,8 @@ export const actions = {
         return { status, data, message, error }
     },
 
-    async fetch ( { state, commit }, { active } ) {
+    async fetch ( { state, commit }, { clientId } ) {
         commit('set', { loading: true } )
-        commit('set', { client: clientId } )
 
         const params = {
             filter: {

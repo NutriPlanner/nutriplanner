@@ -5,15 +5,21 @@
                 <CardHeader>Seguimientos</CardHeader>
             </template>
 
+            <TrackingHelpPendingsSection v-if="!userHasRequiredPendingsLicensee" />
+
             <Tabs>
-                <b-tab title="Pendientes" no-body>
-                    <b-card class="no-border">
+                <b-tab no-body :disabled="!userHasRequiredPendingsLicensee">
+                    <template #title>
+                        <span>Pendientes <Licensee v-if="!userHasRequiredPendingsLicensee" :type="pendingsRequiredLicensee" /></span>
+                    </template>
+
+                    <b-card v-if="userHasRequiredPendingsLicensee" class="no-border">
                         <TrackingMaintainerPendings ref="maintainerPendings" />
                     </b-card>
                 </b-tab>
 
                 <b-tab title="Por cliente" no-body>
-                    <TrackingHelpSection />
+                    <TrackingHelpByClientSection />
 
                     <Tabs v-model="tabIndex">
                         <b-tab title="Clientes">
@@ -35,6 +41,8 @@
 </template>
 
 <script>
+import { feature, requiredLicensee } from '@/config/features'
+
 export default {
     name: 'TrackingPage',
 
@@ -46,8 +54,20 @@ export default {
         }
     },
 
+    computed: {
+        pendingsRequiredLicensee() {
+            return requiredLicensee(feature.TRACKINGS_PENDINGS)
+        },
+
+        userHasRequiredPendingsLicensee() {
+            return this.$loyalty.validate(this.pendingsRequiredLicensee)
+        },
+    },
+
     mounted () {
-        this.$refs.maintainerPendings.reFetch()
+        if (this.userHasRequiredPendingsLicensee)
+            this.$refs.maintainerPendings.reFetch()
+            
         this.$refs.clientList.reFetch()
     },
 

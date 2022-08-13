@@ -30,6 +30,7 @@ export const tableFields = [
         label      : 'Actualizado',
         sortable   : true,
         filterable : false,
+        type       : FieldsTypes.DATE,
         thStyle    : 'width: 125px',
         tdClass    : 'align-middle',
     },

@@ -1,3 +1,5 @@
+import { feature, requiredLicensee } from '@/config/features'
+
 export const routesNames = {
     LOGIN                 : 'login',
     RECOVER_PASSWORD      : 'recover-password',
@@ -33,7 +35,7 @@ export const breadcrumbs = {
         show : false,
     },
     [routesNames.HOME_TRACKING]: {
-        text: 'seguimiento',
+        text: 'seguimientos',
     },
     [routesNames.HOME_TRACKING_POST]: {
         text : 'crear seguimiento',
@@ -52,7 +54,8 @@ export const breadcrumbs = {
         show : false,
     },
     [routesNames.HOME_PLANS]: {
-        text: 'planes',
+        text     : 'planes',
+        licensee : requiredLicensee(feature.PLANS),
     },
     [routesNames.HOME_PLANS_POST]: {
         text : 'crear plan',

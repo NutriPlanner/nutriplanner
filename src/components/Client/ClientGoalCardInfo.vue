@@ -80,8 +80,6 @@ export default {
         },
 
         startDate() {
-            console.log(this.goal.start_date)
-
             return this.goal.start_date ? moment.utc(this.goal.start_date).local().format('DD-MM-YYYY') : ''
         },
     },

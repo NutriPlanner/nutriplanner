@@ -49,7 +49,7 @@ export default {
     },
     computed: {
         sortOptions () {
-            return this.fields
+            return this.fieldsOptions
                 .filter(f => f.sortable)
                 .map( (f) => {
                     return { text: f.label, value: f.key }
@@ -57,11 +57,15 @@ export default {
         },
 
         filterOptions () {
-            return this.fields
+            return this.fieldsOptions
                 .filter(f => f.filterable)
                 .map( (f) => {
                     return { text: f.label, value: f.key }
                 } )
+        },
+
+        fieldsOptions () {
+            return this.fields.filter(f => f.showInTable || f.showInTable === undefined)
         },
     },
     watch: {

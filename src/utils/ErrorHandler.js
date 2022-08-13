@@ -1,10 +1,12 @@
 import { ResponseStatus } from '@/utils'
+import authErrors from '@/store/errors/auth.errors'
 
 let errorsHandler = {}
 
 export const setupErrorHandler = (errorListeners) => {
     errorsHandler = {
         ...errorsHandler,
+        ...authErrors,
         ...errorListeners,
     }
 }

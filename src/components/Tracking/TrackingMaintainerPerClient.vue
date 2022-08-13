@@ -22,10 +22,6 @@
                     :variant="getStatusOption(data.value).variant"
                 />
             </template>
-
-            <template #cell(date)="data">
-                <DateRender :value="data.value" />
-            </template>
         </Maintainer>
     </div>
 </template>

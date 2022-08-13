@@ -24,7 +24,7 @@
         />
 
         <DataTable
-            :fields="fields"
+            :fields="fieldsOptions"
             :items="items"
             :sort-by.sync="sortBy"
             :sort-order.sync="sortOrder"
@@ -32,12 +32,8 @@
             :loading="loading"
         >
             <template v-for="field in fields" #[`cell(${field.key})`]="data">
-                <slot
-                    v-if="field.key !== '__actions'"
-                    :name="`cell(${field.key})`"
-                    v-bind="{ ...data }"
-                >
-                    <DataTableFieldRender :key="field.key" :data="data" :field="field" />
+                <slot v-if="field.key !== '__actions'" :name="`cell(${field.key})`" v-bind="{ ...data }">
+                    <DataTableFieldRender :key="field.key" v-bind="{ ...data }" />
                 </slot>
 
                 <template v-else>

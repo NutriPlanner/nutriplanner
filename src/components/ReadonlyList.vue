@@ -18,16 +18,16 @@
         />
 
         <DataTable
-            :fields="fields"
+            :fields="fieldsOptions"
             :items="items"
             :sort-by.sync="sortBy"
             :sort-order.sync="sortOrder"
             :limit="limit"
             :loading="loading"
         >
-            <template v-for="field in fields" #[`cell(${field.key})`]="data">
+            <template v-for="field in fieldsOptions" #[`cell(${field.key})`]="data">
                 <slot :name="`cell(${field.key})`" v-bind="{ ...data }">
-                    <DataTableFieldRender :key="field.key" :data="data" :field="field" />
+                    <DataTableFieldRender :key="field.key" v-bind="{ ...data }" />
                 </slot>
             </template>
         </DataTable>

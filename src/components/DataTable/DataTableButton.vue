@@ -1,6 +1,6 @@
 <template>
     <b-button v-bind="properties" @click="$emit('click', ...arguments)">
-        {{ text }}
+        <i v-if="$attrs.icon" :class="$attrs.icon" /> {{ text }}
     </b-button>
 </template>
 
@@ -12,7 +12,6 @@ export default {
             return {
                 variant : 'outline-primary',
                 ...this.$attrs,
-                sise    : 'sm',
                 class   : 'np-component--data-table-button',
             }
         },
