@@ -1,8 +1,9 @@
-import { setupErrorHandler, errorHandler } from '~/utils/errorHandler'
+import { ErrorHandler } from '@/utils'
 import { FULLFILLED } from '@/utils/responseStatus'
 import userErrors from '@/services/user.errors'
 import userServices from '@/services/user.services'
 
+const { setupErrorHandler, errorHandler } = ErrorHandler
 setupErrorHandler(userErrors)
 
 export const state = () => ( {
