@@ -24,7 +24,7 @@
         />
 
         <DataTable
-            :fields="fields"
+            :fields="fieldsOptions"
             :items="items"
             :sort-by.sync="sortBy"
             :sort-order.sync="sortOrder"
@@ -32,21 +32,20 @@
             :loading="loading"
         >
             <template v-for="field in fields" #[`cell(${field.key})`]="data">
-                <slot
-                    v-if="field.key !== '__actions'"
-                    :name="`cell(${field.key})`"
-                    v-bind="{ ...data }"
-                >
-                    <DataTableFieldRender :key="field.key" :data="data" :field="field" />
+                <slot v-if="field.key !== '__actions'" :name="`cell(${field.key})`" v-bind="{ ...data }">
+                    <DataTableFieldRender :key="field.key" v-bind="{ ...data }" />
                 </slot>
 
-                <!-- eslint-disable-next-line vue/valid-v-for -->
-                <MaintainerFieldActionRender
-                    v-else
-                    :data="data"
-                    @edit="$emit('edit-registry', $event)"
-                    @delete="$emit('delete-registry', $event)"
-                />
+                <template v-else>
+                    <slot :name="`cell(${field.key})`" v-bind="{ ...data }">
+                        <MaintainerFieldActionRender
+                            :data="data"
+                            :show-delete-button="showDeleteButton"
+                            @edit="$emit('edit-registry', $event)"
+                            @delete="$emit('delete-registry', $event)"
+                        />
+                    </slot>
+                </template>
             </template>
         </DataTable>
 
@@ -65,6 +64,13 @@ import DataTableMixin from '@/mixins/dataTable'
 export default {
     name   : 'MaintainerComponent',
     mixins : [ DataTableMixin ],
+    props  : {
+        showDeleteButton: {
+            type     : Boolean,
+            required : false,
+            default  : true,
+        },
+    },
 }
 </script>
 

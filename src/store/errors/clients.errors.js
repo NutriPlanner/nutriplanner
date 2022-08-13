@@ -8,15 +8,13 @@ const fieldAlreadyTaken = (data) => {
 
 const clientToDeleteNotFound = (data) => {
     return {
-        message:
-      'El cliente que desea eliminar no se encuentra en nuestros registros. Refresque el sitio y vuelva a intentar.',
+        message: 'El cliente que desea eliminar no se encuentra en nuestros registros. Refresque el sitio y vuelva a intentar.',
     }
 }
 
 const clientToUpdateNotFound = (data) => {
     return {
-        message:
-      'El cliente que desea modificar no se encuentra en nuestros registros. Refresque el sitio y vuelva a intentar.',
+        message: 'El cliente que desea modificar no se encuentra en nuestros registros. Refresque el sitio y vuelva a intentar.',
     }
 }
 

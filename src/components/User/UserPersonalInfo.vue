@@ -57,7 +57,9 @@
                         </Overlay>
 
                         <b-button
-                            block variant="outline-danger" :disabled="loading"
+                            block
+                            variant="outline-danger"
+                            :disabled="loading"
                             @click="editMode = false"
                         >
                             Descartar cambios

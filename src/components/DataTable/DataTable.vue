@@ -20,11 +20,10 @@
         :per-page="limit"
         :busy="loading"
         class="np-component np-component--data-table mt-4"
-        @update:sort-by="$emit('update:sort-by', $event)"
-        @update:sort-desc="$emit('update:sort-desc', $event)"
+        @sort-changed="onSortChanged"
     >
         <template v-for="field in fields" #[`cell(${field.key})`]="data">
-            <slot :name="`cell(${field.key})`" v-bind="{ ...data }">
+            <slot :name="`cell(${field.key})`" v-bind="{...data}">
                 {{ data.value }}
             </slot>
         </template>
@@ -82,6 +81,15 @@ export default {
         return {
             noResultsText: 'No hay resultados',
         }
+    },
+    methods: {
+        onSortChanged (event) {
+            if (this.sortBy !== event.sortBy)
+                this.$emit('update:sort-by', event.sortBy)
+            
+            if (this.sortOrder !== event.sortDesc)
+                this.$emit('update:sort-order', event.sortDesc)
+        },
     },
 }
 </script>

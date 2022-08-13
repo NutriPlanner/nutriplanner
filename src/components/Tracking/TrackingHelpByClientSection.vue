@@ -32,7 +32,7 @@
 
 <script>
 export default {
-    name: 'TrackingHelpSectionComponent',
+    name: 'TrackingHelpByClientSectionComponent',
     data () {
         return {
             collapsed: true,

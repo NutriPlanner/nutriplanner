@@ -1,18 +1,39 @@
 <template>
     <div class="np-page np-page--tracking">
         <b-card no-body>
-            <TrackingHelpSection />
+            <template #header>
+                <CardHeader>Seguimientos</CardHeader>
+            </template>
 
-            <Tabs v-model="tabIndex">
-                <b-tab title="Clientes">
-                    <ClientList
-                        @table-reload="onTableReload"
-                        @show-tracking-list="okShowTrackingList"
-                    />
+            <TrackingHelpPendingsSection v-if="!userHasRequiredPendingsLicensee" />
+
+            <Tabs>
+                <b-tab no-body :disabled="!userHasRequiredPendingsLicensee">
+                    <template #title>
+                        <span>Pendientes <Licensee v-if="!userHasRequiredPendingsLicensee" :type="pendingsRequiredLicensee" /></span>
+                    </template>
+
+                    <b-card v-if="userHasRequiredPendingsLicensee" class="no-border">
+                        <TrackingMaintainerPendings ref="maintainerPendings" />
+                    </b-card>
                 </b-tab>
 
-                <b-tab title="Seguimientos" :disabled="!existClientSelected">
-                    <TrackingMaintainer />
+                <b-tab title="Por cliente" no-body>
+                    <TrackingHelpByClientSection />
+
+                    <Tabs v-model="tabIndex">
+                        <b-tab title="Clientes">
+                            <ClientList
+                                ref="clientList"
+                                @table-reload="onTableReload"
+                                @show-tracking-list="onShowTrackingList"
+                            />
+                        </b-tab>
+
+                        <b-tab title="Seguimientos" sticky-column :disabled="!existClientSelected">
+                            <TrackingMaintainerPerClient ref="maintainer" :client="client" />
+                        </b-tab>
+                    </Tabs>
                 </b-tab>
             </Tabs>
         </b-card>
@@ -20,44 +41,55 @@
 </template>
 
 <script>
+import { feature, requiredLicensee } from '@/config/features'
+
 export default {
     name: 'TrackingPage',
+
     data () {
         return {
-            tabIndex: 0,
+            tabIndex            : 0,
+            client              : {},
+            existClientSelected : false,
         }
     },
+
     computed: {
-        existClientSelected () {
-            return this.$store.state.trackings.selectedClientId
-        },
-    },
-    watch: {
-        existClientSelected (value) {
-            setTimeout( () => {
-                this.tabIndex = value ? 1 : 0
-            }, 100)
-        },
-    },
-    methods: {
-        onTableReload () {
-            this.$store.dispatch('trackings/setClient', {
-                id       : null,
-                fullName : null,
-                rut      : null,
-                email    : null,
-                phone    : null,
-            } )
+        pendingsRequiredLicensee() {
+            return requiredLicensee(feature.TRACKINGS_PENDINGS)
         },
 
-        okShowTrackingList ( { item } ) {
-            this.$store.dispatch('trackings/setClient', {
-                id       : item.id,
-                fullName : `${item.name} ${item.last_name}`,
-                rut      : item.rut,
-                email    : item.email,
-                phone    : item.phone,
-            } )
+        userHasRequiredPendingsLicensee() {
+            return this.$loyalty.validate(this.pendingsRequiredLicensee)
+        },
+    },
+
+    mounted () {
+        if (this.userHasRequiredPendingsLicensee)
+            this.$refs.maintainerPendings.reFetch()
+            
+        this.$refs.clientList.reFetch()
+    },
+
+    methods: {
+        onTableReload () {
+            this.client = {}
+            this.existClientSelected = false
+
+            setTimeout( () => {
+                this.tabIndex = 0
+            }, 100)
+        },
+
+        onShowTrackingList ( { item } ) {
+            this.client = item
+            this.existClientSelected = true
+
+            this.$refs.maintainer.reFetch()
+            
+            setTimeout( () => {
+                this.tabIndex = 1
+            }, 100)
         },
     },
 }

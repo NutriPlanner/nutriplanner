@@ -1,13 +1,12 @@
-import { OBJECT_ID } from '../../utils/fieldsTypes'
-import { getNeededFields } from '../../utils/fields'
+import { FieldsTypes } from '@/utils'
 
-const fields = [
+export const tableFields = [
     {
         key        : 'id',
         label      : 'ID',
         sortable   : false,
         filterable : true,
-        type       : OBJECT_ID,
+        type       : FieldsTypes.OBJECT_ID,
         tdClass    : 'align-middle',
         thStyle    : 'width: 210px',
     },
@@ -31,14 +30,32 @@ const fields = [
         label      : 'Actualizado',
         sortable   : true,
         filterable : false,
+        type       : FieldsTypes.DATE,
+        thStyle    : 'width: 125px',
+        tdClass    : 'align-middle',
+    },
+    {
+        key        : '__actions',
+        label      : 'Acciones',
+        sortable   : false,
+        filterable : false,
         thStyle    : 'width: 125px',
         tdClass    : 'align-middle',
     },
 ]
 
-const getFields = neededFields => getNeededFields(fields, neededFields)
+export const statusOptions = [
+    { text: 'PENDIENTE', value: 'PENDING', variant: 'warning' },
+    { text: 'FINALIZADO', value: 'DONE', variant: 'success' },
+    { text: 'CERRADO', value: 'CLOSED', variant: 'danger' },
+]
+
+export const getStatusOption = (status) => {
+    return statusOptions.find(option => option.value === status)
+}
 
 export default {
-    fields,
-    getFields,
+    tableFields,
+    statusOptions,
+    getStatusOption,
 }

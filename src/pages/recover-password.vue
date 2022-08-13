@@ -7,66 +7,73 @@
                         title="Recuperar Contraseña"
                         class="np-page--recover-password__card"
                     >
-                        <b-card-text>
-                            <p class="text-justify">
-                                Para recuperar contraseña, ingrese su correo electrónico. Luego,
-                                se le enviará un correo con un código de autorización para que
-                                pueda hacer efectivo el cambio.
-                            </p>
 
-                            <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
-                                <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
-                                    <validation-provider
-                                        v-slot="validationContext"
-                                        name="correo"
-                                        rules="required|email"
+                        <!-- HELP -->
+                        <p class="text-justify">
+                            Para recuperar contraseña, ingrese su correo electrónico. Luego,
+                            se le enviará un correo con un código de autorización para que
+                            pueda hacer efectivo el cambio.
+                        </p>
+
+
+                        <!-- FORM -->
+                        <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
+                            <b-form @submit.stop.prevent="handleSubmit(getCode)">
+
+
+                                <!-- EMAIL -->
+                                <validation-provider v-slot="validationContext" name="correo" rules="required|email">
+                                    <b-form-group
+                                        id="input-group-email"
+                                        label="Correo electrónico"
+                                        label-for="input-email"
                                     >
-                                        <b-form-group
-                                            id="input-group-email"
-                                            label="Correo electrónico"
-                                            label-for="input-email"
-                                        >
-                                            <b-form-input
-                                                id="input-email"
-                                                v-model="form.email"
-                                                type="email"
-                                                aria-describedby="input-email-feedback"
-                                                trim
-                                                :state="__getValidationState(validationContext)"
-                                            />
+                                        <b-form-input
+                                            id="input-email"
+                                            v-model="email"
+                                            type="email"
+                                            aria-describedby="input-email-feedback"
+                                            trim
+                                            :state="__getValidationState(validationContext)"
+                                        />
 
-                                            <b-form-invalid-feedback id="input-email-feedback">
-                                                {{ validationContext.errors[0] }}
-                                            </b-form-invalid-feedback>
-                                        </b-form-group>
-                                    </validation-provider>
+                                        <b-form-invalid-feedback id="input-email-feedback">
+                                            {{ validationContext.errors[0] }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
+                                </validation-provider>
 
-                                    <Overlay :loading="loading">
-                                        <b-button block type="submit" variant="primary">
-                                            Obtener código
-                                        </b-button>
-                                    </Overlay>
 
-                                    <b-button
-                                        block
-                                        variant="outline-primary"
-                                        :disabled="loading"
-                                        @click="toChangePasswordView"
-                                    >
-                                        Ya poseo un código
+                                <!-- GET CODE BUTTON -->
+                                <Overlay :loading="loading">
+                                    <b-button block type="submit" variant="primary">
+                                        Obtener código
                                     </b-button>
+                                </Overlay>
 
-                                    <b-button
-                                        block
-                                        variant="link"
-                                        to="/login"
-                                        :disabled="loading"
-                                    >
-                                        Volver
-                                    </b-button>
-                                </b-form>
-                            </validation-observer>
-                        </b-card-text>
+
+                                <!-- TO CHANGE PASSWORD BUTTON -->
+                                <b-button
+                                    block
+                                    variant="outline-primary"
+                                    :disabled="loading"
+                                    @click="redirectToChangePassword"
+                                >
+                                    Ya poseo un código
+                                </b-button>
+
+
+                                <!-- BACK BUTTON -->
+                                <b-button
+                                    block
+                                    variant="link"
+                                    :disabled="loading"
+                                    @click="redirectToLogin"
+                                >
+                                    Volver
+                                </b-button>
+                            </b-form>
+                        </validation-observer>
                     </b-card>
                 </b-col>
             </b-row>
@@ -75,52 +82,38 @@
 </template>
 
 <script>
-import _ from 'lodash'
-import { FULLFILLED } from '@/utils/responseStatus'
+import { mapFields } from 'vuex-map-fields'
+import { mapActions } from 'vuex'
 
 export default {
     name   : 'RecoverPasswordPage',
     layout : 'start',
     auth   : 'guest',
-    data () {
-        return {
-            form: {
-                email: '',
-            },
-        }
-    },
+
     computed: {
-        loading () {
-            return this.$store.state.authorization.loading
-        },
+        ...mapFields('recoverPassword', {
+            email   : 'data.email',
+            loading : 'loading',
+        } ),
     },
+
+    mounted() {
+        setTimeout( () => {
+            this.$refs.formObserver.validate()
+        }, 100)
+    },
+
     methods: {
-        async onSubmit () {
-            const { status } = await this.$store.dispatch(
-                'authorization/requestChangePassword',
-                {
-                    params: _.cloneDeep(this.form),
-                },
-            )
-            if (status === FULLFILLED) {
-                this.$router.push( {
-                    name  : 'change-password',
-                    query : {
-                        email: this.form.email,
-                    },
-                } )
-            }
-        },
-        toChangePasswordView () {
+        ...mapActions('recoverPassword', {
+            getCode                        : 'getCode',
+            redirectToChangePasswordAction : 'redirectToChangePassword',
+            redirectToLogin                : 'redirectToLogin',
+        } ),
+
+        redirectToChangePassword () {
             this.$refs.formObserver.validate().then( (valid) => {
-                if (valid) {
-                    this.$router.push( {
-                        name  : 'change-password',
-                        query : {
-                            email: this.form.email,
-                        },
-                    } )
-                }
+                if (valid)
+                    this.redirectToChangePasswordAction()
             } )
         },
     },

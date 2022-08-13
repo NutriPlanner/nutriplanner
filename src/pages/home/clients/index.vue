@@ -1,6 +1,10 @@
 <template>
     <div class="np-page np-page--clients">
         <b-card>
+            <template #header>
+                <CardHeader>Clientes</CardHeader>
+            </template>
+
             <Maintainer
                 ref="maintainer"
                 :fields="fields"
@@ -8,71 +12,56 @@
                 :total-rows="totalRows"
                 :page="page"
                 :loading="loading"
-                @new-registry="onNewRegistry"
-                @edit-registry="onEditRegistry"
-                @delete-registry="onDeleteRegistry"
-                @filters-changed="fetchData"
+                @new-registry="redirectToPost"
+                @edit-registry="redirectToPut"
+                @delete-registry="deleteRegistry"
+                @filters-changed="fetchAction"
             />
         </b-card>
     </div>
 </template>
 
 <script>
-import clientConfig from '@/config/clients/fields'
-
-const fields = clientConfig.getFields( [
-    'herba_id',
-    'name',
-    'last_name',
-    'rut',
-    'birthday',
-    'address',
-    'phone',
-    'email',
-] )
+import { mapFields, mapMultiRowFields } from 'vuex-map-fields'
+import { mapGetters, mapActions } from 'vuex'
+import { ResponseStatus } from '@/utils'
 
 export default {
     name: 'ClientsPage',
-    data () {
-        return {
-            fields: [
-                ...fields,
-                {
-                    key      : '__actions',
-                    label    : 'Acciones',
-                    sortable : false,
-                },
-            ],
-        }
+
+    async fetch() {
+        await this.fetchAction()
     },
+
     computed: {
-        items () {
-            return this.$store.state.clients.list
-        },
-        totalRows () {
-            return this.$store.state.clients.totalResults
-        },
-        page () {
-            return this.$store.state.clients.page
-        },
-        loading () {
-            return this.$store.state.clients.loading
-        },
+        ...mapMultiRowFields('clients', {
+            items: 'data.clients',
+        } ),
+
+        ...mapFields('clients', {
+            totalRows : 'data.totalRows',
+            page      : 'data.page',
+            loading   : 'loading',
+        } ),
+
+        ...mapGetters('clients', {
+            fields: 'tableFields',
+        } ),
     },
+
     methods: {
-        fetchData (params) {
-            this.$store.dispatch('clients/fetch', params)
-        },
-        onNewRegistry () {
-            this.$router.push( { name: 'home-clients-post' } )
-        },
-        onEditRegistry (data) {
-            this.$store.dispatch('clients/set', { update: data } )
-            this.$router.push( { name: 'home-clients-put' } )
-        },
-        async onDeleteRegistry (id) {
-            await this.$store.dispatch('clients/delete', id)
-            this.$refs.maintainer.reFetch()
+        ...mapActions('clients', {
+            fetchAction          : 'fetch',
+            deleteRegistryAction : 'deleteRegistry',
+            redirectToPost       : 'redirectToPost',
+            redirectToPut        : 'redirectToPut',
+        } ),
+
+        async deleteRegistry (id) {
+            const response = await this.deleteRegistryAction(id)
+
+            if (response.status = ResponseStatus.FULLFILLED)
+                this.$refs.maintainer.reFetch()
         },
     },
 }

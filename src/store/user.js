@@ -1,12 +1,9 @@
-import axios from 'axios'
-import { setupErrorHandler, errorHandler } from '../utils/ErrorHandler'
-import { FULLFILLED } from '../utils/responseStatus'
-import userErrors from '../services/user.errors'
-import userServices from '../services/user.services'
+import { ErrorHandler } from '@/utils'
+import { FULLFILLED } from '@/utils/responseStatus'
+import userErrors from '@/services/user.errors'
+import userServices from '@/services/user.services'
 
-const CancelToken = axios.CancelToken
-let source = CancelToken.source()
-
+const { setupErrorHandler, errorHandler } = ErrorHandler
 setupErrorHandler(userErrors)
 
 export const state = () => ( {
@@ -25,19 +22,7 @@ export const actions = {
         commit('set', data)
     },
 
-    abortPreviousRequests () {
-    // abort previous operations
-        const cancelMemory = { oldSource: source, newSource: CancelToken.source() }
-        source = cancelMemory.newSource
-
-        // this timeout is important to await the source is injected in the axios instance
-        setTimeout( () => {
-            cancelMemory.oldSource.cancel('Operation canceled by the user.')
-        }, 100)
-    },
-
-    async update ( { commit, dispatch, rootState }, params) {
-        dispatch('abortPreviousRequests')
+    async update ( { commit, rootState }, params) {
         commit('set', { loading: true } )
 
         const customParams = {
