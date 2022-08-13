@@ -17,7 +17,7 @@
                         :active="activeRoute === name"
                         :disabled="!$loyalty.validate(licensee)"
                     >
-                        {{ text }} <Licensee v-if="licensee" :type="licensee" />
+                        {{ text }} <Licensee v-if="!userHasRequiredLicensee(licensee)" :type="licensee" />
                     </b-nav-item>
                 </b-nav>
             </div>
@@ -52,6 +52,12 @@ export default {
 
                     return acc
                 }, {} )
+        },
+    },
+
+    methods: {
+        userHasRequiredLicensee(licensee) {
+            return this.$loyalty.validate(licensee)
         },
     },
 }
