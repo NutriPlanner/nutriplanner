@@ -60,6 +60,37 @@
                 </validation-provider>
 
 
+                <!-- DATE -->
+                <validation-provider v-slot="validationContext" name="fecha" :rules="{ required: true }">
+                    <b-form-group
+                        id="input-group-date"
+                        label="Fecha"
+                        label-for="input-date"
+                    >
+                        <b-skeleton v-if="loading" type="input" />
+                        <b-form-datepicker
+                            v-else
+                            id="input-date"
+                            v-model="date"
+                            aria-describedby="input-date-feedback"
+                            reset-button
+                            label-reset-button="Limpiar"
+                            label-no-date-selected="Fecha no seleccionada"
+                            :date-format-options="{
+                                year: 'numeric',
+                                month: '2-digit',
+                                day: '2-digit',
+                            }"
+                            :state="__getValidationState(validationContext)"
+                        />
+
+                        <b-form-invalid-feedback id="input-date-feedback">
+                            {{ validationContext.errors[0] }}
+                        </b-form-invalid-feedback>
+                    </b-form-group>
+                </validation-provider>
+
+
                 <!-- MEASUREMENTS -->
                 <p class="mt-5 mb-3">
                     MEDIDAS DEL CUERPO
@@ -312,6 +343,7 @@ export default {
         ...mapFields('trackings/form', {
             status    : 'data.status',
             subject   : 'data.subject',
+            date      : 'data.date',
             chest     : 'data.measurement.chest',
             waist     : 'data.measurement.waist',
             arm       : 'data.measurement.arm',
@@ -348,7 +380,7 @@ export default {
     watch: {
         loading() {
             if (!this.loading) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.formObserver.validate()
                 }, 100)
             }
@@ -357,7 +389,7 @@ export default {
 
     // post case
     mounted() {
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },

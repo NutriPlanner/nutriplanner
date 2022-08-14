@@ -153,7 +153,7 @@ export default {
     watch: {
         sessions() {
             if (this.$refs.sessionsGroup.validate) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.sessionsGroup.validate()
                 }, 100)
             }
@@ -161,7 +161,7 @@ export default {
 
         loading() {
             if (!this.loading) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.formObserver.validate()
                 }, 100)
             }
@@ -170,7 +170,7 @@ export default {
 
     // post case
     mounted() {
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },

@@ -13,7 +13,7 @@ import equalValues from './rules/equal-values'
 import rut from './rules/rut'
 
 // Install VeeValidate rules and localization
-Object.keys(rules).forEach( (rule) => {
+Object.keys(rules).forEach((rule) => {
     extend(rule, rules[rule] )
 } )
 localize('es', es)

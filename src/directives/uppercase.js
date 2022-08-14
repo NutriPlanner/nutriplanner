@@ -5,7 +5,7 @@ export default {
             const start = el.selectionStart
             el.value = el.value.toUpperCase()
             el.setSelectionRange(start, start)
-            vnode.componentInstance.$emit('input', el.value.toUpperCase() )
+            vnode.componentInstance.$emit('input', el.value.toUpperCase())
         }
 
         // add event listener

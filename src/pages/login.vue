@@ -95,7 +95,7 @@ export default {
     },
 
     mounted() {
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },

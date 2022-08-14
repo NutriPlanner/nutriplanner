@@ -239,7 +239,7 @@ export default {
     watch: {
         loading() {
             if (!this.loading) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.formObserver.validate()
                 }, 100)
             }
@@ -248,7 +248,7 @@ export default {
 
     // post case
     mounted() {
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },

@@ -10,7 +10,7 @@
                 :fields="fields"
                 :items="items"
                 :total-rows="totalRows"
-                :page="page"
+                :page.sync="page"
                 :loading="loading"
                 @new-registry="redirectToPost"
                 @edit-registry="redirectToPut"
@@ -39,7 +39,7 @@ export default {
         } ),
 
         ...mapFields('clients', {
-            totalRows : 'data.totalRows',
+            totalRows : 'data.totalResults',
             page      : 'data.page',
             loading   : 'loading',
         } ),

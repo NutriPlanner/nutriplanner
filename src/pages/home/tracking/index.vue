@@ -26,8 +26,13 @@
                             <ClientList
                                 ref="clientList"
                                 @table-reload="onTableReload"
-                                @show-tracking-list="onShowTrackingList"
-                            />
+                            >
+                                <template #cell(__actions)="data">
+                                    <DataTableButton @click="onShowTrackingList(data)">
+                                        Mostrar
+                                    </DataTableButton>
+                                </template>
+                            </ClientList>
                         </b-tab>
 
                         <b-tab title="Seguimientos" sticky-column :disabled="!existClientSelected">
@@ -76,7 +81,7 @@ export default {
             this.client = {}
             this.existClientSelected = false
 
-            setTimeout( () => {
+            setTimeout(() => {
                 this.tabIndex = 0
             }, 100)
         },
@@ -84,11 +89,10 @@ export default {
         onShowTrackingList ( { item } ) {
             this.client = item
             this.existClientSelected = true
-
-            this.$refs.maintainer.reFetch()
             
-            setTimeout( () => {
+            setTimeout(() => {
                 this.tabIndex = 1
+                this.$refs.maintainer.reFetch()
             }, 100)
         },
     },

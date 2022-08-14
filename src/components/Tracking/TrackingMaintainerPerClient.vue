@@ -7,13 +7,13 @@
             :fields="fields"
             :items="items"
             :total-rows="totalRows"
-            :page="page"
+            :page.sync="page"
             :loading="loading"
             :default-sort-config="{ sortBy: 'date', sortOrder: true }"
             @new-registry="redirectToPost"
             @edit-registry="redirectToPut"
             @delete-registry="deleteRegistry"
-            @filters-changed="fetchAction"
+            @filters-changed="fetch"
         >
             <template #cell(status)="data">
                 <StatusRender
@@ -49,7 +49,7 @@ export default {
         } ),
 
         ...mapFields('trackings/perClient', {
-            totalRows : 'data.totalRows',
+            totalRows : 'data.totalResults',
             page      : 'data.page',
             loading   : 'loading',
         } ),
@@ -66,6 +66,18 @@ export default {
             redirectToPostAction : 'redirectToPost',
             redirectToPut        : 'redirectToPut',
         } ),
+
+        fetch(data) {
+            const filter = JSON.parse(data.filter)
+
+            this.fetchAction( {
+                ...data,
+                filter: JSON.stringify( {
+                    ...filter,
+                    client: this.client.id,
+                } ),
+            } )
+        },
 
         redirectToPost () {
             this.redirectToPostAction( { clientId: this.client.id } )
