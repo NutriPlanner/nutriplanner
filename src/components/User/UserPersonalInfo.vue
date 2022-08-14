@@ -111,14 +111,14 @@ export default {
 
             this.editMode = true
 
-            setTimeout( () => {
+            setTimeout(() => {
                 this.$refs.formObserver.validate()
             }, 100)
         },
 
         async onSubmit() {
             this.internalLoading = true
-            const { status } = await this.$store.dispatch('user/update', _.cloneDeep(this.form) )
+            const { status } = await this.$store.dispatch('user/update', _.cloneDeep(this.form))
             
             if (status === FULLFILLED) {
                 await this.$auth.fetchUser()

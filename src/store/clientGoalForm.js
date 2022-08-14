@@ -40,15 +40,11 @@ export const getters = {
         return clientsConfigs.goalStatusOptions
     },
 
-    selectedPlanData(state) {
-        return state.planResults.find(plan => plan.id === state.data.plan) || {}
-    },
-
     planOptions(state) {
         return state.planResults.map(plan => ( {
             text  : plan.name,
             value : plan.id,
-        } ) )
+        } ))
     },
 
     progress(state) {
@@ -142,7 +138,7 @@ export const actions = {
             return await this.$axios.post(`/${namespace}`, {
                 ...state.data,
                 start_date : getters.startDate,
-                client     : state.client,
+                client     : this.$router.currentRoute.query.id,
             } )
         }, this)
 
@@ -175,7 +171,7 @@ export const actions = {
             return await this.$axios.put(`/${namespace}/${state.data.id}`, {
                 ...state.data,
                 start_date : getters.startDate,
-                client     : state.client,
+                client     : this.$router.currentRoute.query.id,
             } )
         }, this)
 
@@ -239,7 +235,7 @@ export const actions = {
             } ),
         }
 
-        const { status, data } = await dispatch('plan/fetch', params, { root: true } )
+        const { status, data } = await dispatch('plans/fetch', params, { root: true } )
 
         if (status === ResponseStatus.FULLFILLED)
             commit('set', { planResults: data.results } )
@@ -273,18 +269,12 @@ export const actions = {
         } )
     },
 
-    addNewExtraSession ( { commit, getters, state } ) {
-        const { name, sessions } = getters.selectedPlanData
-
-        const sessionsCount = sessions ? sessions.length : 0
-        const extraSessionsCount = state.data.extra_sessions.length
-        const customName = name ? name : `PERSONALIZADO`
-
+    addNewExtraSession ( { commit, state } ) {
         commit('set', {
             'data.extra_sessions': [
                 ...state.data.extra_sessions,
                 {
-                    subject : `SG[${sessionsCount + extraSessionsCount + 1}] - ${customName}`,
+                    subject : '',
                     start   : '7',
                 },
             ],

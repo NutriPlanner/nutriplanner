@@ -42,6 +42,7 @@
                                 id="input-name"
                                 v-model="name"
                                 aria-describedby="input-name-feedback"
+                                :state="__getValidationState(validationContext)"
                             />
 
                             <b-form-invalid-feedback id="input-name-feedback">
@@ -99,7 +100,7 @@
                                 :state="__getValidationState(validationContext)"
                             />
 
-                            <b-form-invalid-feedback id="input-birthday-feedback">
+                            <b-form-invalid-feedback id="input-start_date-feedback">
                                 {{ validationContext.errors[0] }}
                             </b-form-invalid-feedback>
                         </b-form-group>
@@ -287,7 +288,7 @@ export default {
     watch: {
         tasks() {
             if (this.$refs.clientGoalTasks.validate) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.clientGoalTasks.validate()
                 }, 100)
             }
@@ -295,7 +296,7 @@ export default {
 
         extra_sessions() {
             if (this.$refs.extraSessionsGroup.validate) {
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.extraSessionsGroup.validate()
                 }, 100)
             }
@@ -332,7 +333,7 @@ export default {
                 const result = await this.close()
 
                 if (result.status === ResponseStatus.FULLFILLED) {
-                    setTimeout( () => {
+                    setTimeout(() => {
                         this.$refs.formObserver.validate()
                     }, 100)
                 }

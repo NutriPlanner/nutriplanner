@@ -155,7 +155,7 @@ export default {
             if (!this.requestingCodeLoading) {
                 this.requestingCodeLoading = true
                 this.codeCounter = 30
-                this.codeInterval = setInterval( () => {
+                this.codeInterval = setInterval(() => {
                     this.codeCounter--
                     if (this.codeCounter === 0) {
                         clearInterval(this.codeInterval)
@@ -181,7 +181,7 @@ export default {
 
             if (status === FULLFILLED) {
                 this.form = _.cloneDeep(initialFormState),
-                setTimeout( () => {
+                setTimeout(() => {
                     this.$refs.formObserver.validate()
                 }, 100)
             }
