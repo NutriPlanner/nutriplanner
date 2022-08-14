@@ -19,7 +19,7 @@ export const mutations = {
 
         let path = ''
 
-        params.forEach( (param) => {
+        params.forEach((param) => {
             path = `${path}/${param}`
             const match = this.$router.match(path)
 

@@ -175,7 +175,7 @@ export default {
     mounted() {
         this.email = this.$route.query.email
 
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },

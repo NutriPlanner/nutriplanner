@@ -2,21 +2,17 @@
     <div class="np-component np-component--clients-list">
         <ReadonlyList
             ref="list"
-            :fields="trackingsClientsFields"
+            :fields="fields"
             :items="items"
             :total-rows="totalRows"
-            :page="page"
+            :page.sync="page"
             :loading="loading"
             @filters-changed="fetchData"
         >
             <template v-for="field in fields" #[`cell(${field.key})`]="data">
-                <DataTableButton
-                    v-if="field.key === '__actions'"
-                    :key="`action-${field.key}`"
-                    @click="$emit('show-tracking-list', data)"
-                >
-                    Mostrar
-                </DataTableButton>
+                <template v-if="field.key === '__actions'">
+                    <slot :name="`cell(${field.key})`" v-bind="{ ...data }" />
+                </template>
 
                 <DataTableFieldRender v-else :key="`field-${field.key}`" v-bind="{ ...data }" />
             </template>
@@ -37,7 +33,7 @@ export default {
         } ),
 
         ...mapFields('clients', {
-            totalRows : 'data.totalRows',
+            totalRows : 'data.totalResults',
             page      : 'data.page',
             loading   : 'loading',
         } ),
@@ -45,20 +41,6 @@ export default {
         ...mapGetters('clients', {
             fields: 'tableFields',
         } ),
-
-        trackingsClientsFields() {
-            return this.fields.map(f => {
-                if (f.key === '__actions') {
-                    return {
-                        key      : '__actions',
-                        label    : 'Seguimientos',
-                        sortable : false,
-                    }
-                }
-
-                return f
-            } )
-        },
     },
 
     methods: {

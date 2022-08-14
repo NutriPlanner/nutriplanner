@@ -7,7 +7,7 @@
                 </b-button>
             </b-col>
 
-            <b-col cols="auto ml-2">
+            <b-col v-if="showCreateButton" cols="auto ml-2">
                 <b-button @click="$emit('new-registry')">
                     Crear nuevo
                 </b-button>
@@ -66,6 +66,12 @@ export default {
     mixins : [ DataTableMixin ],
     props  : {
         showDeleteButton: {
+            type     : Boolean,
+            required : false,
+            default  : true,
+        },
+
+        showCreateButton: {
             type     : Boolean,
             required : false,
             default  : true,

@@ -1,3 +1,4 @@
+import moment from 'moment'
 import { getField, updateField } from 'vuex-map-fields'
 import { ResponseStatus, ErrorHandler, Store } from '@/utils'
 import trackingsErrors from '@/store/errors/trackings.errors'
@@ -20,7 +21,9 @@ const defaultData = {
         bottom    : '',
         body_mass : '',
     },
-    note: '',
+    note   : '',
+    date   : moment().local().format('YYYY-MM-DD'),
+    client : '',
 }
 
 
@@ -69,6 +72,7 @@ export const actions = {
                 data: {
                     ...defaultData,
                     ...data,
+                    date: moment.utc(data.date).local().format('YYYY-MM-DD'),
                 },
             } )
         }
@@ -83,7 +87,8 @@ export const actions = {
 
         const paramsWithClientId = {
             ...state.data,
-            client: this.$router.currentRoute.query.clientId,
+            client : this.$router.currentRoute.query.clientId,
+            date   : moment(state.data.date).utc().toISOString(),
         }
 
         const { status, data, message, error } = await errorHandler(async () => {
@@ -108,7 +113,11 @@ export const actions = {
     async update ( { state, commit } ) {
         commit('set', { loading: true } )
 
-        const { id, ...params } = state.data
+        const { id, ...stateData } = state.data
+        const params = {
+            ...stateData,
+            date: moment(stateData.date).utc().toISOString(),
+        }
 
         const { status, data, message, error } = await errorHandler(async () => {
             return await this.$axios.put(`/${apiNamespace}/${id}`, params)

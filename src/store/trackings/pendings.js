@@ -12,8 +12,8 @@ export const actions = {
 
     async getPendings( { dispatch }, { filter, sortBy, limit, page } = {} ) {
         const filters = JSON.stringify( {
-            ...JSON.parse(filter),
             date: { $lte: moment.utc().toISOString() },
+            ...JSON.parse(filter),
         } )
 
         return await dispatch('fetch', { filter: filters, sortBy, limit, page, options: { url: '/pendings' } } )

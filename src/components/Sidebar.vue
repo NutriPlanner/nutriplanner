@@ -46,8 +46,8 @@ export default {
 
         routes () {
             return Object.entries(breadcrumbs)
-                .filter( ( [ , { show }] ) => show !== false)
-                .reduce( (acc, route) => {
+                .filter(( [ , { show }] ) => show !== false)
+                .reduce((acc, route) => {
                     acc[route[0]] = route[1]
 
                     return acc

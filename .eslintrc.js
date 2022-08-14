@@ -85,7 +85,7 @@ module.exports = {
 
         'object-curly-spacing' : [ 'error', 'always' ],
         'space-in-parens'      : [ 'error', 'never', {
-            exceptions: [ '[]', '{}', '()' ],
+            exceptions: [ '[]', '{}' ],
         }],
 
         'comma-spacing': [ 'error', {

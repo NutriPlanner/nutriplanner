@@ -98,7 +98,7 @@ export default {
     },
 
     mounted() {
-        setTimeout( () => {
+        setTimeout(() => {
             this.$refs.formObserver.validate()
         }, 100)
     },
@@ -111,7 +111,7 @@ export default {
         } ),
 
         redirectToChangePassword () {
-            this.$refs.formObserver.validate().then( (valid) => {
+            this.$refs.formObserver.validate().then((valid) => {
                 if (valid)
                     this.redirectToChangePasswordAction()
             } )

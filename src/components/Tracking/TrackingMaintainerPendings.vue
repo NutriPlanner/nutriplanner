@@ -5,9 +5,10 @@
             :fields="fields"
             :items="items"
             :total-rows="totalRows"
-            :page="page"
+            :page.sync="page"
             :loading="loading"
             :default-sort-config="{ sortBy: 'date', sortOrder: true }"
+            :show-create-button="false"
             @new-registry="redirectToPost"
             @edit-registry="redirectToPut"
             @delete-registry="deleteRegistry"
@@ -39,7 +40,7 @@ export default {
         } ),
 
         ...mapFields('trackings/pendings', {
-            totalRows : 'data.totalRows',
+            totalRows : 'data.totalResults',
             page      : 'data.page',
             loading   : 'loading',
         } ),

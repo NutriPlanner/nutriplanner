@@ -117,14 +117,14 @@ export const actions = {
 
     setSessions ( { state, commit } ) {
         // trunc the array to the number of sessions in order to keep the modifications made by the user
-        if (state.data.sessions.length > Number(state.data.sessions_count) ) {
+        if (state.data.sessions.length > Number(state.data.sessions_count)) {
             commit('set', {
-                'data.sessions': state.data.sessions.slice(0, Number(state.data.sessions_count) ),
+                'data.sessions': state.data.sessions.slice(0, Number(state.data.sessions_count)),
             } )
         }
 
         // add new sessions if the number of sessions is greater than the length of sessions array
-        if (state.data.sessions.length < Number(state.data.sessions_count) ) {
+        if (state.data.sessions.length < Number(state.data.sessions_count)) {
             const start = state.data.sessions.length + 1
             const end = Number(state.data.sessions_count) + 1
 
@@ -133,7 +133,7 @@ export const actions = {
                     _.range(start, end).map(i => ( {
                         subject : `SG[${i}] - ${state.data.name}`,
                         start   : '7',
-                    } ) ),
+                    } )),
                 ),
             } )
         }
