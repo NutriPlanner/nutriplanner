@@ -58,10 +58,23 @@ export default {
         } ),
 
         async deleteRegistry (id) {
-            const response = await this.deleteRegistryAction(id)
+            const confirm = await this.$bvModal.msgBoxConfirm(
+                'Si elimina el cliente, se eliminarán todos los registros relacionados con el mismo (objetivos, seguimientos). ¿Desea continuar?',
+                {
+                    title         : '¡Cuidado!',
+                    okTitle       : 'confirmar',
+                    okVariant     : 'danger',
+                    cancelTitle   : 'cancelar',
+                    cancelVariant : 'outline-primary',
+                },
+            )
 
-            if (response.status = ResponseStatus.FULLFILLED)
-                this.$refs.maintainer.reFetch()
+            if (confirm) {
+                const response = await this.deleteRegistryAction(id)
+
+                if (response.status = ResponseStatus.FULLFILLED)
+                    this.$refs.maintainer.reFetch()
+            }
         },
     },
 }
