@@ -70,6 +70,7 @@ export const mutations = {
         state.data = {
             ...defaultData,
         }
+        state.isNew = true
     },
 }
 
