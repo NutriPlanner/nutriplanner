@@ -1,5 +1,12 @@
 <template>
-    <b-button v-bind="properties" @click="$emit('click', ...arguments)">
+    <b-button
+        :class="classNames.button"
+        v-bind="{
+            variant: 'outline-primary',
+            ...$attrs
+        }"
+        @click="$emit('click', ...arguments)"
+    >
         <i v-if="$attrs.icon" :class="$attrs.icon" /> {{ text }}
     </b-button>
 </template>
@@ -8,11 +15,9 @@
 export default {
     name     : 'DataTableButtonComponent',
     computed : {
-        properties () {
+        classNames() {
             return {
-                variant : 'outline-primary',
-                ...this.$attrs,
-                class   : 'np-component--data-table-button',
+                button: this.$style.button,
             }
         },
 
@@ -25,9 +30,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--data-table-button {
-  padding: 0 5px;
-  font-size: 0.85rem;
+<style lang="scss" module>
+.button {
+    padding: 0 5px;
+    font-size: 0.85rem;
 }
 </style>

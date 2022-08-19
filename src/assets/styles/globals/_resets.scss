@@ -1,0 +1,98 @@
+// --- Bootstrap Variables Override ---
+
+// This table defines the theme colors (variant names)
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    'primary'   : $primary,
+    'secondary' : $secondary,
+    'tertiary'  : $tertiary,
+    'success'   : $success,
+    'info'      : $info,
+    'warning'   : $warning,
+    'danger'    : $danger,
+    'light'     : $light,
+    'dark'      : $dark
+  ),
+  $theme-colors
+);
+
+@import 'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600;700;800;900&display=swap';
+
+$gray-600: $n500;
+
+$font-family-sans-serif: 'Inter', sans-serif;
+$font-family-monospace: 'Roboto Mono', monospace;
+
+$body-bg: $n100;
+$body-color: $n900;
+
+$link-decoration: none;
+$link-hover-decoration: none;
+
+$text-muted: $n600;
+
+$table-accent-bg: $p100;
+$table-hover-bg: $p200;
+$table-th-font-weight: 500;
+
+
+// --- Elements CSS Override ---
+
+html {
+  font-size: 14px;
+}
+
+html,
+body {
+  overscroll-behavior: contain;
+}
+
+html,
+body,
+#__nuxt,
+#__layout {
+  height: 100% !important;
+}
+
+#__layout {
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    flex: auto;
+  }
+}
+
+table {
+    border-radius: 0.25rem;
+  
+    th {
+      border-bottom: 1px solid $primary !important;
+    }
+
+    &.b-table[aria-busy='true'] {
+        opacity: 1 !important;
+    }
+}
+
+.btn,
+.nav-link {
+  text-transform: uppercase;
+  font-size: 0.85rem !important;
+
+  i {
+    font-size: 1rem;
+    vertical-align: sub;
+  }
+
+  .no-transform {
+    text-transform: none;
+  }
+}
+
+.card-title {
+  text-transform: uppercase !important;
+}

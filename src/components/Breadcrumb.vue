@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--breadcrumb">
+    <div>
         <b-breadcrumb :items="items" />
     </div>
 </template>
@@ -16,5 +16,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

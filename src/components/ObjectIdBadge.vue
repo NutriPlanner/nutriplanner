@@ -1,13 +1,12 @@
 <template>
-    <b-badge
-        variant="tertiary"
-        class="np-component np-component--object-id-badge"
-    >
+    <b-badge variant="tertiary" :class="classNames.badge">
         {{ value }}
     </b-badge>
 </template>
 
 <script>
+import cx from 'classnames'
+
 export default {
     name  : "ObjectIdBadgeComponent",
     props : {
@@ -16,14 +15,20 @@ export default {
             required : true,
         },
     },
+    computed: {
+        classNames() {
+            return {
+                badge: cx(this.$style.badge, 'text-monospace'),
+            }
+        },
+    },
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--object-id-badge {
+<style lang="scss" module>
+.badge {
     word-break: break-all;
     white-space: normal;
     padding: 0.5em 0.7em;
-    font-family: monospace;
 }
 </style>

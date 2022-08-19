@@ -1,5 +1,5 @@
 <template>
-    <div class="np-page np-page--tracking-post">
+    <div>
         <b-card>
             <template #header>
                 <CardHeader>Registrar seguimiento</CardHeader>
@@ -41,5 +41,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

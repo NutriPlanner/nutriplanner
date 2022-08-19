@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--data-table-field-render tabular-nums">
+    <div class="tabular-nums">
         <template v-if="field.type === OBJECT_ID">
             <ObjectIdBadge v-if="$attrs.value" :value="$attrs.value" />
         </template>
@@ -38,7 +38,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

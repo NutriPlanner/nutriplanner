@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--tracking-maintainer">
+    <div>
         <Maintainer
             ref="maintainer"
             :fields="fields"
@@ -77,5 +77,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

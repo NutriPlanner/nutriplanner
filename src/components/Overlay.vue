@@ -5,7 +5,7 @@
         :opacity="$attrs.opacity || 0.6"
         spinner-small
         spinner-variant="primary"
-        class="np-component np-component--overlay mb-2"
+        class="mb-2"
     >
         <slot />
     </b-overlay>
@@ -22,5 +22,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

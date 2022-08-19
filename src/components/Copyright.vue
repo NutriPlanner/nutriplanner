@@ -1,7 +1,7 @@
 <template>
-    <div class="np-component np-component--copyright">
+    <div>
         <div class="py-3">
-            <span class="np-component--copyright__text">
+            <span>
                 <small>NutriPlanner © Todos los derechos reservados - {{ currentYear }}</small>
             </span>
         </div>

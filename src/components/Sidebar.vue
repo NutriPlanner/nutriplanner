@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--sidebar">
+    <div>
         <b-sidebar
             :id="target"
             backdrop
@@ -16,6 +16,7 @@
                         exact-active-class="active"
                         :active="activeRoute === name"
                         :disabled="!$loyalty.validate(licensee)"
+                        :class="classNames.link"
                     >
                         {{ text }} <Licensee v-if="!userHasRequiredLicensee(licensee)" :type="licensee" />
                     </b-nav-item>
@@ -40,6 +41,12 @@ export default {
     },
 
     computed: {
+        classNames() {
+            return {
+                link: this.$style.link,
+            }
+        },
+
         ...mapFields('breadcrumb', {
             activeRoute: 'active',
         } ),
@@ -63,24 +70,24 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import '@/assets/styles/globals/mainColors';
+<style lang="scss" module>
 @import '@/assets/styles/globals/colors';
 
-.nav-link {
-    margin-bottom: 5px;
+.link {
+    & > a {
+        margin-bottom: 5px;
 
-    &.disabled {
-        background-color: $disabled-bkg;
-    }
+        &.disabled {
+            background-color: $n200;
+        }
 
-    &:not(.active):not(.disabled) {
-        border: solid 1px $primary;
+        &:not(.active):not(.disabled) {
+            border: solid 1px $primary;
 
-        &:hover {
-            background-color: rgba($primary, 0.1);
+            &:hover {
+                background-color: rgba($primary, 0.1);
+            }
         }
     }
 }
-
 </style>
