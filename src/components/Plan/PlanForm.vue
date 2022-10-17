@@ -116,7 +116,12 @@
 
 
                 <!-- SESSIONS -->
-                <PlanSessionsGroup ref="sessionsGroup" :sessions="sessions" class="mt-4" />
+                <PlanSessionsGroup
+                    ref="sessionsGroup"
+                    :sessions="sessions"
+                    class="mt-4"
+                    @delete-session="removeSession"
+                />
 
 
                 <!-- SUBMIT BUTTON -->
@@ -177,7 +182,8 @@ export default {
 
     methods: {
         ...mapActions('planForm', {
-            setSessionsAction: 'setSessions',
+            removeSession     : 'removeSession',
+            setSessionsAction : 'setSessions',
         } ),
 
         onSubmit () {
