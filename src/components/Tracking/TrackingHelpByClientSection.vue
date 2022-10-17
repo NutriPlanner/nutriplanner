@@ -22,7 +22,7 @@
                     <p class="m-0">
                         Para poder habilitar la lista de seguimientos, primero debe buscar
                         un cliente y luego presionar sobre el botón de
-                        <code>MOSTRAR</code> en la columna de <code>Seguimientos</code>.
+                        <code>MOSTRAR</code> en la columna de <code>ACCIONES</code>.
                     </p>
                 </b-card-text>
             </b-card-body>
@@ -40,5 +40,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

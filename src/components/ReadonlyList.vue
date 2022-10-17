@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--readonly-list">
+    <div>
         <b-row class="mb-4" align-h="end" no-gutters>
             <b-col cols="auto">
                 <b-button variant="outline-primary" @click="reFetch">
@@ -49,5 +49,3 @@ export default {
     mixins : [ DataTableMixin ],
 }
 </script>
-
-<style lang="scss" scoped></style>

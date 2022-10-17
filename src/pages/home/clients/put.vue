@@ -1,5 +1,5 @@
 <template>
-    <div class="np-page np-page--clients-put">
+    <div>
         <b-card no-body>
             <template #header>
                 <CardHeader>Editar cliente</CardHeader>
@@ -66,5 +66,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

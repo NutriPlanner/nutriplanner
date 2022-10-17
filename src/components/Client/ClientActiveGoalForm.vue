@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--client-active-goal">
+    <div>
         <b-card>
 
             <!--  CARD HEADER -->
@@ -342,7 +342,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

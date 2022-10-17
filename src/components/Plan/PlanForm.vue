@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--plan-form">
+    <div>
 
         <!-- FORM -->
         <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
@@ -215,5 +215,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

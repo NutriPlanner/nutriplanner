@@ -1,16 +1,20 @@
 <template>
-    <div class="np-page np-page--preferences">
+    <div>
         <UserPersonalInfo />
-        <UserPasswordInfo class="mt-5" />
+        <UserPasswordInfo :class="classNames.passwordCard" />
     </div>
 </template>
 
 <script>
 export default {
     name: 'PreferencesPage',
+
+    computed: {
+        classNames() {
+            return {
+                passwordCard: 'mt-5',
+            }
+        },
+    },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

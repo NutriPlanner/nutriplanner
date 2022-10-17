@@ -1,5 +1,5 @@
 <template>
-    <b-card class="np-component np-component--data-table-filters">
+    <b-card>
         <b-row>
             <b-col
                 v-if="sortOptions.length > 0"
@@ -89,7 +89,7 @@
                 <b-form-group
                     v-slot="{ ariaDescribedby }"
                     label="Filtrar por"
-                    description="Dejar todas las opciones desactivadas para poder filtrar por todos los campos"
+                    description="Dejar todas las opciones desactivadas para poder filtrar por todos los campos a la vez"
                     label-cols-sm="2"
                     label-align-sm="left"
                     label-size="sm"
@@ -146,5 +146,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

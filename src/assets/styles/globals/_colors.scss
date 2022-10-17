@@ -1,31 +1,89 @@
+// NutriPlanner colors
+
+// neutral
+$n900: #212121;
+$n800: #3d3d3d;
+$n700: #595959;
+$n600: #747474;
+$n500: #909090;
+$n400: #acacac;
+$n300: #c8c8c8;
+$n200: #e3e3e3;
+$n100: #ffffff;
+
+// purple
+$p900: #8463f3; // default
+$p800: #9274f4;
+$p700: #9f86f6;
+$p600: #ad97f7;
+$p500: #bba8f8;
+$p400: #c8bafa;
+$p300: #d6cbfb;
+$p200: #f1ecff;
+$p100: #f9f7ff;
+
+// red
+$r900: #e44d7f; // default
+$r800: #e7618d;
+$r700: #ea759b;
+$r600: #ed88aa;
+$r500: #f09cb8;
+$r400: #f3b0c6;
+$r300: #f6c4d4;
+$r200: #f9d7e3;
+$r100: #fcebf1;
+
+// aero-blue
+$a900: #4cdec0;
+$a800: #70e5cd;
+$a700: #94ebd9;
+$a600: #b8f2e6; // default
+$a500: #c0f3e9;
+$a400: #c8f5ec;
+$a300: #d0f6ee;
+$a200: #d8f8f1;
+$a100: #dff9f4;
+
+// yellow
+$y900: #efbf16;
+$y800: #f1c835;
+$y700: #f3d053; // default
+$y600: #f4d566;
+$y500: #f6da79;
+$y400: #f7e08c;
+$y300: #f8e59f;
+$y200: #faeab3;
+$y100: #fbefc6;
+
+// orange
+$o900: #ff8c1f;
+$o800: #ffa44f;
+$o700: #ffbd7f;
+$o600: #ffd5ae;
+$o500: #ffeede; // default
+$o400: #fff0e2;
+$o300: #fff2e5;
+$o200: #fff4e9;
+$o100: #fff6ed;
+
+// green
+$g900: #277d65;
+$g800: #2e9276;
+$g700: #34a787;
+$g600: #3bbc98;
+$g500: #4bc7a4; // default
+$g400: #5fcdae;
+$g300: #73d3b8;
+$g200: #87dac2;
+$g100: #9be0cc;
+
 // Theme color default definitions
-$primary: $purple !default;
-$secondary: $purple !default;
-$tertiary: $mango !default;
-$success: $green !default;
-$info: $aero-blue !default;
-// $warning: $yellow !default;
-$danger: $ruby !default;
-$light: $white !default;
-// $dark: $gray-800 !default;
-
-// This table defines the theme colors (variant names)
-$theme-colors: () !default;
-$theme-colors: map-merge(
-  (
-    'primary': $primary,
-    'secondary': $secondary,
-    'tertiary': $tertiary,
-    'success': $success,
-    'info': $info,
-    // 'warning': $warning,
-    'danger': $danger,
-    'light': $light,
-    // 'dark': $dark
-  ),
-  $theme-colors
-);
-
-// This table defines the theme colors (variant names)
-$body-bg: $background-color;
-$body-color: $text-color;
+$primary    : $p900 !default;
+$secondary  : $p900 !default;
+$tertiary   : $o500 !default;
+$success    : $g500 !default;
+$info       : $a600 !default;
+$warning    : $y700 !default;
+$danger     : $r900 !default;
+$light      : $n100 !default;
+$dark       : $n900 !default;

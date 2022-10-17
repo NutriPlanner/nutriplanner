@@ -1,16 +1,16 @@
 <template>
     <b-navbar
-        class="np-component np-component--navigation-bar"
+        :class="classNames.navbar"
         toggleable="md"
         sticky
     >
-        <SidebarToggle target="sidebar" />
+        <SidebarToggle :target="sidebarToggleTarget" />
 
         <b-navbar-brand href="#">
             NutriPlanner
         </b-navbar-brand>
 
-        <b-navbar-toggle target="nav-collapse">
+        <b-navbar-toggle target="nav-collapse" :class="classNames.toggle">
             <template #default="{ expanded }">
                 <b-button
                     v-if="expanded"
@@ -49,12 +49,28 @@
 
 <script>
 export default {
-    name     : 'NavigationBarComponent',
-    computed : {
+    name: 'NavigationBarComponent',
+
+    props: {
+        sidebarToggleTarget: {
+            type    : String,
+            default : 'sidebar',
+        },
+    },
+
+    computed: {
+        classNames() {
+            return {
+                navbar : this.$style.navbar,
+                toggle : this.$style.toggle,
+            }
+        },
+
         userName () {
             return this.$store.state.auth.user.name
         },
     },
+
     methods: {
         async logout () {
             const confirmed = await this.$bvModal.msgBoxConfirm(
@@ -75,15 +91,15 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-@import "@/assets/styles/globals/mainColors";
+<style lang="scss" module>
+@import "@/assets/styles/globals/colors";
 
-.np-component--navigation-bar {
-  background-color: $background-color;
+.navbar {
+    background-color: $n100;
+}
 
-  .navbar-toggler {
+.toggle {
     border: none;
     padding: 0;
-  }
 }
 </style>

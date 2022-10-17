@@ -1,5 +1,5 @@
 <template>
-    <b-row class="np-component np-component--data-table-pagination mb-4">
+    <b-row class="mb-4">
         <b-col cols="auto">
             <b-pagination
                 :value="page"
@@ -63,5 +63,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

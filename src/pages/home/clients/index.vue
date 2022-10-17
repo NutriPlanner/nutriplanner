@@ -1,5 +1,5 @@
 <template>
-    <div class="np-page np-page--clients">
+    <div>
         <b-card>
             <template #header>
                 <CardHeader>Clientes</CardHeader>
@@ -79,5 +79,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

@@ -1,52 +1,6 @@
-$enable-shadows: false;
+// Bootstrap resets
+@import './resets';
 
-.btn-link,
-a {
-  text-decoration: none !important;
-  &:hover,
-  &:focus {
-    text-decoration: none !important;
-  }
-}
-
-/* Busy table styling */
-table.b-table[aria-busy='true'] {
-  opacity: 1 !important;
-}
-
-/* Striped table styling */
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba($primary, 0.03) !important;
-}
-
-.table td {
-  padding: 0.75rem !important;
-}
-
-.btn,
-.nav-link {
-  text-transform: uppercase;
-  font-size: 0.85rem !important;
-
-  i {
-    font-size: 1rem;
-    vertical-align: sub;
-  }
-
-  .no-transform {
-    text-transform: none;
-  }
-}
-
-table {
-  border-radius: 0.25rem;
-
-  th {
-    font-weight: 500;
-    border-bottom: 1px solid $primary !important;
-  }
-}
-
-.card-title {
-  text-transform: uppercase !important;
-}
+// Then import Bootstrap and BootstrapVue SCSS files (order is important)
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';

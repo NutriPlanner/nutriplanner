@@ -1,5 +1,5 @@
 <template>
-    <div class="np-page np-page--clients-post">
+    <div>
         <b-card>
             <template #header>
                 <CardHeader>Agregar cliente</CardHeader>
@@ -28,5 +28,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

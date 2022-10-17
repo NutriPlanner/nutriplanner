@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--maintainer-field-action-render">
+    <div :class="classNames.wrapper">
         <DataTableButton @click="$emit('edit', data.item)">
             Editar
         </DataTableButton>
@@ -24,6 +24,13 @@ export default {
             default  : true,
         },
     },
+    computed: {
+        classNames() {
+            return {
+                wrapper: this.$style.wrapper,
+            }
+        },
+    },
     methods: {
         async onDelete () {
             const confirmed = await this.$bvModal.msgBoxConfirm(
@@ -44,8 +51,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--maintainer-field-action-render {
-  white-space: nowrap;
+<style lang="scss" module>
+.wrapper {
+    white-space: nowrap;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <div fluid class="np-layout np-layout--default">
-        <NavigationBar />
+    <div :class="classNames.layout">
+        <NavigationBar sidebar-toggle-target="sidebar" />
 
         <Sidebar toggle="sidebar" />
 
@@ -8,7 +8,7 @@
             <Breadcrumb />
         </b-container>
 
-        <b-container fluid class="py-3">
+        <b-container fluid :class="classNames.container">
             <Nuxt />
         </b-container>
 
@@ -17,9 +17,30 @@
 </template>
 
 <script>
+import cx from 'classnames'
+
 export default {
     name: 'DefaultLayout',
+
+    computed: {
+        classNames() {
+            return {
+                layout    : this.$style.layout,
+                container : cx(this.$style.container, 'py-3'),
+            }
+        },
+    },
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" module>
+.layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex-grow: 1;
+}
+
+</style>

@@ -1,10 +1,10 @@
 <template>
-    <div class="np-component np-component--client-goal-card-info">
+    <div>
         <b-card>
             <template #header>
                 <h4 class="m-0">
                     CLO.:
-                    <b-badge variant="tertiary" class="object-id np-component--client-goal-card-info__badge">
+                    <b-badge variant="tertiary" :class="classNames.badge">
                         {{ goal.id }}
                     </b-badge>
                 </h4>
@@ -17,11 +17,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Nombre
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ goal.name }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ goal.name }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -29,11 +29,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Estado
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ goal.status }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ goal.status }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -41,11 +41,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             F. Inicio
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ startDate }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ startDate }}</span></b-col>
                     </b-row>
                 </b-card-text>
             </Overlay>
@@ -55,6 +55,7 @@
 
 <script>
 import moment from 'moment'
+import cx from 'classnames'
 
 export default {
     name  : 'ClientGoalCardInfoComponent',
@@ -73,9 +74,13 @@ export default {
     },
 
     computed: {
-        colClass() {
+        classNames() {
             return {
-                'np-component--client-goal-card-info__field': this.$mq !== 'xs',
+                badge : cx(this.$style.badge, 'object-id'),
+                field : cx( {
+                    [this.$style.field]: this.$mq !== 'xs',
+                } ),
+                fieldValue: cx('text-muted'),
             }
         },
 
@@ -86,14 +91,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--client-goal-card-info {
-    &__badge {
-        vertical-align: bottom;
-    }
+<style lang="scss" module>
+.badge {
+    vertical-align: bottom;
+}
 
-    &__field {
-        max-width: 100px;
-    }
+.__field {
+    max-width: 100px;
 }
 </style>

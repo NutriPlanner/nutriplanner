@@ -74,6 +74,14 @@ export default {
     // Build Configuration: https://go.nuxtjs.dev/config-build
     build: {
         transpile: [ 'vee-validate/dist/rules' ],
+
+        loaders: {
+            cssModules: {
+                modules: {
+                    localIdentName: '[local]_[hash:base64:8]',
+                },
+            },
+        },
     },
 
     srcDir: 'src/',

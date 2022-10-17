@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--client-goals">
+    <div>
         <ClientCardInfo :client="client" class="mb-5" />
 
         <ClientActiveGoalForm />
@@ -19,7 +19,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

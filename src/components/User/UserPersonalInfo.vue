@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--user-personal-info">
+    <div>
         <b-card title="Datos Personales">
 
             <template #header>
@@ -130,7 +130,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--plan-sessions-group">
+    <div>
         <PlanSessionInput
             v-for="(session, index) in sessions"
             :ref="`si-${index}`"
@@ -50,7 +50,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
