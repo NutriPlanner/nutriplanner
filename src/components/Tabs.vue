@@ -3,7 +3,6 @@
         :value="value"
         pills
         card
-        class="np-component np-component--tabs"
         @input="$emit('input', $event)"
     >
         <slot />
@@ -21,5 +20,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

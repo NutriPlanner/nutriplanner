@@ -19,7 +19,7 @@
         :empty-filtered-text="noResultsText"
         :per-page="limit"
         :busy="loading"
-        class="np-component np-component--data-table mt-4"
+        class="mt-4"
         @sort-changed="onSortChanged"
     >
         <template v-for="field in fields" #[`cell(${field.key})`]="data">
@@ -93,5 +93,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

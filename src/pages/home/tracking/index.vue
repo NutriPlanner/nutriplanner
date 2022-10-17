@@ -1,5 +1,5 @@
 <template>
-    <div class="np-page np-page--tracking">
+    <div>
         <b-card no-body>
             <template #header>
                 <CardHeader>Seguimientos</CardHeader>
@@ -13,7 +13,7 @@
                         <span>Pendientes <Licensee v-if="!userHasRequiredPendingsLicensee" :type="pendingsRequiredLicensee" /></span>
                     </template>
 
-                    <b-card v-if="userHasRequiredPendingsLicensee" class="no-border">
+                    <b-card v-if="userHasRequiredPendingsLicensee" class="border-0">
                         <TrackingMaintainerPendings ref="maintainerPendings" />
                     </b-card>
                 </b-tab>
@@ -98,5 +98,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

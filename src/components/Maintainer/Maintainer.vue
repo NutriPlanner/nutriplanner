@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--maintainer">
+    <div>
         <b-row class="mb-4" align-h="end" no-gutters>
             <b-col cols="auto">
                 <b-button variant="outline-primary" @click="reFetch">
@@ -79,5 +79,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

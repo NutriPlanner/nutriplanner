@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--sidebar-toggle">
+    <div>
         <b-button
             v-b-toggle="target"
             size="sm"
@@ -22,5 +22,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

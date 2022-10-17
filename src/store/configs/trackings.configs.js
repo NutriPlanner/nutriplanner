@@ -44,10 +44,16 @@ export const tableFields = [
     },
 ]
 
+export const StatusVariants = {
+    PENDING : 'PENDING',
+    DONE    : 'DONE',
+    CLOSED  : 'CLOSED',
+}
+
 export const statusOptions = [
-    { text: 'PENDIENTE', value: 'PENDING', variant: 'warning' },
-    { text: 'FINALIZADO', value: 'DONE', variant: 'success' },
-    { text: 'CERRADO', value: 'CLOSED', variant: 'danger' },
+    { text: 'PENDIENTE', value: 'PENDING', variant: 'PENDING' },
+    { text: 'FINALIZADO', value: 'DONE', variant: 'DONE' },
+    { text: 'CERRADO', value: 'CLOSED', variant: 'CLOSED' },
 ]
 
 export const getStatusOption = (status) => {
@@ -57,5 +63,6 @@ export const getStatusOption = (status) => {
 export default {
     tableFields,
     statusOptions,
+    StatusVariants,
     getStatusOption,
 }

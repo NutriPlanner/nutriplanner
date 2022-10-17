@@ -1,5 +1,6 @@
 import axios from 'axios'
 import escapeStringRegexp from 'escape-string-regexp'
+import { ObjectId } from '@/utils'
 
 const CancelToken = axios.CancelToken
 
@@ -7,20 +8,24 @@ export const setFilterParam = (filterColumns, searchValue) => {
     const filterParam = {}
 
     if (searchValue) {
-        filterParam.$or = []
         const escapedValue = escapeStringRegexp(searchValue.trim())
 
         filterColumns.forEach((column) => {
+            let filter
+
             if (column !== 'id') {
-                filterParam.$or.push( {
+                filter = {
                     [column]: { $regex: escapedValue, $options: 'i' },
-                } )
+                }
             }
-            else {
-                filterParam.$or.push( {
+            else if (ObjectId.isObjectId(searchValue.trim())) {
+                filter = {
                     ['_id']: searchValue.trim(),
-                } )
+                }
             }
+
+            if (filter && !filterParam.$or) filterParam.$or = []
+            if (filter) filterParam.$or.push(filter)
         } )
     }
 

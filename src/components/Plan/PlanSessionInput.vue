@@ -1,5 +1,5 @@
 <template>
-    <b-row class="np-component np-component--plan-session-input">
+    <b-row>
         <b-col cols="12" md="6" xl="7">
             <validation-provider
                 ref="input-subject"
@@ -34,7 +34,7 @@
                         v-slot="validationContext"
                         ref="input-start"
                         name="desde"
-                        :rules="{ required: true, min_value: 1, max_value: 60 }"
+                        :rules="{ required: true, min_value: 0, max_value: 60 }"
                     >
                         <b-form-group
                             id="input-group-start"
@@ -142,7 +142,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

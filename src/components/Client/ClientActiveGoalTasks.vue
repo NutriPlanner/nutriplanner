@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--client-active-goal-tasks">
+    <div>
         <ClientGoalTaskInput
             v-for="(task, index) in tasks"
             :ref="`task-${index}`"
@@ -41,7 +41,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

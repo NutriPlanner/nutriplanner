@@ -1,68 +1,80 @@
 <template>
-    <div class="np-component np-component--status-render">
+    <div :class="classNames.wrapper">
         <b-row
             no-gutters
             align-v="center"
-            class="np-component--status-render__row"
         >
             <b-col cols="auto">
-                <div
-                    class="np-component--status-render__dot"
-                    :variant="$attrs.variant"
-                />
+                <div :class="classNames.dot" />
             </b-col>
 
             <b-col cols="auto">
-                <span class="np-component--status-render__title">{{
+                <span :class="classNames.title">{{
                     $attrs.title
                 }}</span>
-                <span class="np-component--status-render__description">({{ $attrs.description }})</span>
+                <span :class="classNames.description">({{ $attrs.description }})</span>
             </b-col>
         </b-row>
     </div>
 </template>
 
 <script>
+import cx from 'classnames'
+import { StatusVariants } from '@/store/configs/trackings.configs'
+
 export default {
     name: 'StatusRenderComponent',
+
+    computed: {
+        classNames() {
+            return {
+                wrapper : this.$style.wrapper,
+                dot     : cx(this.$style.dot, {
+                    [this.$style.dotPending] : this.$attrs.variant === StatusVariants.PENDING,
+                    [this.$style.dotDone]    : this.$attrs.variant === StatusVariants.DONE,
+                    [this.$style.dotClosed]  : this.$attrs.variant === StatusVariants.CLOSED,
+                } ),
+                title       : this.$style.title,
+                description : this.$style.description,
+            }
+        },
+    },
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--status-render {
-  text-align: center;
+<style lang="scss" module>
+@import '@/assets/styles/globals/colors';
 
-  &__dot {
+.wrapper {
+  text-align: center;
+}
+
+.dot {
     height: 4px;
     width: 4px;
     border-radius: 50%;
     margin-right: 10px;
+}
 
-    &[variant="success"] {
-      background-color: var(--success);
-    }
+.dotPending {
+    background-color: $y700;
+}
 
-    &[variant="danger"] {
-      background-color: var(--danger);
-    }
+.dotDone {
+    background-color: $g500;
+}
 
-    &[variant="primary"] {
-      background-color: var(--primary);
-    }
+.dotClosed {
+    background-color: $r900;
+}
 
-    &[variant="warning"] {
-      background-color: var(--warning);
-    }
-  }
-
-  &__title {
+.title {
     display: block;
     font-size: 0.8rem;
-  }
+}
 
-  &__description {
+.description {
     display: block;
     font-size: 0.6rem;
-  }
 }
 </style>

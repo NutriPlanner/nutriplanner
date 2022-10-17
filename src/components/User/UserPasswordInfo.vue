@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--user-password-info">
+    <div>
         <b-card title="Contraseña">
             <b-card-text>
                 <p class="text-justify">
@@ -189,7 +189,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

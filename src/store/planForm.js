@@ -138,4 +138,10 @@ export const actions = {
             } )
         }
     },
+
+    removeSession ( { state, commit }, index) {
+        commit('set', {
+            'data.sessions': state.data.sessions.slice(0, index),
+        } )
+    },
 }

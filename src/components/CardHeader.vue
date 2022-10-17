@@ -9,7 +9,3 @@ export default {
     name: 'CardHeaderComponent',
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

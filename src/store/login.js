@@ -54,7 +54,7 @@ export const actions = {
 
     // VIEW ACTIONS
 
-    redirectToForgonPassword (_ctx) {
+    redirectToForgonPassword ( { commit } ) {
         this.$router.push( { name: routesNames.RECOVER_PASSWORD } )
         commit('resetData')
     },

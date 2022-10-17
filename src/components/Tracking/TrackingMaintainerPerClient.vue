@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--tracking-maintainer">
+    <div>
         <ClientCardInfo v-if="client" :client="client" class="mb-4" />
 
         <Maintainer
@@ -98,5 +98,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

@@ -1,6 +1,6 @@
 <template>
     <b-row
-        class="np-component np-component--client-goal-task-input mt-3"
+        class="mt-3"
         no-gutters
         align-v="start"
         align-h="end"
@@ -126,7 +126,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>

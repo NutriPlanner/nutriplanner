@@ -1,10 +1,10 @@
 <template>
-    <div class="np-component np-component--client-card-info">
+    <div>
         <b-card>
             <template #header>
                 <h4 class="m-0">
                     CLI.:
-                    <b-badge variant="tertiary" class="object-id np-component--client-card-info__badge">
+                    <b-badge variant="tertiary" :class="classNames.badge">
                         {{ client.id }}
                     </b-badge>
                 </h4>
@@ -17,11 +17,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             RUT
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.rut }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ client.rut }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -29,11 +29,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Nombre
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ fullName }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ fullName }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -41,11 +41,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Correo
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.email }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ client.email }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -53,11 +53,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Teléfono
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.phone }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ client.phone }}</span></b-col>
                     </b-row>
 
                     <b-row>
@@ -65,11 +65,11 @@
                             cols="12"
                             sm="3"
                             md="2"
-                            :class="colClass"
+                            :class="classNames.field"
                         >
                             Dirección
                         </b-col>
-                        <b-col>: <span class="text-muted">{{ client.address }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ client.address }}</span></b-col>
                     </b-row>
                 </b-card-text>
             </Overlay>
@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import cx from 'classnames'
+
 export default {
     name  : 'ClientCardInfoComponent',
     props : {
@@ -95,9 +97,13 @@ export default {
     },
 
     computed: {
-        colClass() {
+        classNames() {
             return {
-                'np-component--client-card-info__field': this.$mq !== 'xs',
+                badge : cx(this.$style.badge, 'object-id'),
+                field : cx( {
+                    [this.$style.field]: this.$mq !== 'xs',
+                } ),
+                fieldValue: cx('text-muted'),
             }
         },
 
@@ -111,14 +117,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.np-component--client-card-info {
-    &__badge {
-        vertical-align: bottom;
-    }
+<style lang="scss" module>
+.badge {
+    vertical-align: bottom;
+}
 
-    &__field {
-        max-width: 100px;
-    }
+.__field {
+    max-width: 100px;
 }
 </style>

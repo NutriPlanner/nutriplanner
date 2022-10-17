@@ -1,6 +1,6 @@
 <template>
-    <div class="np-component np-component--tracking-form">
-        <ClientCardInfo :client="client" :loading="loadingClient" :class="styles.clientCardInfo" />
+    <div>
+        <ClientCardInfo :client="client" :loading="loadingClient" :class="classNames.clientCardInfo" />
 
         <ClientGoalCardInfo
             v-if="clientGoal?.id"
@@ -367,7 +367,7 @@ export default {
             statusOptions: 'statusOptions',
         } ),
 
-        styles() {
+        classNames() {
             return {
                 clientCardInfo: cx( {
                     'mb-5' : !this.clientGoal,
@@ -401,5 +401,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

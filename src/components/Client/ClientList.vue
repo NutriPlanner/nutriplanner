@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--clients-list">
+    <div>
         <ReadonlyList
             ref="list"
             :fields="fields"
@@ -60,5 +60,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

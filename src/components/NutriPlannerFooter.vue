@@ -1,15 +1,29 @@
 <template>
-    <div class="np-component np-component--nutri-planner-footer">
+    <div>
         <div class="py-3 text-center">
-            <span class="np-component--nutri-planner-footer__text">
-                <small>Para contactarse con soporte, puede hacerlo a través de support@nutriplanner.life</small>
+            <span>
+                <small>Para contactarse con soporte, puede hacerlo a través de <a href="mailto:support@nutriplanner.life">support@nutriplanner.life</a></small>
             </span>
+        </div>
+
+        <div class="py-3 text-center">
+            <b-btn variant="outline-primary">
+                <small class="no-transform">Ver {{ version }}</small>
+            </b-btn>
         </div>
     </div>
 </template>
 
 <script>
+import { version } from '@@/package.json'
+
 export default {
     name: 'NutriPlannerFooterComponent',
+
+    data() {
+        return {
+            version,
+        }
+    },
 }
 </script>

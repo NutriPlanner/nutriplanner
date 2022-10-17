@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--plan-form">
+    <div>
 
         <!-- FORM -->
         <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
@@ -116,7 +116,12 @@
 
 
                 <!-- SESSIONS -->
-                <PlanSessionsGroup ref="sessionsGroup" :sessions="sessions" class="mt-4" />
+                <PlanSessionsGroup
+                    ref="sessionsGroup"
+                    :sessions="sessions"
+                    class="mt-4"
+                    @delete-session="removeSession"
+                />
 
 
                 <!-- SUBMIT BUTTON -->
@@ -177,7 +182,8 @@ export default {
 
     methods: {
         ...mapActions('planForm', {
-            setSessionsAction: 'setSessions',
+            removeSession     : 'removeSession',
+            setSessionsAction : 'setSessions',
         } ),
 
         onSubmit () {
@@ -215,5 +221,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

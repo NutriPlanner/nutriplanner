@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--date-render tabular-nums">
+    <div class="tabular-nums">
         {{ moment.utc(value).local().format("DD-MM-YYYY") }}
     </div>
 </template>
@@ -17,5 +17,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped></style>

@@ -1,5 +1,5 @@
 <template>
-    <div class="np-component np-component--data-select">
+    <div>
         <b-form-input
             :value="search"
             type="text"
@@ -57,7 +57,3 @@ export default {
     },
 }
 </script>
-
-<style lang="scss" scoped>
-
-</style>
