@@ -1,73 +1,68 @@
 <template>
     <div>
-        <b-card title="Datos Personales">
+        <h4>DATOS PERSONALES</h4>
+        <hr>
 
-            <template #header>
-                <b-row align-h="end">
-                    <b-col cols="auto">
-                        <b-button
-                            variant="primary"
-                            :disabled="loading"
-                            @click="onEdit"
+        <template v-if="!editMode">
+            <b-card-text>ID: <ObjectIdBadge :value="userID" /></b-card-text>
+            <b-card-text>Nombre: {{ userName }}</b-card-text>
+            <b-card-text>Correo electrónico: {{ userEmail }}</b-card-text>
+
+            <b-button
+                block
+                variant="outline-primary"
+                :disabled="loading"
+                @click="onEdit"
+            >
+                <i class="ri-edit-line" />
+                Editar
+            </b-button>
+        </template>
+
+        <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
+            <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
+                <template v-if="editMode">
+                    <validation-provider
+                        v-slot="validationContext"
+                        name="nombre"
+                        :rules="{ required: true }"
+                    >
+                        <b-form-group
+                            id="input-group-name"
+                            label="Nombre"
+                            label-for="input-name"
                         >
-                            <i class="ri-edit-line" />
-                            Editar
+                            <b-form-input
+                                id="input-name"
+                                v-model="form.name"
+                                v-input-upper
+                                aria-describedby="input-name-feedback"
+                                :state="__getValidationState(validationContext)"
+                            />
+
+                            <b-form-invalid-feedback id="input-name-feedback">
+                                {{ validationContext.errors[0] }}
+                            </b-form-invalid-feedback>
+                        </b-form-group>
+                    </validation-provider>
+
+                    <Overlay :loading="loading">
+                        <b-button block type="submit" variant="primary">
+                            Guardar
                         </b-button>
-                    </b-col>
-                </b-row>
-            </template>
+                    </Overlay>
 
-            <template v-if="!editMode">
-                <b-card-text>ID: <ObjectIdBadge :value="userID" /></b-card-text>
-                <b-card-text>Nombre: {{ userName }}</b-card-text>
-                <b-card-text>Correo electrónico: {{ userEmail }}</b-card-text>
-            </template>
-
-            <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
-                <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
-                    <template v-if="editMode">
-                        <validation-provider
-                            v-slot="validationContext"
-                            name="nombre"
-                            :rules="{ required: true }"
-                        >
-                            <b-form-group
-                                id="input-group-name"
-                                label="Nombre"
-                                label-for="input-name"
-                            >
-                                <b-form-input
-                                    id="input-name"
-                                    v-model="form.name"
-                                    v-input-upper
-                                    aria-describedby="input-name-feedback"
-                                    :state="__getValidationState(validationContext)"
-                                />
-
-                                <b-form-invalid-feedback id="input-name-feedback">
-                                    {{ validationContext.errors[0] }}
-                                </b-form-invalid-feedback>
-                            </b-form-group>
-                        </validation-provider>
-
-                        <Overlay :loading="loading">
-                            <b-button block type="submit" variant="primary">
-                                Guardar
-                            </b-button>
-                        </Overlay>
-
-                        <b-button
-                            block
-                            variant="outline-danger"
-                            :disabled="loading"
-                            @click="editMode = false"
-                        >
-                            Descartar cambios
-                        </b-button>
-                    </template>
-                </b-form>
-            </validation-observer>
-        </b-card>
+                    <b-button
+                        block
+                        variant="outline-danger"
+                        :disabled="loading"
+                        @click="editMode = false"
+                    >
+                        Descartar cambios
+                    </b-button>
+                </template>
+            </b-form>
+        </validation-observer>
     </div>
 </template>
 
