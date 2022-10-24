@@ -5,29 +5,6 @@
         <validation-observer ref="formObserver" v-slot="{ handleSubmit }">
             <b-form @submit.stop.prevent="handleSubmit(onSubmit)">
 
-
-                <!-- HERBA_ID -->
-                <validation-provider v-slot="validationContext" name="herbal_id" :rules="{ required: false }">
-                    <b-form-group
-                        id="input-group-uuid"
-                        label="HerbaID"
-                        label-for="input-uuid"
-                    >
-                        <b-skeleton v-if="loading" type="input" />
-                        <b-form-input
-                            v-else
-                            id="input-uuid"
-                            v-model="herba_id"
-                            aria-describedby="input-uuid-feedback"
-                        />
-
-                        <b-form-invalid-feedback id="input-uuid-feedback">
-                            {{ validationContext.errors[0] }}
-                        </b-form-invalid-feedback>
-                    </b-form-group>
-                </validation-provider>
-
-
                 <!-- NAME -->
                 <validation-provider v-slot="validationContext" name="nombre" :rules="{ required: true }">
                     <b-form-group
@@ -224,7 +201,6 @@ export default {
 
     computed: {
         ...mapFields('clientForm', {
-            herba_id  : 'data.herba_id',
             name      : 'data.name',
             last_name : 'data.last_name',
             rut       : 'data.rut',

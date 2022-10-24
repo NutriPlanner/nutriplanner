@@ -8,7 +8,6 @@ setupErrorHandler(clientsErrors)
 const apiNamespace = 'clients'
 
 const defaultData = {
-    herba_id  : '',
     name      : '',
     last_name : '',
     rut       : '',
