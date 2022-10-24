@@ -10,7 +10,7 @@ const apiNamespace = 'clients'
 const defaultData = {
     name      : '',
     last_name : '',
-    rut       : '',
+    dni       : '',
     birthday  : '',
     address   : '',
     phone     : '',

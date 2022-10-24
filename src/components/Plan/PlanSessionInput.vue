@@ -9,6 +9,7 @@
             >
                 <b-form-group
                     :id="`input-group-subject-${_uid}`"
+                    required
                 >
                     <b-form-input
                         :id="`input-subject-${_uid}`"
@@ -39,6 +40,7 @@
                         <b-form-group
                             id="input-group-start"
                             style="min-width: 80px;"
+                            required
                         >
                             <b-form-input
                                 id="input-start"

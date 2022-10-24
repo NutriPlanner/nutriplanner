@@ -35,6 +35,7 @@
                             id="input-group-name"
                             label="Nombre"
                             label-for="input-name"
+                            required
                         >
                             <b-skeleton v-if="loading" type="input" />
                             <b-form-input
@@ -58,6 +59,7 @@
                             id="input-group-status"
                             label="Estado"
                             label-for="input-status"
+                            required
                         >
                             <b-skeleton v-if="loading" type="input" />
                             <b-form-select
@@ -81,6 +83,7 @@
                             id="input-group-start_date"
                             label="Fecha inicio"
                             label-for="input-start_date"
+                            required
                         >
                             <b-skeleton v-if="loading" type="input" />
                             <b-form-datepicker

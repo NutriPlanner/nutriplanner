@@ -28,7 +28,7 @@
                 name="descripción"
                 :rules="{ required: true }"
             >
-                <b-form-group id="input-group-description">
+                <b-form-group id="input-group-description" required>
                     <b-form-input
                         id="input-description"
                         v-input-upper

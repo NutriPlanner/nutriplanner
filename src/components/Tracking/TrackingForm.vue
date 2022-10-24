@@ -20,6 +20,7 @@
                         id="input-group-status"
                         label="Estado"
                         label-for="input-status"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-select
@@ -43,6 +44,7 @@
                         id="input-group-subject"
                         label="Asunto"
                         label-for="input-subject"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input
@@ -66,6 +68,7 @@
                         id="input-group-date"
                         label="Fecha"
                         label-for="input-date"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-datepicker

@@ -23,8 +23,8 @@ export const tableFields = [
         filterable : true,
     },
     {
-        key        : 'rut',
-        label      : 'Rut',
+        key        : 'dni',
+        label      : 'DNI',
         sortable   : true,
         filterable : true,
         tdClass    : 'tabular-nums',

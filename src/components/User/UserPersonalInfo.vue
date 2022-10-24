@@ -35,6 +35,7 @@
                                 id="input-group-name"
                                 label="Nombre"
                                 label-for="input-name"
+                                required
                             >
                                 <b-form-input
                                     id="input-name"

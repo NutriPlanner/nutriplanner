@@ -9,16 +9,18 @@
             <div class="px-3 py-4">
                 <b-nav vertical pills>
                     <b-nav-item
-                        v-for="({ text, licensee }, name) in routes"
+                        v-for="({ text, licensee, commingSoon }, name) in routes"
                         :key="name"
                         :to="{ name }"
                         exact
                         exact-active-class="active"
                         :active="activeRoute === name"
-                        :disabled="!$loyalty.validate(licensee)"
+                        :disabled="!$loyalty.validate(licensee) || commingSoon"
                         :class="classNames.link"
                     >
-                        {{ text }} <Licensee v-if="!userHasRequiredLicensee(licensee)" :type="licensee" />
+                        {{ text }}
+                        <Licensee v-if="!userHasRequiredLicensee(licensee)" :type="licensee" />
+                        <ComingSoon v-if="commingSoon" />
                     </b-nav-item>
                 </b-nav>
             </div>
@@ -77,11 +79,12 @@ export default {
     & > a {
         margin-bottom: 5px;
 
-        &.disabled {
+        &[class*="disabled"] {
             background-color: $n200;
+            color: $n600;
         }
 
-        &:not(.active):not(.disabled) {
+        &:not([class*="active"]):not([class*="disabled"]) {
             border: solid 1px $primary;
 
             &:hover {

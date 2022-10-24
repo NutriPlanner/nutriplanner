@@ -5,6 +5,7 @@ export const routesNames = {
     RECOVER_PASSWORD      : 'recover-password',
     CHANGE_PASSWORD       : 'change-password',
     HOME                  : 'home',
+    ANALYTICS             : 'analytics',
     HOME_CLIENTS          : 'home-clients',
     HOME_CLIENTS_POST     : 'home-clients-post',
     HOME_CLIENTS_PUT      : 'home-clients-put',
@@ -16,12 +17,19 @@ export const routesNames = {
     HOME_PLANS            : 'home-plans',
     HOME_PLANS_POST       : 'home-plans-post',
     HOME_PLANS_PUT        : 'home-plans-put',
+    APPOINTMENTS          : 'home-appointments',
 }
 
 export const breadcrumbs = {
     [routesNames.HOME]: {
-        text : 'inicio',
-        show : false,
+        text        : 'resumen',
+        show        : true,
+        commingSoon : true,
+    },
+    [routesNames.ANALYTICS]: {
+        text        : 'analítica',
+        show        : true,
+        commingSoon : true,
     },
     [routesNames.HOME_CLIENTS]: {
         text: 'clientes',
@@ -64,5 +72,10 @@ export const breadcrumbs = {
     [routesNames.HOME_PLANS_PUT]: {
         text : 'editar plan',
         show : false,
+    },
+    [routesNames.APPOINTMENTS]: {
+        text        : 'citas',
+        show        : true,
+        commingSoon : true,
     },
 }

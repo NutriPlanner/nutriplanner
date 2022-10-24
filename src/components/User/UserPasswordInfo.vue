@@ -22,6 +22,7 @@
                                 id="input-group-code"
                                 label="Código de Autorización"
                                 label-for="input-code"
+                                required
                             >
                                 <b-form-input
                                     id="input-code"
@@ -58,6 +59,7 @@
                                 id="input-group-password"
                                 label="Nueva Contraseña"
                                 label-for="input-password"
+                                required
                             >
                                 <b-form-input
                                     id="input-password"
@@ -89,6 +91,7 @@
                                 id="input-group-confirm-password"
                                 label="Confirmar Contraseña"
                                 label-for="input-confirm-password"
+                                required
                             >
                                 <b-form-input
                                     id="input-confirm-password"
