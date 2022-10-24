@@ -96,3 +96,20 @@ table {
 .card-title {
   text-transform: uppercase !important;
 }
+
+.form-group[required="required"] {
+    > label {
+        &:before {
+            content: "(R) ";
+            color: $danger;
+        }
+    }
+}
+
+form {
+    &:after {
+        content: "(R) Campos requeridos";
+        color: $danger;
+        line-height: 2.5rem;
+    }
+}

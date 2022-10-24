@@ -19,9 +19,9 @@
                             md="2"
                             :class="classNames.field"
                         >
-                            RUT
+                            DNI
                         </b-col>
-                        <b-col>: <span :class="classNames.fieldValue">{{ client.rut }}</span></b-col>
+                        <b-col>: <span :class="classNames.fieldValue">{{ client.dni }}</span></b-col>
                     </b-row>
 
                     <b-row>

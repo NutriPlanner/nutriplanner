@@ -11,6 +11,7 @@
                         id="input-group-name"
                         label="Nombre"
                         label-for="input-name"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input
@@ -35,6 +36,7 @@
                         id="input-group-last_name"
                         label="Apellido(s)"
                         label-for="input-last_name"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input
@@ -53,21 +55,20 @@
                 </validation-provider>
 
 
-                <!-- RUT -->
-                <validation-provider v-slot="validationContext" name="rut" :rules="{ required: true, rut: true }">
-                    <b-form-group id="input-group-rut" label="RUT" label-for="input-rut">
+                <!-- DNI -->
+                <validation-provider v-slot="validationContext" name="dni" :rules="{ required: false }">
+                    <b-form-group id="input-group-dni" label="DNI" label-for="input-dni">
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input
                             v-else
-                            id="input-rut"
-                            v-model="rut"
+                            id="input-dni"
+                            v-model="dni"
                             v-input-upper
-                            v-input-rut
-                            aria-describedby="input-rut-feedback"
+                            aria-describedby="input-dni-feedback"
                             :state="__getValidationState(validationContext)"
                         />
 
-                        <b-form-invalid-feedback id="input-rut-feedback">
+                        <b-form-invalid-feedback id="input-dni-feedback">
                             {{ validationContext.errors[0] }}
                         </b-form-invalid-feedback>
                     </b-form-group>
@@ -75,7 +76,7 @@
 
 
                 <!-- BIRTHDAY -->
-                <validation-provider v-slot="validationContext" name="fecha nacimiento" :rules="{ required: true }">
+                <validation-provider v-slot="validationContext" name="fecha nacimiento" :rules="{ required: false }">
                     <b-form-group
                         id="input-group-birthday"
                         label="Fecha Nacimiento"
@@ -107,7 +108,7 @@
 
 
                 <!-- ADDRESS -->
-                <validation-provider v-slot="validationContext" name="dirección" :rules="{ required: true }">
+                <validation-provider v-slot="validationContext" name="dirección" :rules="{ required: false }">
                     <b-form-group
                         id="input-group-address"
                         label="Dirección física"
@@ -131,7 +132,7 @@
 
 
                 <!-- PHONE -->
-                <validation-provider v-slot="validationContext" name="teléfono" :rules="{ required: true, min: 9, max: 9 }">
+                <validation-provider v-slot="validationContext" name="teléfono" :rules="{ required: false }">
                     <b-form-group
                         id="input-group-phone"
                         label="Teléfono"
@@ -143,7 +144,6 @@
                             id="input-phone"
                             v-model="phone"
                             v-input-upper
-                            v-input-max-length="9"
                             aria-describedby="input-phone-feedback"
                             type="number"
                             no-wheel
@@ -158,7 +158,7 @@
 
 
                 <!-- EMAIL -->
-                <validation-provider v-slot="validationContext" name="correo" rules="required|email">
+                <validation-provider v-slot="validationContext" name="correo" rules="email">
                     <b-form-group
                         id="input-group-email"
                         label="Correo electrónico"
@@ -203,7 +203,7 @@ export default {
         ...mapFields('clientForm', {
             name      : 'data.name',
             last_name : 'data.last_name',
-            rut       : 'data.rut',
+            dni       : 'data.dni',
             birthday  : 'data.birthday',
             address   : 'data.address',
             phone     : 'data.phone',
