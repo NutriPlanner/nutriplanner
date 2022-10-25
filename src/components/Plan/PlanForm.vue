@@ -22,6 +22,7 @@
                         id="input-group-name"
                         label="Nombre"
                         label-for="input-name"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input
@@ -86,6 +87,7 @@
                         id="input-group-sessions"
                         label="Cantidad de sesiones"
                         label-for="input-sessions"
+                        required
                     >
                         <b-skeleton v-if="loading" type="input" />
                         <b-form-input

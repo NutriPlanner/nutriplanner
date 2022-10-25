@@ -11,14 +11,6 @@ export const tableFields = [
         thStyle    : 'width: 210px; min-width: 100px;',
     },
     {
-        key        : 'herba_id',
-        label      : 'HerbaID',
-        sortable   : false,
-        filterable : true,
-        type       : FieldsTypes.OBJECT_ID,
-        tdClass    : 'align-middle',
-    },
-    {
         key        : 'name',
         label      : 'Nombre',
         sortable   : true,
@@ -31,8 +23,8 @@ export const tableFields = [
         filterable : true,
     },
     {
-        key        : 'rut',
-        label      : 'Rut',
+        key        : 'dni',
+        label      : 'DNI',
         sortable   : true,
         filterable : true,
         tdClass    : 'tabular-nums',

@@ -23,6 +23,7 @@
                                     id="input-group-email"
                                     label="Correo electrónico"
                                     label-for="input-email"
+                                    required
                                 >
                                     <b-form-input
                                         id="input-email"
