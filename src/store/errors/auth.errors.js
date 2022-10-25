@@ -24,9 +24,16 @@ const passwordResetFailed = (data) => {
     }
 }
 
+const inactiveAccount = (data) => {
+    return {
+        message: 'Su usuario se encuentra inactivo. Si necesita ayuda, contacte a soporte para recibir ayuda.',
+    }
+}
+
 export default {
     AUTH__LOWER_LICENSEE        : lowerLicensee,
     AUTH__INVALID_CREDENTIALS   : invalidCredentials,
     AUTH__USER_NOT_FOUND        : userNotFound,
     AUTH__PASSWORD_RESET_FAILED : passwordResetFailed,
+    AUTH__INACTIVE_ACCOUNT      : inactiveAccount,
 }
